@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour
 {
     // === 점수를 띄어줄 텍스트 ===
-    public Text score;
-    public Text time;
+    public TextMeshProUGUI score;
+    public TextMeshProUGUI time;
     public GameObject endPanel;
 
     // === 다른 매니저 호출 ===
@@ -37,6 +37,15 @@ public class TitleManager : MonoBehaviour
         endPanel.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            GameOver(); // 확인용
+        }
+    }
+
+    // === 게임 오버시 호출 ===
     public void GameOver()
     {
         endPanel.SetActive(true);
@@ -46,6 +55,7 @@ public class TitleManager : MonoBehaviour
         Time.timeScale = 0.0f;
     }
 
+    // === 게임 재시작시 버튼에 할당 ===
     public void ReStart()
     {
         Time.timeScale = 1.0f;
