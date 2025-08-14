@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class PlayerAnimationController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static readonly int isJumping = Animator.StringToHash("IsJump");
+    public static readonly int isCrouch = Animator.StringToHash("IsCrouch");
+
+    Animator animator;
+
+
+    private void Awake()
     {
-        
+        animator = GetComponentInChildren<Animator>();
+    }
+    
+    public void Jump()
+    {
+        animator.SetTrigger(isJumping);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Crouch()
     {
-        
+        animator.SetTrigger(isCrouch);
     }
 }
