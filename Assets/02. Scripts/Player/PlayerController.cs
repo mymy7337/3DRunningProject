@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,10 +17,10 @@ public class PlayerController : MonoBehaviour
     private bool isMoving;
     private float curXPos;
     private float targetXPos;
+    public LayerMask groundLayerMask;
 
     private float time;
 
-    public Transform player;
     private Rigidbody _rigidbody;
 
     private void Awake()
@@ -37,17 +38,17 @@ public class PlayerController : MonoBehaviour
         {
             if (!isMoving)
             {
-                curXPos = player.position.x;
+                curXPos = transform.position.x;
                 targetXPos = curXPos + (moveDirection.x * moveDistance);
                 isMoving = true;
             }
             time += Time.fixedDeltaTime * speed;
             float playerXPos = Mathf.Lerp(curXPos, targetXPos, time);
-            player.position = new Vector3(playerXPos, player.position.y, player.position.z);
+            transform.position = new Vector3(playerXPos, transform.position.y, transform.position.z);
 
             if (time > 1f)
             {
-                player.position = new Vector3(targetXPos, player.position.y, player.position.z);
+                transform.position = new Vector3(targetXPos, transform.position.y, transform.position.z);
                 canMove = false;
                 isMoving = false;
                 time = 0f;
@@ -66,5 +67,34 @@ public class PlayerController : MonoBehaviour
         {
             moveDirection = Vector2.zero;
         }
+    }
+
+    public void OnJumpInput(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started && IsGrounded())
+        {
+            _rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+        }
+    }
+
+    public bool IsGrounded()
+    {
+        Ray[] rays = new Ray[4]
+        {
+            new Ray(transform.position + transform.forward * 0.5f + transform.up * 0.01f, Vector3.down),
+            new Ray(transform.position + -transform.forward * 0.5f + transform.up * 0.01f, Vector3.down),
+            new Ray(transform.position + transform.right * 0.5f + transform.up * 0.01f, Vector3.down),
+            new Ray(transform.position + -transform.right * 0.5f + transform.up * 0.01f, Vector3.down)
+        };
+
+        for (int i = 0; i < rays.Length; ++i)
+        {
+            if (Physics.Raycast(rays[i], 0.5f, groundLayerMask))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
