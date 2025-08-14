@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class TitleManager : MonoBehaviour
 {
     // === 점수를 띄어줄 텍스트 ===
+    public TextMeshProUGUI highScore;
     public TextMeshProUGUI score;
     public TextMeshProUGUI time;
     public GameObject endPanel;
@@ -42,7 +43,7 @@ public class TitleManager : MonoBehaviour
     {
         endPanel.SetActive(true);
 
-        ScoreManager.UpDateTimer();
+        ScoreManager.FinalScore();
 
         Time.timeScale = 0.0f;
     }
