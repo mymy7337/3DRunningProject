@@ -36,7 +36,7 @@ public class ScoreManager : MonoBehaviour , IScoreGet
         }
     }
 
-    public void UpDateUI(int highScore, int finalScore, float timer)
+    public void UpDateUI(int highScore, int finalScore)
     {
         // === 최고점수 현재점수 생존시간 업데이트 ===
         TitleManager.Instance.highScore.text = highScore.ToString("N0"); // === 소수점 없이 ===
@@ -55,13 +55,13 @@ public class ScoreManager : MonoBehaviour , IScoreGet
     {
         currentScore = GetScore();
 
-        if (currentScore >= highScore)
-        {
-            highScore = currentScore;
-        }
-
         int finalScore = currentScore + (int)timer;
 
-        UpDateUI(highScore, finalScore, timer);
+        if (finalScore >= highScore)
+        {
+            highScore = finalScore;
+        }
+
+        UpDateUI(highScore, finalScore);
     }
 }
