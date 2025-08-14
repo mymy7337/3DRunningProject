@@ -10,7 +10,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        if(GameManager.Instance != null)
+        if(TitleManager.Instance != null)
         {
             timer = 0;
         }
@@ -24,6 +24,6 @@ public class ScoreManager : MonoBehaviour
     public void UpDateTimer()
     {
         // === 소수점 둘째 자리까지 표현 ===
-        GameManager.Instance.score.text = timer.ToString("N2");
+        TitleManager.Instance.score.text = timer.ToString("N2");
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class TitleManager : MonoBehaviour
 {
     // === Á¡¼ö¸¦ ¶ç¾îÁÙ ÅØ½ºÆ® ===
     public Text score;
@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public ScoreManager ScoreManager { get; private set; }
 
     // === ½Ì±ÛÅæ ¼±¾ğ ===
-    public static GameManager Instance { get; private set; }
+    public static TitleManager Instance { get; private set; }
 
 
     private void Awake()
