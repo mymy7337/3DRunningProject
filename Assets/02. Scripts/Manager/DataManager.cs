@@ -8,7 +8,7 @@ public class DataManager : MonoBehaviour
     [SerializeField]
     private ScoreData scoreData;
 
-    private string filePath = Application.persistentDataPath + "/ScoreData.json";
+    private string filePath;
 
     // === 싱글톤 ===
     public static DataManager Instance { get; private set; }
@@ -26,27 +26,33 @@ public class DataManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        // === 파일 경로를 찾기 ===
+        filePath = Path.Combine(Application.persistentDataPath, "gameData.json");
         Load();
     }
 
-    public void Save()
+    public void Save(ScoreData score)
     {
-        var saveData = JsonUtility.ToJson(scoreData);
+        var saveData = JsonUtility.ToJson(score);
 
         File.WriteAllText(filePath, saveData);
     }
 
-    public void Load()
+    public ScoreData Load()
     {
         // === 파일 확인 후 로드 ===
         if (File.Exists(filePath)) 
         {
             var loadData = File.ReadAllText(filePath);
-            scoreData = JsonUtility.FromJson<ScoreData>(loadData);
+            return JsonUtility.FromJson<ScoreData>(loadData);
         }
         else
         {
-            Debug.Log("저장된 JSON 파일이 없습니다.");
+            // === 없으면 하나 만들어줌 ===
+            scoreData = new ScoreData { highScore = 0, currentScore = 0 };
+            string json = JsonUtility.ToJson(scoreData);
+            File.WriteAllText(filePath, json); 
+            return scoreData;
         }
     }
 }

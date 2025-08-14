@@ -2,12 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IScoreGet
-{
-    int GetScore();
-}
-
-public class ScoreManager : MonoBehaviour , IScoreGet
+public class ScoreManager : MonoBehaviour
 {
     // === 점수를 위한 타이머 ===
     private float timer;
@@ -22,6 +17,13 @@ public class ScoreManager : MonoBehaviour , IScoreGet
 
     private void Start()
     {
+        // === ScoreData에서 저장된 highScore를 불러옴 ===
+        ScoreData loadedData = DataManager.Instance.Load();
+        if (loadedData != null)
+        {
+            highScore = loadedData.highScore;
+        }
+
         if (TitleManager.Instance != null)
         {
             timer = 0;
@@ -36,6 +38,12 @@ public class ScoreManager : MonoBehaviour , IScoreGet
         }
     }
 
+    // === 점수 추가 메서드 ===
+    public void AddScore(int amount)
+    {
+        score += amount;
+    }
+
     public void UpDateUI(int highScore, int finalScore)
     {
         // === 최고점수 현재점수 생존시간 업데이트 ===
@@ -44,23 +52,25 @@ public class ScoreManager : MonoBehaviour , IScoreGet
         TitleManager.Instance.time.text = timer.ToString("N2");         // === 소수점 둘째 자리까지 표현 ===
     }
 
-    // === 인터페이스 구현 ===
-    public int GetScore()
-    {
-        return score;
-    }
-
     // === 최종점수 반환 ===
     public void FinalScore()
     {
-        currentScore = GetScore();
-
         int finalScore = currentScore + (int)timer;
 
         if (finalScore >= highScore)
         {
             highScore = finalScore;
         }
+        
+        // === 제이슨 파일에 저장 ===
+        ScoreData dataToSave = new()
+        {
+            highScore = highScore,
+            currentScore = currentScore
+        };
+
+        DataManager.Instance.Save(dataToSave);
+
 
         UpDateUI(highScore, finalScore);
     }
