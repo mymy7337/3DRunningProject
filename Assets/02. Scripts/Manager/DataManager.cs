@@ -29,14 +29,14 @@ public class DataManager : MonoBehaviour
         Load();
     }
 
-    void Save()
+    public void Save()
     {
         var saveData = JsonUtility.ToJson(scoreData);
 
         File.WriteAllText(filePath, saveData);
     }
 
-    void Load()
+    public void Load()
     {
         // === 파일 확인 후 로드 ===
         if (File.Exists(filePath)) 

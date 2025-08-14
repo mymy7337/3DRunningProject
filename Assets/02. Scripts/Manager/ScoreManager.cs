@@ -16,9 +16,13 @@ public class ScoreManager : MonoBehaviour , IScoreGet
     [SerializeField]
     private int score = 0;
 
+    // === 게임내에서 현재점수, 최고점수 임의로 저장 ===
+    private int highScore = 0;
+    private int currentScore = 0;
+
     private void Start()
     {
-        if(TitleManager.Instance != null)
+        if (TitleManager.Instance != null)
         {
             timer = 0;
         }
@@ -32,11 +36,12 @@ public class ScoreManager : MonoBehaviour , IScoreGet
         }
     }
 
-    public void UpDateTimer()
+    public void UpDateUI(int highScore, int finalScore, float timer)
     {
-        // === 소수점 둘째 자리까지 표현 ===
-        TitleManager.Instance.score.text = FinalScore().ToString();
-        TitleManager.Instance.time.text = timer.ToString("N2");
+        // === 최고점수 현재점수 생존시간 업데이트 ===
+        TitleManager.Instance.highScore.text = highScore.ToString("N0"); // === 소수점 없이 ===
+        TitleManager.Instance.score.text = finalScore.ToString("N0");
+        TitleManager.Instance.time.text = timer.ToString("N2");         // === 소수점 둘째 자리까지 표현 ===
     }
 
     // === 인터페이스 구현 ===
@@ -46,8 +51,17 @@ public class ScoreManager : MonoBehaviour , IScoreGet
     }
 
     // === 최종점수 반환 ===
-    public int FinalScore()
+    public void FinalScore()
     {
-        return GetScore() + (int)timer;
+        currentScore = GetScore();
+
+        if (currentScore >= highScore)
+        {
+            highScore = currentScore;
+        }
+
+        int finalScore = currentScore + (int)timer;
+
+        UpDateUI(highScore, finalScore, timer);
     }
 }
