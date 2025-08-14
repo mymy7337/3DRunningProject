@@ -7,10 +7,6 @@ public class ScoreManager : MonoBehaviour
     // === 점수를 위한 타이머 ===
     private float timer;
 
-    // === 추후에 점수를 얻을 경우 ===
-    [SerializeField]
-    private int score = 0;
-
     // === 게임내에서 현재점수, 최고점수 임의로 저장 ===
     private int highScore = 0;
     private int currentScore = 0;
@@ -42,7 +38,7 @@ public class ScoreManager : MonoBehaviour
     // === 점수 추가 메서드 ===
     public void AddScore(int amount)
     {
-        score += amount;
+        currentScore += amount;
     }
 
     public void UpDateUI(int highScore, int finalScore)

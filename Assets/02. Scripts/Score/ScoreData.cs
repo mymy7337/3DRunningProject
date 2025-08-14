@@ -7,5 +7,5 @@ using UnityEngine;
 public class ScoreData 
 {
     public int highScore;
-    public int currentScore;
+    public int currentScore; // === 추후에 돈으로 변경 ===
 }

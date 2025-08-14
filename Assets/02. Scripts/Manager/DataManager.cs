@@ -44,6 +44,7 @@ public class DataManager : MonoBehaviour
         if (File.Exists(filePath)) 
         {
             var loadData = File.ReadAllText(filePath);
+
             return JsonUtility.FromJson<ScoreData>(loadData);
         }
         else
@@ -52,6 +53,7 @@ public class DataManager : MonoBehaviour
             scoreData = new ScoreData { highScore = 0, currentScore = 0 };
             string json = JsonUtility.ToJson(scoreData);
             File.WriteAllText(filePath, json);
+
             return scoreData;
         }
     }
