@@ -32,6 +32,7 @@ public class ScoreManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // === 방어 코드 ===
         if (TitleManager.Instance != null)
         {
             timer += Time.fixedDeltaTime;

@@ -38,14 +38,6 @@ public class TitleManager : MonoBehaviour
         endPanel.SetActive(false);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Escape)) 
-        {
-            GameOver();
-        }
-    }
-
     // === 게임 오버시 호출 ===
     public void GameOver()
     {

@@ -51,7 +51,7 @@ public class DataManager : MonoBehaviour
             // === 없으면 하나 만들어줌 ===
             scoreData = new ScoreData { highScore = 0, currentScore = 0 };
             string json = JsonUtility.ToJson(scoreData);
-            File.WriteAllText(filePath, json); 
+            File.WriteAllText(filePath, json);
             return scoreData;
         }
     }
