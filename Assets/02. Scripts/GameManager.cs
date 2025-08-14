@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
         GameObject ScoreManagerObject = new GameObject("ScoreManager");
         ScoreManager = ScoreManagerObject.AddComponent<ScoreManager>();
         ScoreManagerObject.transform.SetParent(transform);
+
+        endPanel.SetActive(false);
     }
 
     public void GameOver()
@@ -45,11 +47,18 @@ public class GameManager : MonoBehaviour
 
     public void ReStart()
     {
-        endPanel.SetActive(false);
-
         Time.timeScale = 1.0f;
+
+        // === 게임 매니저를 보존 ===
+        if (Instance != null)
+        {
+            Destroy(Instance.gameObject);
+            Instance = null;
+        }
 
         // === 현재 씬을 재로드 ===
         SceneManager.LoadScene("MainScene");
+
+        endPanel.SetActive(false);
     }
 }
