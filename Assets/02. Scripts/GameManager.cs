@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,11 +31,15 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        Time.timeScale = 0.0f;
         // 나중에
     }
 
     public void ReStart()
     {
-        // 혹시 모르니
+        Time.timeScale = 1.0f;
+
+        // === 현재 씬을 재로드 ===
+        SceneManager.LoadScene("MainScene");
     }
 }

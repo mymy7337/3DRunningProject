@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    // === 점수를 위한 타이머 ===
+    private float timer;
+
+    private void Start()
     {
-        
+        if(GameManager.Instance != null)
+        {
+            timer = 0;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+        timer += Time.fixedDeltaTime;
     }
 }
