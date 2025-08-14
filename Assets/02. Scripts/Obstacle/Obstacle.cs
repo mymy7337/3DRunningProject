@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    public LayerMask playerLayer;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        // other의 레이어가 playerLayer에 포함되는지 확인
-        if ((playerLayer.value & (1 << other.gameObject.layer)) != 0)
+        if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("플레이어 감지됨! (레이어 기반)"); //플레이어죽이기(게임오버)
+            Debug.Log("플레이어 감지됨!"); //플레이어죽이기(게임오버)
         }
     }
 }
