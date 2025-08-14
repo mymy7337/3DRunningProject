@@ -15,6 +15,8 @@ public class TitleManager : Singleton<TitleManager>
     // === 다른 매니저 호출 ===
     public ScoreManager ScoreManager { get; private set; }
 
+    protected override bool isDestroy => false;
+
     protected override void Awake()
     {
         // === 제너릭 싱글톤의 Awake를 불러옴 ===

@@ -10,6 +10,8 @@ public class DataManager : Singleton<DataManager>
 
     private string filePath;
 
+    protected override bool isDestroy => false;
+
     protected override void Awake()
     {
         base.Awake();
