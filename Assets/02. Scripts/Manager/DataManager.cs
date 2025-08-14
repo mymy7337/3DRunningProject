@@ -3,28 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class DataManager : MonoBehaviour
+public class DataManager : Singleton<DataManager>
 {
     [SerializeField]
     private ScoreData scoreData;
 
     private string filePath;
 
-    // === ΩÃ±€≈Ê ===
-    public static DataManager Instance { get; private set; }
-
-    private void Awake()
+    protected override void Awake()
     {
-        // ΩÃ±€≈Ê ∆–≈œ ±∏«ˆ
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        base.Awake();
 
         // === ∆ƒ¿œ ∞Ê∑Œ∏¶ √£±‚ ===
         filePath = Path.Combine(Application.persistentDataPath, "gameData.json");

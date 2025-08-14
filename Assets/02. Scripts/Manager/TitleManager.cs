@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TitleManager : MonoBehaviour
+public class TitleManager : Singleton<TitleManager>
 {
     // === 점수를 띄어줄 텍스트 ===
     public TextMeshProUGUI highScore;
@@ -15,20 +15,10 @@ public class TitleManager : MonoBehaviour
     // === 다른 매니저 호출 ===
     public ScoreManager ScoreManager { get; private set; }
 
-    // === 싱글톤 선언 ===
-    public static TitleManager Instance { get; private set; }
-
-
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(this.gameObject);
+        // === 제너릭 싱글톤의 Awake를 불러옴 ===
+        base.Awake();
 
         // === ScoreManager 생성 ===
         GameObject ScoreManagerObject = new GameObject("ScoreManager");
@@ -36,6 +26,11 @@ public class TitleManager : MonoBehaviour
         ScoreManagerObject.transform.SetParent(transform);
 
         endPanel.SetActive(false);
+    }
+
+    public void Update()
+    {
+
     }
 
     // === 게임 오버시 호출 ===
@@ -57,7 +52,6 @@ public class TitleManager : MonoBehaviour
         if (Instance != null)
         {
             Destroy(Instance.gameObject);
-            Instance = null;
         }
 
         // === 현재 씬을 재로드 ===
