@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    // === 점수를 띄어줄 텍스트 ===
+    public Text score;
+    public GameObject endPanel;
+
     // === 다른 매니저 호출 ===
     public ScoreManager ScoreManager { get; private set; }
 
@@ -31,12 +36,17 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        endPanel.SetActive(true);
+
+        ScoreManager.UpDateTimer();
+
         Time.timeScale = 0.0f;
-        // 나중에
     }
 
     public void ReStart()
     {
+        endPanel.SetActive(false);
+
         Time.timeScale = 1.0f;
 
         // === 현재 씬을 재로드 ===

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ScoreManager : MonoBehaviour
 {
     // === 점수를 위한 타이머 ===
@@ -18,5 +19,11 @@ public class ScoreManager : MonoBehaviour
     private void FixedUpdate()
     {
         timer += Time.fixedDeltaTime;
+    }
+
+    public void UpDateTimer()
+    {
+        // === 소수점 둘째 자리까지 표현 ===
+        GameManager.Instance.score.text = timer.ToString("N2");
     }
 }
