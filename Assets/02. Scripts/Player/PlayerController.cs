@@ -17,17 +17,23 @@ public class PlayerController : MonoBehaviour
     private bool isMoving;
     private float curXPos;
     private float targetXPos;
+    private float dirX;
     public LayerMask groundLayerMask;
 
     private float time;
 
     private Rigidbody _rigidbody;
     private CapsuleCollider _capsuleCollider;
+    private PlayerAnimationController _animationController;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
+    }
+    private void Start()
+    {
+        _animationController = PlayerManager.Instance.Player.animationController;
     }
     void FixedUpdate()
     {
@@ -40,20 +46,26 @@ public class PlayerController : MonoBehaviour
         {
             if (!isMoving)
             {
+                dirX = moveDirection.x;
                 curXPos = transform.position.x;
                 targetXPos = curXPos + (moveDirection.x * moveDistance);
+                Quaternion delta = Quaternion.AngleAxis(30, Vector3.up * moveDirection.x);
+                _rigidbody.MoveRotation(_rigidbody.rotation * delta);
                 isMoving = true;
             }
             time += Time.fixedDeltaTime * speed;
             float playerXPos = Mathf.Lerp(curXPos, targetXPos, time);
             transform.position = new Vector3(playerXPos, transform.position.y, transform.position.z);
-
+            
             if (time > 1f)
             {
                 transform.position = new Vector3(targetXPos, transform.position.y, transform.position.z);
                 canMove = false;
                 isMoving = false;
                 time = 0f;
+                Quaternion delta = Quaternion.AngleAxis(30, Vector3.down * dirX);
+                _rigidbody.MoveRotation(_rigidbody.rotation * delta);
+                dirX = 0f;
             }
         }
     }
@@ -76,6 +88,7 @@ public class PlayerController : MonoBehaviour
         if(context.phase == InputActionPhase.Started && IsGrounded())
         {
             _rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            _animationController.Jump();
         }
     }
 
@@ -102,9 +115,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnCrouchInput(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started)
+        if(context.phase == InputActionPhase.Started && IsGrounded())
         {
             StartCoroutine(Crouch());
+            _animationController.Crouch();
         }
     }
 
@@ -112,7 +126,7 @@ public class PlayerController : MonoBehaviour
     {
         _capsuleCollider.center = new Vector3(0, 0.6f, 0);
         _capsuleCollider.height = 1.5f;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         _capsuleCollider.center = new Vector3(0, 1, 0);
         _capsuleCollider.height = 2.05f;
     }
