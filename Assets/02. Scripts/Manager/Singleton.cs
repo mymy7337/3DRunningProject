@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static T _instance;
+    protected abstract bool isDestroy { get;}
 
+    private static T _instance;
     public static  T Instance
     {
         get
@@ -36,7 +37,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
 
         _instance = this as T;
-
-        DontDestroyOnLoad(gameObject);
+        if(!isDestroy)
+            DontDestroyOnLoad(gameObject);
     }
 }
