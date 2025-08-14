@@ -22,10 +22,12 @@ public class PlayerController : MonoBehaviour
     private float time;
 
     private Rigidbody _rigidbody;
+    private CapsuleCollider _capsuleCollider;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _capsuleCollider = GetComponent<CapsuleCollider>();
     }
     void FixedUpdate()
     {
@@ -96,5 +98,22 @@ public class PlayerController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void OnCrouchInput(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started)
+        {
+            StartCoroutine(Crouch());
+        }
+    }
+
+    private IEnumerator Crouch()
+    {
+        _capsuleCollider.center = new Vector3(0, 0.6f, 0);
+        _capsuleCollider.height = 1.5f;
+        yield return new WaitForSeconds(2);
+        _capsuleCollider.center = new Vector3(0, 1, 0);
+        _capsuleCollider.height = 2.05f;
     }
 }
