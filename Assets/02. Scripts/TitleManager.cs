@@ -8,6 +8,7 @@ public class TitleManager : MonoBehaviour
 {
     // === 점수를 띄어줄 텍스트 ===
     public Text score;
+    public Text time;
     public GameObject endPanel;
 
     // === 다른 매니저 호출 ===
