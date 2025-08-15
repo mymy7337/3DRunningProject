@@ -92,7 +92,7 @@
                 {
                     "name": "",
                     "id": "94b8bba6-0d5a-4b6c-8ee2-4954f7dda650",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -103,7 +103,7 @@
                 {
                     "name": "",
                     "id": "8dc9cee2-28e9-4381-b390-49be0962e304",
-                    "path": "<Keyboard>/leftShift",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
