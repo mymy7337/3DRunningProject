@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 17434555}
   - component: {fileID: 17434554}
   - component: {fileID: 17434553}
+  - component: {fileID: 17434558}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -334,6 +335,39 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &17434558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17434549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9fb1a392cfd6d746b8da48e239a4368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers:
+  - {fileID: 361926538}
+  - {fileID: 2121908670}
+  - {fileID: 335763392}
+  - {fileID: 1760416741}
+  - {fileID: 281960522}
+--- !u!137 &281960522 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -3347090507751969436, guid: 5fc49a3406a4ec14b8a4f623c2384866, type: 3}
+  m_PrefabInstance: {fileID: 1208542535}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &335763392 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4320098735860348617, guid: 5fc49a3406a4ec14b8a4f623c2384866, type: 3}
+  m_PrefabInstance: {fileID: 1208542535}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &361926538 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1206874426333947015, guid: 5fc49a3406a4ec14b8a4f623c2384866, type: 3}
+  m_PrefabInstance: {fileID: 1208542535}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &593827317
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,6 +1026,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
+--- !u!137 &1760416741 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3531045958359482523, guid: 5fc49a3406a4ec14b8a4f623c2384866, type: 3}
+  m_PrefabInstance: {fileID: 1208542535}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &2121908670 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 9155276747989737948, guid: 5fc49a3406a4ec14b8a4f623c2384866, type: 3}
+  m_PrefabInstance: {fileID: 1208542535}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
