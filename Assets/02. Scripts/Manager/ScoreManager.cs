@@ -34,7 +34,7 @@ public class ScoreManager : MonoBehaviour
             timer += Time.fixedDeltaTime;
 
             // === 첫번째 업적 ===
-            if (timer >= 6.0f && DataManager.Instance.achievements[0].isClear == false)
+            if (timer >= 60.0f && DataManager.Instance.achievements[0].isClear == false)
             {
                 DataManager.Instance.ClearAchievement(0);
             }
