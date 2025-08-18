@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class MapReset : MonoBehaviour
+public class MapManager : Singleton<MapManager>
 {
     public GameObject mapPrefab;            // 반복할 맵 프리팹
     public int preSpawnCount;           // 시작 시 생성할 맵 수
@@ -13,6 +12,13 @@ public class MapReset : MonoBehaviour
 
     private Queue<GameObject> mapQueue = new Queue<GameObject>();
     private GameObject lastMap;
+
+    protected override bool isDestroy => false;
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     void Start()
     {
@@ -75,4 +81,5 @@ public class MapReset : MonoBehaviour
             Destroy(mapQueue.Dequeue());
         }
     }
+
 }

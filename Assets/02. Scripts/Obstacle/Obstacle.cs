@@ -8,9 +8,17 @@ public class Obstacle : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("플레이어 감지됨!"); //플레이어죽이기(게임오버)
-            //Time.timeScale = 0f;
-            //게임오버 UI 띄우기
+            //var playerStatus = other.gameObject.GetComponent<PlayerStatus>();
+
+            //if (playerStatus != null && playerStatus.IsInvincible)
+            //{
+            //    Debug.Log("플레이어 무적 상태, 5초간 충돌 무시됨.");
+            //    return;
+            //}
         }
+
+        Debug.Log("플레이어 감지됨."); // 플레이어죽이기(게임오버)
+
+        TitleManager.Instance.GameOver();
     }
 }
