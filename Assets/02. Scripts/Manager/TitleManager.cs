@@ -30,11 +30,6 @@ public class TitleManager : Singleton<TitleManager>
         endPanel.SetActive(false);
     }
 
-    public void Update()
-    {
-
-    }
-
     // === 게임 오버시 호출 ===
     public void GameOver()
     {

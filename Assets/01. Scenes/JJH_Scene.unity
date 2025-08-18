@@ -1336,7 +1336,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1026671961}
         m_TargetAssemblyTypeName: TitleManager, Assembly-CSharp
         m_MethodName: ReStart
         m_Mode: 1
@@ -1709,9 +1709,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1949337226c69b43ba523d4c95f2ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreData:
-    highScore: 0
-    currentScore: 0
+  achievements:
+  - {fileID: 11400000, guid: 40165304042bd5742a258424b0666a87, type: 2}
 --- !u!4 &1780682676
 Transform:
   m_ObjectHideFlags: 0

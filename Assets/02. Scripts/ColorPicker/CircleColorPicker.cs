@@ -33,15 +33,14 @@ public class CircleColorPicker : BaseColorPicker
         Vector2 pickerPosition = picker.transform.position;
 
         Vector2 position = pickerPosition - circlePalettePosition + sizeOfPalette * 0.5f;
-        Debug.Log(position);
+
         Vector2 normalized = new Vector2(
             (position.x / (palette.GetComponent<RectTransform>().rect.width)),
             (position.y / (palette.GetComponent<RectTransform>().rect.height)));
-        Debug.Log(normalized);
 
         Texture2D texture = palette.mainTexture as Texture2D;
         Color circularSelectedColor = texture.GetPixelBilinear(normalized.x, normalized.y);
-        Debug.Log(circularSelectedColor);
+
         return circularSelectedColor;
     }
 }
