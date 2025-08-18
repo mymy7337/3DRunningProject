@@ -7,8 +7,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class DataManager : Singleton<DataManager>
 {
-    [SerializeField]
-    private ScoreData scoreData;
+    private GameData gameData;
 
     public List<AchievementData> achievements;
 
@@ -24,43 +23,43 @@ public class DataManager : Singleton<DataManager>
         filePath = Path.Combine(Application.persistentDataPath, "gameData.json");
 
         // === JSON 동기화 ===
-        scoreData = Load();
+        gameData = Load();
 
-        if (scoreData.achievements == null || scoreData.achievements.Count == 0)
+        if (gameData.achievements == null || gameData.achievements.Count == 0)
         {
-            scoreData.achievements = new List<AchievementData>(achievements);
-            Save(scoreData);
+            gameData.achievements = new List<AchievementData>(achievements);
+            Save(gameData);
         }
     }
 
-    public void Save(ScoreData score)
+    public void Save(GameData score)
     {
         var saveData = JsonUtility.ToJson(score);
 
         File.WriteAllText(filePath, saveData);
     }
 
-    public ScoreData Load()
+    public GameData Load()
     {
         // === 파일 확인 후 로드 ===
         if (File.Exists(filePath)) 
         {
             var loadData = File.ReadAllText(filePath);
 
-            return JsonUtility.FromJson<ScoreData>(loadData);
+            return JsonUtility.FromJson<GameData>(loadData);
         }
         else
         {
             // === 없으면 하나 만들어줌 ===
-            scoreData = new ScoreData 
+            gameData = new GameData 
             { 
                 highScore = 0, currentScore = 0,
                 achievements = new List<AchievementData>()
             };
-            string json = JsonUtility.ToJson(scoreData);
+            string json = JsonUtility.ToJson(gameData);
             File.WriteAllText(filePath, json);
 
-            return scoreData;
+            return gameData;
         }
     }
 
@@ -75,7 +74,7 @@ public class DataManager : Singleton<DataManager>
                 {
                     achievements[i].isClear = true;
                     Debug.Log($"{achievements[i].name} 업적 클리어!");
-                    Save(scoreData);
+                    Save(gameData);
                 }
                 return;
             }

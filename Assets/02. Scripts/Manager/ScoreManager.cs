@@ -13,8 +13,8 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        // === ScoreData에서 저장된 highScore를 불러옴 ===
-        ScoreData loadedData = DataManager.Instance.Load();
+        // === GameData에서 저장된 highScore를 불러옴 ===
+        GameData loadedData = DataManager.Instance.Load();
         if (loadedData != null)
         {
             highScore = loadedData.highScore;
@@ -65,7 +65,7 @@ public class ScoreManager : MonoBehaviour
         }
         
         // === 제이슨 파일에 저장 ===
-        ScoreData dataToSave = new()
+        GameData dataToSave = new()
         {
             highScore = highScore,
             currentScore = currentScore
