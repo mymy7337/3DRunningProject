@@ -13,9 +13,9 @@ public class PowerUpItem : MonoBehaviour
         collider.isTrigger = true;
     }
 
-    private void OnTriggerEner(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Plyer")) return;
+        if (!other.CompareTag("Player")) return;
 
         var runner = other.GetComponent<PowerUpPlayer>();
         if (runner != null && powerUpSO != null)
