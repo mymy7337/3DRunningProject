@@ -68,8 +68,7 @@ public class ScoreManager : MonoBehaviour
         // === 제이슨 파일에 저장 ===
         GameData dataToSave = new()
         {
-            highScore = highScore,
-            currentScore = currentScore
+            highScore = highScore
         };
 
         DataManager.Instance.Save(dataToSave);

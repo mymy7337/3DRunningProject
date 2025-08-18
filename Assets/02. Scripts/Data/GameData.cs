@@ -7,5 +7,6 @@ using UnityEngine;
 public class GameData 
 {
     public int highScore;
-    public int currentScore; // === 추후에 돈으로 변경 ===
+
+    public List<AchievementStat> achievements = new();
 }

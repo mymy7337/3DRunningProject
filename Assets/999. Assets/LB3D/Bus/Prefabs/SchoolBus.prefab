@@ -307,7 +307,8 @@ GameObject:
   - component: {fileID: 33497813519183736}
   - component: {fileID: 23928220542301338}
   - component: {fileID: 114936204718003962}
-  - component: {fileID: 1483555049181722335}
+  - component: {fileID: 1808517598095706866}
+  - component: {fileID: 4242989857381736913}
   m_Layer: 0
   m_Name: SchoolBus
   m_TagString: Untagged
@@ -409,7 +410,7 @@ MonoBehaviour:
   StopSign1: {fileID: 95413257323596780}
   StopSign3: {fileID: 95250161553012254}
   OpenCloseSpeed: 1
---- !u!65 &1483555049181722335
+--- !u!65 &1808517598095706866
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -428,8 +429,20 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.3164277, y: 2.6122782, z: 13.908186}
-  m_Center: {x: 0.050560236, y: 1.5680388, z: -1.1559954}
+  m_Size: {x: 3.3164277, y: 2.6106677, z: 13.908186}
+  m_Center: {x: 0.050560236, y: 1.5672336, z: -1.1559954}
+--- !u!114 &4242989857381736913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209199135775896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f83631773a80f404f80c255f476c961d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1263401212293124
 GameObject:
   m_ObjectHideFlags: 0

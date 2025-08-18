@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 6762782829382823525}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: -4}
+  m_LocalPosition: {x: 0, y: 2.7, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -66,7 +66,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.471, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7034381173638277663}
@@ -229,10 +229,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464172a28389a5746ac0d1e5fe746c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDistance: 3
+  moveDistance: 1
   jumpPower: 100
   crouchTime: 2
-  speed: 1
+  speed: 3
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -266,6 +266,13 @@ MonoBehaviour:
   - {fileID: 6275016773804903791}
   - {fileID: 1809196524094663720}
   - {fileID: 4006272924155011216}
+  colorData:
+    colors:
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &3403405642830788872
 MonoBehaviour:
   m_ObjectHideFlags: 0
