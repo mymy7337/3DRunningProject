@@ -24,7 +24,10 @@ public class MapReset : MonoBehaviour
         if (player.position.z + mapLength > nextSpawnZ)
         {
             SpawnMap();
-            RemoveOldMap();
+            if(spawnedMaps.Count > 0)
+            {
+                RemoveOldMap();
+            }
         }
     }
 
