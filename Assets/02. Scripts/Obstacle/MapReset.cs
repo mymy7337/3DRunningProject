@@ -4,47 +4,73 @@ using UnityEngine;
 
 public class MapReset : MonoBehaviour
 {
-    public GameObject mapPrefab;      // 긴 하나의 맵 프리팹
-    public Transform player;          // 캐릭터
-    public float mapLength = 100f;    // 맵 프리팹의 길이 (Z축)
-    public int maxMaps = 2;           // 동시에 유지할 맵 개수
+    public GameObject mapPrefab;            // 반복할 맵 프리팹
+    public int preSpawnCount = 2;           // 시작 시 생성할 맵 수
+    public float mapLength = 80f;           // 하나의 맵 길이
+    public float moveSpeed = 10f;           // 맵이 뒤로 이동하는 속도
+    public float spawnTriggerOffset = 20f;  // 마지막 맵이 이 거리 이상 이동하면 다음 맵 생성
+    public float despawnZ = -130f;           // 이 Z값보다 뒤에 있는 맵은 제거
 
-    private float nextSpawnZ = 0f;
-    private Queue<GameObject> spawnedMaps = new Queue<GameObject>();
+    private Queue<GameObject> mapQueue = new Queue<GameObject>();
+    private GameObject lastMap;
 
     void Start()
     {
-        // 처음에 maxMaps만큼 생성
-        for (int i = 0; i < maxMaps; i++)
-            SpawnMap();
+        for (int i = 0; i < preSpawnCount; i++)
+        {
+            SpawnNextMap();
+        }
     }
 
     void Update()
     {
-        if (player.position.z + mapLength > nextSpawnZ)
+        MoveMaps();
+        TrySpawnNext();
+        RemovePassedMaps();
+    }
+
+    void MoveMaps()
+    {
+        foreach (GameObject map in mapQueue)
         {
-            SpawnMap();
-            if(spawnedMaps.Count > 0)
-            {
-                RemoveOldMap();
-            }
+            map.transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
         }
     }
 
-    void SpawnMap()
+    void TrySpawnNext()
     {
-        Vector3 spawnPos = new Vector3(0, 0, nextSpawnZ);
-        GameObject newMap = Instantiate(mapPrefab, spawnPos, Quaternion.identity);
-        spawnedMaps.Enqueue(newMap);
-        nextSpawnZ += mapLength;
+        if (lastMap == null) return;
+
+        float lastMapZ = lastMap.transform.position.z;
+
+        if (lastMapZ < spawnTriggerOffset)
+        {
+            SpawnNextMap();
+        }
     }
 
-    void RemoveOldMap()
+    void SpawnNextMap()
     {
-        if (spawnedMaps.Count > maxMaps)
+        Vector3 spawnPos = Vector3.zero;
+
+        if (lastMap != null)
         {
-            GameObject oldMap = spawnedMaps.Dequeue();
-            Destroy(oldMap);
+            spawnPos = lastMap.transform.position + new Vector3(0, 0, mapLength);
+        }
+
+        GameObject newMap = Instantiate(mapPrefab, spawnPos, Quaternion.identity);
+        mapQueue.Enqueue(newMap);
+        lastMap = newMap;
+    }
+
+    void RemovePassedMaps()
+    {
+        if (mapQueue.Count == 0) return;
+
+        GameObject firstMap = mapQueue.Peek();
+        if (firstMap.transform.position.z < despawnZ)
+        {
+            Destroy(mapQueue.Dequeue());
         }
     }
 }

@@ -484,7 +484,7 @@ Transform:
   m_GameObject: {fileID: 694780773}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.42, y: 1.3, z: 4.63}
+  m_LocalPosition: {x: 3.42, y: 2.3, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -503,9 +503,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapPrefab: {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
-  player: {fileID: 694780777}
+  preSpawnCount: 2
   mapLength: 100
-  maxMaps: 2
+  moveSpeed: 10
+  spawnTriggerOffset: 20
+  despawnZ: -90
 --- !u!1 &838150808 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 172217303782348944, guid: e898f64f4bb313b4093714a7f5141831, type: 3}
@@ -1239,7 +1241,7 @@ Transform:
   m_GameObject: {fileID: 1748640919}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 3.33, y: 3.41, z: 1.29}
+  m_LocalPosition: {x: 3.33, y: 3.38, z: 5.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
