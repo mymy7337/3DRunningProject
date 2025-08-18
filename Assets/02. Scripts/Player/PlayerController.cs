@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private bool canMove;
     private bool isMoving;
     private bool isJumping;
+    private bool isCrouching;
     private bool canJump = true;
     private float curXPos;
     private float targetXPos;
@@ -87,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started && IsGrounded() && canJump)
+        if(context.phase == InputActionPhase.Started && IsGrounded() && canJump && !isJumping)
         {
             StartCoroutine(JumpCheck());
             _rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
@@ -125,7 +126,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnCrouchInput(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started)
+        if(context.phase == InputActionPhase.Started && !isCrouching)
         {
             canJump = false;
             StartCoroutine(Crouch());
@@ -135,6 +136,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Crouch()
     {
+        isCrouching = true;
         if (isJumping)
         {
             _rigidbody.AddForce(Vector3.down * jumpPower, ForceMode.Impulse);
@@ -147,6 +149,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1);
         _capsuleCollider.center = new Vector3(0, 1, 0);
         _capsuleCollider.height = 2.05f;
+        isCrouching = false;
         canJump = true;
     }
 }
