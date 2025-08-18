@@ -12,6 +12,15 @@ public class PlayerCustomizer : MonoBehaviour
 
     private void Start()
     {
+        if (!File.Exists(Application.persistentDataPath + "/ColorData.json"))
+        {
+            for(int i = 0; i < 5; i++)
+            {
+                colorData.colors[i] = new Color(1, 1, 1);
+            }
+            Save();
+        }
+
         SetColor();
     }
 
