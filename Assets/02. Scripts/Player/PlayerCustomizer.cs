@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class PlayerCustomizer : MonoBehaviour
 {
     [SerializeField] private SkinnedMeshRenderer[] renderers;
     //1. Çì¾î 2. ÇÇºÎ 3. ¿Ê 4. Àå°© 5. ½Å¹ß
+
+    public ColorData colorData;
 
     private void Start()
     {
@@ -16,8 +19,8 @@ public class PlayerCustomizer : MonoBehaviour
     {
         for(int i = 0; i < renderers.Length; i++)
         {
-            Color color = new Color(PlayerPrefs.GetFloat($"{i}.r"), PlayerPrefs.GetFloat($"{i}.g"), PlayerPrefs.GetFloat($"{i}.b"));
-            renderers[i].material.SetColor("_Color", color);
+            Load();
+            renderers[i].material.SetColor("_Color", colorData.colors[i]);
         }
     }
 
@@ -27,8 +30,26 @@ public class PlayerCustomizer : MonoBehaviour
 
         material.SetColor("_Color", albedo);
 
-        PlayerPrefs.SetFloat($"{idx}.r", albedo.r);
-        PlayerPrefs.SetFloat($"{idx}.g", albedo.g);
-        PlayerPrefs.SetFloat($"{idx}.b", albedo.b);
+        colorData.colors[idx] = albedo;
+        Save();
+    }
+
+    private void Save()
+    {
+        var saveColorData = JsonUtility.ToJson(colorData);
+
+        File.WriteAllText(Application.persistentDataPath + "/ColorData.json", saveColorData);
+    }
+
+    private void Load()
+    {
+        var loadColorData = File.ReadAllText(Application.persistentDataPath + "/ColorData.json");
+        colorData = JsonUtility.FromJson<ColorData>(loadColorData);
+    }
+
+    [System.Serializable]
+    public class ColorData
+    {
+        public Color[] colors = new Color[5];
     }
 }
