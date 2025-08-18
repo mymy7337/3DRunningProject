@@ -14,7 +14,7 @@ public class MapReset : MonoBehaviour
 
     void Start()
     {
-        // 처음에 2개 정도 붙여줌
+        // 처음에 maxMaps만큼 생성
         for (int i = 0; i < maxMaps; i++)
             SpawnMap();
     }
@@ -41,7 +41,7 @@ public class MapReset : MonoBehaviour
         if (spawnedMaps.Count > maxMaps)
         {
             GameObject oldMap = spawnedMaps.Dequeue();
-            Destroy(oldMap); // 또는 재사용(풀링)도 가능
+            Destroy(oldMap);
         }
     }
 }
