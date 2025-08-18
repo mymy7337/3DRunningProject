@@ -13,8 +13,9 @@ public class DataManager : Singleton<DataManager>
 
     [Header("infomation")]
     public Image achievementPanel;            // === 업적 창 ===
-    public TextMeshProUGUI nameText;           // === 업적 이름===
-    public TextMeshProUGUI descriptionText;     // === 업적 내용 ===
+    public Image icon;                         // === 업적 아이콘 ===
+    public TextMeshProUGUI nameText;            // === 업적 이름===
+    public TextMeshProUGUI descriptionText;      // === 업적 내용 ===
 
     private string filePath;
 
@@ -92,6 +93,7 @@ public class DataManager : Singleton<DataManager>
     {
         achievementPanel.gameObject.SetActive(true);
 
+        icon.sprite = data.icon;
         nameText.text = data.achievementName;
         descriptionText.text = data.description;
 
