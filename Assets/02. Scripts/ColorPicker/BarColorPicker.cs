@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BarColorPicker : BaseColorPicker
 {
-    public Image image;
+    public int rendererIndex;
 
     private void Start()
     {
@@ -14,12 +14,11 @@ public class BarColorPicker : BaseColorPicker
     protected override void SelectColor()
     {
         Vector3 offest = Input.mousePosition - transform.position;
-        Vector3 diff = new Vector3(Mathf.Clamp(offest.x, -499, 499), 0);
+        Vector3 diff = new Vector3(Mathf.Clamp(offest.x, -174, 174), 0);
 
         picker.transform.position = transform.position + diff;
 
-        image.color = GetColor();
-        //PlayerManager.Instance.Player.customizer.ChangeColor(0, GetColor());
+        PlayerManager.Instance.Player.customizer.ChangeColor(rendererIndex, GetColor());
     }
 
     protected override Color GetColor()
@@ -30,8 +29,6 @@ public class BarColorPicker : BaseColorPicker
         Vector2 position = pickerPosition - palettePosition + sizeOfPalette * 0.5f;
         Vector2 normalized = new Vector2(
             (position.x / (palette.GetComponent<RectTransform>().rect.width)), 0);
-        Debug.Log(position);
-        Debug.Log(normalized);
 
         var grad = palette.GetComponent<ImageGradient>();
         if (grad != null)

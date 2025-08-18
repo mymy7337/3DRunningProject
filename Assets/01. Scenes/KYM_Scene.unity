@@ -257,6 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   animationController: {fileID: 0}
+  customizer: {fileID: 0}
 --- !u!114 &17434557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,10 +349,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderers:
-  - {fileID: 361926538}
-  - {fileID: 2121908670}
   - {fileID: 335763392}
+  - {fileID: 361926538}
   - {fileID: 1760416741}
+  - {fileID: 2121908670}
   - {fileID: 281960522}
 --- !u!137 &281960522 stripped
 SkinnedMeshRenderer:
