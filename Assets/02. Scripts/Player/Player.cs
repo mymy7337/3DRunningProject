@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public PlayerController controller;
     public PlayerAnimationController animationController;
     public PlayerCustomizer customizer;
+    public Transform CameraAnchor;
 
     private void Awake()
     {
