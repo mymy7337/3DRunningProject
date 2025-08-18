@@ -13,7 +13,7 @@ public class MapManager : Singleton<MapManager>
     private Queue<GameObject> mapQueue = new Queue<GameObject>();
     private GameObject lastMap;
 
-    protected override bool isDestroy => false;
+    protected override bool isDestroy => true;
 
     protected override void Awake()
     {
