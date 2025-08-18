@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class DataManager : Singleton<DataManager>
 {
     private GameData gameData;
 
     public List<AchievementData> achievements;
+
+    [Header("infomation")]
+    public Image achievementPanel;            // === 업적 창 ===
+    public TextMeshProUGUI nameText;           // === 업적 이름===
+    public TextMeshProUGUI descriptionText;     // === 업적 내용 ===
 
     private string filePath;
 
@@ -24,6 +29,12 @@ public class DataManager : Singleton<DataManager>
 
         // === JSON 동기화 ===
         gameData = Load();
+
+        // === 판넬 끄기 + 방어 코드===
+        if(TitleManager.Instance != null)
+        {
+            achievementPanel.gameObject.SetActive(false);
+        }
     }
 
     public void Save(GameData score)
@@ -66,7 +77,9 @@ public class DataManager : Singleton<DataManager>
                 if(achievements[i].isClear == false)
                 {
                     achievements[i].isClear = true;
-                    Debug.Log($"{achievements[i].achievementName} 업적 클리어!"); // === 확인용 ===
+
+                    SetAchievementText(achievements[i]);
+
                     Save(gameData);
                 }
                 return;
@@ -74,4 +87,21 @@ public class DataManager : Singleton<DataManager>
         }
     }
 
+    // === 업적 달성시 팝넬창 나타내기 ===
+    private void SetAchievementText(AchievementData data)
+    {
+        achievementPanel.gameObject.SetActive(true);
+
+        nameText.text = data.achievementName;
+        descriptionText.text = data.description;
+
+        StartCoroutine(HidePanel(3.0f));
+    }
+
+    // === 판넬창 끄기 ===
+    private IEnumerator HidePanel(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        achievementPanel.gameObject.SetActive(false);
+    }
 }
