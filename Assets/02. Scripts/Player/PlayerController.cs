@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDirection;
     private bool canMove;
     private bool isMoving;
+    private bool isJumping;
+    private bool canJump = true;
     private float curXPos;
     private float targetXPos;
     private float dirX;
@@ -85,11 +87,19 @@ public class PlayerController : MonoBehaviour
 
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started && IsGrounded())
+        if(context.phase == InputActionPhase.Started && IsGrounded() && canJump)
         {
+            StartCoroutine(JumpCheck());
             _rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             _animationController.Jump();
         }
+    }
+
+    private IEnumerator JumpCheck()
+    {
+        isJumping = true;
+        yield return new WaitForSeconds(1);
+        isJumping = false;
     }
 
     public bool IsGrounded()
@@ -115,8 +125,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnCrouchInput(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started && IsGrounded())
+        if(context.phase == InputActionPhase.Started)
         {
+            canJump = false;
             StartCoroutine(Crouch());
             _animationController.Crouch();
         }
@@ -124,10 +135,18 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Crouch()
     {
+        if (isJumping)
+        {
+            _rigidbody.AddForce(Vector3.down * jumpPower, ForceMode.Impulse);
+            _animationController.Crouch();
+            yield return new WaitForSeconds(0.05f);
+        }
+
         _capsuleCollider.center = new Vector3(0, 0.6f, 0);
         _capsuleCollider.height = 1.5f;
         yield return new WaitForSeconds(1);
         _capsuleCollider.center = new Vector3(0, 1, 0);
         _capsuleCollider.height = 2.05f;
+        canJump = true;
     }
 }
