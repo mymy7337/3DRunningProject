@@ -5,11 +5,11 @@ using UnityEngine;
 public class MapReset : MonoBehaviour
 {
     public GameObject mapPrefab;            // 반복할 맵 프리팹
-    public int preSpawnCount = 2;           // 시작 시 생성할 맵 수
-    public float mapLength = 80f;           // 하나의 맵 길이
-    public float moveSpeed = 10f;           // 맵이 뒤로 이동하는 속도
-    public float spawnTriggerOffset = 20f;  // 마지막 맵이 이 거리 이상 이동하면 다음 맵 생성
-    public float despawnZ = -130f;           // 이 Z값보다 뒤에 있는 맵은 제거
+    public int preSpawnCount;           // 시작 시 생성할 맵 수
+    public float mapLength;           // 하나의 맵 길이
+    public float moveSpeed;
+    public float spawnTriggerOffset;  // 마지막 맵이 이 거리 이상 이동하면 다음 맵 생성
+    public float despawnZ;           // 이 Z값보다 뒤에 있는 맵은 제거
 
     private Queue<GameObject> mapQueue = new Queue<GameObject>();
     private GameObject lastMap;
@@ -31,6 +31,8 @@ public class MapReset : MonoBehaviour
 
     void MoveMaps()
     {
+        Debug.Log("moveSpeed: " + moveSpeed);
+
         foreach (GameObject map in mapQueue)
         {
             map.transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
