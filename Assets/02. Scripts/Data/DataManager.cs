@@ -24,12 +24,6 @@ public class DataManager : Singleton<DataManager>
 
         // === JSON 동기화 ===
         gameData = Load();
-
-        if (gameData.achievements == null || gameData.achievements.Count == 0)
-        {
-            gameData.achievements = new List<AchievementData>(achievements);
-            Save(gameData);
-        }
     }
 
     public void Save(GameData score)
@@ -54,7 +48,6 @@ public class DataManager : Singleton<DataManager>
             gameData = new GameData 
             { 
                 highScore = 0, currentScore = 0,
-                achievements = new List<AchievementData>()
             };
             string json = JsonUtility.ToJson(gameData);
             File.WriteAllText(filePath, json);
@@ -66,14 +59,14 @@ public class DataManager : Singleton<DataManager>
     // === 업적 해금 ===
     public void ClearAchievement(int id)
     {
-        for(int i = 0; i < gameData.achievements.Count; i++)
+        for(int i = 0; i < achievements.Count; i++)
         {
-            if(id == gameData.achievements[i].id)
+            if(id == achievements[i].id)
             {
-                if(gameData.achievements[i].isClear == false)
+                if(achievements[i].isClear == false)
                 {
-                    gameData.achievements[i].isClear = true;
-                    Debug.Log($"{gameData.achievements[i].achievementName} 업적 클리어!"); // === 확인용 ===
+                    achievements[i].isClear = true;
+                    Debug.Log($"{achievements[i].achievementName} 업적 클리어!"); // === 확인용 ===
                     Save(gameData);
                 }
                 return;
