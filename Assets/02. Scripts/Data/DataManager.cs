@@ -59,8 +59,17 @@ public class DataManager : Singleton<DataManager>
             // === 없으면 하나 만들어줌 ===
             gameData = new GameData 
             { 
-                highScore = 0, currentScore = 0,
+                highScore = 0,
+                achievements = new List<AchievementStat>()
             };
+            foreach (var achievement in achievements)
+            {
+                gameData.achievements.Add(new AchievementStat
+                {
+                    id = achievement.id,
+                    isClear = achievement.isClear
+                });
+            }
             string json = JsonUtility.ToJson(gameData);
             File.WriteAllText(filePath, json);
 
@@ -75,9 +84,11 @@ public class DataManager : Singleton<DataManager>
         {
             if(id == achievements[i].id)
             {
-                if(achievements[i].isClear == false)
+                if(achievements[i].isClear == false && gameData.achievements[i].isClear == false)
                 {
                     achievements[i].isClear = true;
+
+                    gameData.achievements[i].isClear = achievements[i].isClear;
 
                     SetAchievementText(achievements[i]);
 
@@ -88,7 +99,7 @@ public class DataManager : Singleton<DataManager>
         }
     }
 
-    // === 업적 달성시 팝넬창 나타내기 ===
+    // === 업적 달성시 업적창 나타내기 ===
     private void SetAchievementText(AchievementData data)
     {
         achievementPanel.gameObject.SetActive(true);
@@ -100,7 +111,7 @@ public class DataManager : Singleton<DataManager>
         StartCoroutine(HidePanel(3.0f));
     }
 
-    // === 판넬창 끄기 ===
+    // === 업적창 끄기 ===
     private IEnumerator HidePanel(float delay)
     {
         yield return new WaitForSeconds(delay);
