@@ -60,8 +60,16 @@ public class DataManager : Singleton<DataManager>
             gameData = new GameData 
             { 
                 highScore = 0,
-                achievements = new List<AchievementData>()
+                achievements = new List<AchievementStat>()
             };
+            foreach (var achievement in achievements)
+            {
+                gameData.achievements.Add(new AchievementStat
+                {
+                    id = achievement.id,
+                    isClear = achievement.isClear
+                });
+            }
             string json = JsonUtility.ToJson(gameData);
             File.WriteAllText(filePath, json);
 
@@ -76,11 +84,11 @@ public class DataManager : Singleton<DataManager>
         {
             if(id == achievements[i].id)
             {
-                if(achievements[i].isClear == false)
+                if(achievements[i].isClear == false && gameData.achievements[i].isClear == false)
                 {
                     achievements[i].isClear = true;
 
-                    gameData.achievements.Add(achievements[i]);
+                    gameData.achievements[i].isClear = achievements[i].isClear;
 
                     SetAchievementText(achievements[i]);
 
