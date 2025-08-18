@@ -8,4 +8,5 @@ public class GameData
 {
     public int highScore;
 
+    public List<AchievementData> achievements = new();
 }

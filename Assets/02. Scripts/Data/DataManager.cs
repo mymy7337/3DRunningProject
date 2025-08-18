@@ -59,7 +59,8 @@ public class DataManager : Singleton<DataManager>
             // === 없으면 하나 만들어줌 ===
             gameData = new GameData 
             { 
-                highScore = 0
+                highScore = 0,
+                achievements = new List<AchievementData>()
             };
             string json = JsonUtility.ToJson(gameData);
             File.WriteAllText(filePath, json);
@@ -79,6 +80,8 @@ public class DataManager : Singleton<DataManager>
                 {
                     achievements[i].isClear = true;
 
+                    gameData.achievements.Add(achievements[i]);
+
                     SetAchievementText(achievements[i]);
 
                     Save(gameData);
@@ -88,7 +91,7 @@ public class DataManager : Singleton<DataManager>
         }
     }
 
-    // === 업적 달성시 팝넬창 나타내기 ===
+    // === 업적 달성시 업적창 나타내기 ===
     private void SetAchievementText(AchievementData data)
     {
         achievementPanel.gameObject.SetActive(true);
@@ -100,7 +103,7 @@ public class DataManager : Singleton<DataManager>
         StartCoroutine(HidePanel(3.0f));
     }
 
-    // === 판넬창 끄기 ===
+    // === 업적창 끄기 ===
     private IEnumerator HidePanel(float delay)
     {
         yield return new WaitForSeconds(delay);
