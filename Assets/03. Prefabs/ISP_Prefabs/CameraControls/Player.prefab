@@ -261,10 +261,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderers:
-  - {fileID: 672671385411540621}
-  - {fileID: 1809196524094663720}
   - {fileID: 6764846429699259197}
+  - {fileID: 672671385411540621}
   - {fileID: 6275016773804903791}
+  - {fileID: 1809196524094663720}
   - {fileID: 4006272924155011216}
 --- !u!114 &3403405642830788872
 MonoBehaviour:
