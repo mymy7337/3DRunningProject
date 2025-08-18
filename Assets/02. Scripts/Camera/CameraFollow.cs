@@ -37,9 +37,9 @@ public class CameraFollow : MonoBehaviour
         {
             Quaternion desiredRotation = Quaternion.LookRotation(forward, Vector3.up);
             Vector3 euler = desiredRotation.eulerAngles;
-            euler.z = 0f;
+            euler.x += 30f;
             desiredRotation = Quaternion.Euler(euler);
-            
+
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
                 desiredRotation,
