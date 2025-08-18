@@ -1,8 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AchievementData : MonoBehaviour
+[CreateAssetMenu(fileName = "Achievement", menuName = "New Achievement")]
+public class AchievementData : ScriptableObject
 {
+    [Header("info")]
+    public int id;                        // === 업적 순서 ===
+    public string achievementName;         // === 업적 이름 ===
+    public string description;              // === 해금 조건 ===
+    public bool isClear;                     // === 해금시 true ===
 
+    [Header("etc.")]
+    public Sprite icon;                       // === 업적별 아이콘 ===
 }

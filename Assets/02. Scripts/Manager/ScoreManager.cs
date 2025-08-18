@@ -32,6 +32,11 @@ public class ScoreManager : MonoBehaviour
         if (TitleManager.Instance != null)
         {
             timer += Time.fixedDeltaTime;
+
+            if (timer > 5.0f) 
+            {
+                DataManager.Instance.ClearAchievement(0);
+            }
         }
     }
 
