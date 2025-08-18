@@ -92,6 +92,8 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(JumpCheck());
             _rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             _animationController.Jump();
+            AudioManager.Instance.PlaySFX(0);
+            AudioManager.Instance.SetSFXVolume(0.3f);
         }
     }
 
@@ -130,6 +132,8 @@ public class PlayerController : MonoBehaviour
             canJump = false;
             StartCoroutine(Crouch());
             _animationController.Crouch();
+            AudioManager.Instance.PlaySFX(1);
+            AudioManager.Instance.SetSFXVolume(0.1f);
         }
     }
 

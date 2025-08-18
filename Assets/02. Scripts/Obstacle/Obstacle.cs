@@ -21,5 +21,7 @@ public class Obstacle : MonoBehaviour
         Debug.Log("플레이어 감지됨."); // 플레이어죽이기(게임오버)
 
         TitleManager.Instance.GameOver();
+        AudioManager.Instance.PlaySFX(3);
+        AudioManager.Instance.SetSFXVolume(0.3f);
     }
 }
