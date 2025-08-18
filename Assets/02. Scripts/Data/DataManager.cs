@@ -59,7 +59,7 @@ public class DataManager : Singleton<DataManager>
             // === 없으면 하나 만들어줌 ===
             gameData = new GameData 
             { 
-                highScore = 0, currentScore = 0,
+                highScore = 0
             };
             string json = JsonUtility.ToJson(gameData);
             File.WriteAllText(filePath, json);
