@@ -25,6 +25,11 @@ public class AudioManager : MonoBehaviour
             return;
         }
     }
+    private void Start()
+    {
+        PlayBGM(0);
+        SetBGMVolume(0.4f);
+    }
 
     public void PlayBGM(int index)
     {
