@@ -11,6 +11,8 @@ public class ScoreManager : MonoBehaviour
     private int highScore = 0;
     private int currentScore = 0;
 
+    public List<AchievementData> achievements;
+
     private void Start()
     {
         // === GameData에서 저장된 highScore를 불러옴 ===
@@ -34,7 +36,7 @@ public class ScoreManager : MonoBehaviour
             timer += Time.fixedDeltaTime;
 
             // === 첫번째 업적 ===
-            if (timer >= 60.0f && DataManager.Instance.achievements[0].isClear == false)
+            if (timer >= 6.0f && DataManager.Instance.achievements[0].isClear == false)
             {
                 DataManager.Instance.ClearAchievement(0);
             }
@@ -68,7 +70,7 @@ public class ScoreManager : MonoBehaviour
         // === 제이슨 파일에 저장 ===
         GameData dataToSave = new()
         {
-            highScore = highScore
+            highScore = highScore,
         };
 
         DataManager.Instance.Save(dataToSave);

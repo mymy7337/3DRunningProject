@@ -40,6 +40,16 @@ public class DataManager : Singleton<DataManager>
 
     public void Save(GameData score)
     {
+
+        foreach (var achievement in achievements)
+        {
+            score.achievements.Add(new AchievementStat
+            {
+                id = achievement.id,
+                isClear = achievement.isClear
+            });
+        }
+
         var saveData = JsonUtility.ToJson(score);
 
         File.WriteAllText(filePath, saveData);
