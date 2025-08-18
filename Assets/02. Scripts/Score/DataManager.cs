@@ -66,14 +66,14 @@ public class DataManager : Singleton<DataManager>
     // === 업적 해금 ===
     public void ClearAchievement(int id)
     {
-        for(int i = 0; i < achievements.Count; i++)
+        for(int i = 0; i < gameData.achievements.Count; i++)
         {
-            if(id == achievements[i].id)
+            if(id == gameData.achievements[i].id)
             {
-                if(achievements[i].isClear == false)
+                if(gameData.achievements[i].isClear == false)
                 {
-                    achievements[i].isClear = true;
-                    Debug.Log($"{achievements[i].name} 업적 클리어!");
+                    gameData.achievements[i].isClear = true;
+                    Debug.Log($"{gameData.achievements[i].achievementName} 업적 클리어!"); // === 확인용 ===
                     Save(gameData);
                 }
                 return;

@@ -30,15 +30,6 @@ public class TitleManager : Singleton<TitleManager>
         endPanel.SetActive(false);
     }
 
-    public void Update()
-    {
-        // === 테스트 용 ===
-        if (Input.GetKeyUp(KeyCode.Escape)) 
-        {
-            GameOver();
-        }
-    }
-
     // === 게임 오버시 호출 ===
     public void GameOver()
     {

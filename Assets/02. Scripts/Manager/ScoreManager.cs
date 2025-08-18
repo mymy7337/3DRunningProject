@@ -33,7 +33,8 @@ public class ScoreManager : MonoBehaviour
         {
             timer += Time.fixedDeltaTime;
 
-            if (timer > 5.0f) 
+            // === 첫번째 업적 ===
+            if (timer >= 60.0f)
             {
                 DataManager.Instance.ClearAchievement(0);
             }
@@ -72,7 +73,6 @@ public class ScoreManager : MonoBehaviour
         };
 
         DataManager.Instance.Save(dataToSave);
-
 
         UpDateUI(highScore, finalScore);
     }
