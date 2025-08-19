@@ -11,8 +11,6 @@ public class ScoreManager : MonoBehaviour
     private int highScore = 0;
     private int currentScore = 0;
 
-    public List<AchievementData> achievements;
-
     private void Start()
     {
         // === GameData에서 저장된 highScore를 불러옴 ===
