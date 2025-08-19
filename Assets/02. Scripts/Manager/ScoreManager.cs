@@ -59,7 +59,10 @@ public class ScoreManager : MonoBehaviour
     public void FinalScore()
     {
         int finalScore = currentScore + (int)timer;
-
+        if(finalScore >= 99 && DataManager.Instance.achievements[1].isClear == false)
+        {
+            DataManager.Instance.ClearAchievement(1);
+        }
         if (finalScore >= highScore)
         {
             highScore = finalScore;
