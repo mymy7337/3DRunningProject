@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(!(moveDirection == new Vector3(1,0,0) && transform.position.x == 4.5f) && !(moveDirection == new Vector3(-1, 0, 0) && transform.position.x == 2.5f))
+        if(!(moveDirection == new Vector3(1,0,0) && transform.position.x >= 4.5f) && !(moveDirection == new Vector3(-1, 0, 0) && transform.position.x <= 2.5f))
             Move();
     }
 
