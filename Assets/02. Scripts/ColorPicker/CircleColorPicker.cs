@@ -9,8 +9,6 @@ public class CircleColorPicker : BaseColorPicker
 
     private void Start()
     {
-        paletteCollider = palette.GetComponent<CircleCollider2D>();
-
         sizeOfPalette = new Vector2(
             palette.GetComponent<RectTransform>().rect.width,
             palette.GetComponent <RectTransform>().rect.height);
@@ -19,7 +17,7 @@ public class CircleColorPicker : BaseColorPicker
     protected override void SelectColor()
     {
         Vector3 offest = Input.mousePosition - transform.position;
-        Vector3 diff = Vector3.ClampMagnitude(offest, paletteCollider.radius);
+        Vector3 diff = Vector3.ClampMagnitude(offest, 165);
 
         picker.transform.position = transform.position + diff;
 

@@ -19,7 +19,7 @@ public class DataManager : Singleton<DataManager>
 
     private string filePath;
 
-    protected override bool isDestroy => false;
+    protected override bool isDestroy => true;
 
     protected override void Awake()
     {
@@ -40,6 +40,16 @@ public class DataManager : Singleton<DataManager>
 
     public void Save(GameData score)
     {
+
+        foreach (var achievement in achievements)
+        {
+            score.achievements.Add(new AchievementStat
+            {
+                id = achievement.id,
+                isClear = achievement.isClear
+            });
+        }
+
         var saveData = JsonUtility.ToJson(score);
 
         File.WriteAllText(filePath, saveData);
@@ -48,8 +58,8 @@ public class DataManager : Singleton<DataManager>
     public GameData Load()
     {
         // === 파일 확인 후 로드 ===
-        if (File.Exists(filePath)) 
-        {
+        if (File.Exists(filePath))
+        { 
             var loadData = File.ReadAllText(filePath);
 
             return JsonUtility.FromJson<GameData>(loadData);
@@ -114,7 +124,7 @@ public class DataManager : Singleton<DataManager>
     // === 업적창 끄기 ===
     private IEnumerator HidePanel(float delay)
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSecondsRealtime(delay);
         achievementPanel.gameObject.SetActive(false);
     }
 }
