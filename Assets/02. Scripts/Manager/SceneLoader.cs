@@ -33,6 +33,14 @@ public class SceneLoader : Singleton<SceneLoader>
     public void RestartGame()
     {
         LoadPlayScene();
+
+        // === 게임 매니저를 파괴 ===
+        if (TitleManager.Instance.gameObject != null)
+        {
+            Destroy(TitleManager.Instance.gameObject);
+        }
+
+        Time.timeScale = 1.0f;
     }
 
     public void QuitGame()

@@ -40,37 +40,4 @@ public class TitleManager : Singleton<TitleManager>
         Time.timeScale = 0.0f;
     }
 
-    // === 게임 재시작시 버튼에 할당 ===
-    public void ReStart()
-    {
-        Time.timeScale = 1.0f;
-
-        // === 게임 매니저를 보존 ===
-        if (Instance != null)
-        {
-            Destroy(Instance.gameObject);
-        }
-
-        // === 현재 씬을 재로드 ===
-        SceneManager.LoadScene("MainScene");
-
-        endPanel.SetActive(false);
-    }
-
-    // === 게임 재시작시 버튼에 할당 ===
-    public void Shop()
-    {
-        Time.timeScale = 1.0f;
-
-        // === 게임 매니저를 보존 ===
-        if (Instance != null)
-        {
-            Destroy(Instance.gameObject);
-        }
-
-        // === 커마 씬을 로드 ===
-        SceneManager.LoadScene("CustomizeScene");
-
-        endPanel.SetActive(false);
-    }
 }
