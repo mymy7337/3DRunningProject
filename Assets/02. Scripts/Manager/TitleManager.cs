@@ -15,7 +15,7 @@ public class TitleManager : Singleton<TitleManager>
     // === 다른 매니저 호출 ===
     public ScoreManager ScoreManager { get; private set; }
 
-    protected override bool isDestroy => false;
+    protected override bool isDestroy => true;
 
     protected override void Awake()
     {
@@ -28,6 +28,8 @@ public class TitleManager : Singleton<TitleManager>
         ScoreManagerObject.transform.SetParent(transform);
 
         endPanel.SetActive(false);
+
+        Time.timeScale = 1.0f;
     }
 
     // === 게임 오버시 호출 ===
