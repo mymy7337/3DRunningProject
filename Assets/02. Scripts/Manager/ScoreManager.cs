@@ -11,8 +11,6 @@ public class ScoreManager : MonoBehaviour
     private int highScore = 0;
     private int currentScore = 0;
 
-    public List<AchievementData> achievements;
-
     private void Start()
     {
         // === GameData에서 저장된 highScore를 불러옴 ===
@@ -61,7 +59,10 @@ public class ScoreManager : MonoBehaviour
     public void FinalScore()
     {
         int finalScore = currentScore + (int)timer;
-
+        if(finalScore >= 99 && DataManager.Instance.achievements[1].isClear == false)
+        {
+            DataManager.Instance.ClearAchievement(1);
+        }
         if (finalScore >= highScore)
         {
             highScore = finalScore;

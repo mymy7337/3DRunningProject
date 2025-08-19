@@ -28,6 +28,8 @@ public class SceneLoader : Singleton<SceneLoader>
     public void LoadCustomizingScene()
     {
         SceneManager.LoadScene(SceneNames.CustomizeScene);
+
+        Time.timeScale = 1.0f;
     }
 
     public void RestartGame()

@@ -258,7 +258,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC0C1\uC810\n"
+  m_text: "\uCEE4\uC2A4\uD130\n\uB9C8\uC774\uC9D5"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: efe35d104fc190c4dbf0109723651010, type: 2}
   m_sharedMaterial: {fileID: 5039076036764523313, guid: efe35d104fc190c4dbf0109723651010, type: 2}
@@ -552,9 +552,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2011479521}
-        m_TargetAssemblyTypeName: TitleManager, Assembly-CSharp
-        m_MethodName: ReStart
+      - m_Target: {fileID: 1637901394}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -633,6 +633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievements:
   - {fileID: 11400000, guid: 40165304042bd5742a258424b0666a87, type: 2}
+  - {fileID: 11400000, guid: 27292a2c3e2e4a04fb13d202b084b3b3, type: 2}
   achievementPanel: {fileID: 66648696}
   icon: {fileID: 2110050904}
   nameText: {fileID: 2043317060}
@@ -735,9 +736,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2011479521}
-        m_TargetAssemblyTypeName: TitleManager, Assembly-CSharp
-        m_MethodName: Shop
+      - m_Target: {fileID: 1637901394}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadCustomizingScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2475,6 +2476,50 @@ Transform:
   - {fileID: 1527914003}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1637901393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1637901395}
+  - component: {fileID: 1637901394}
+  m_Layer: 0
+  m_Name: SceneLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1637901394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637901393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eda4462ca261946e488075fd3a26231e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1637901395
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637901393}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 453.75, y: 160.41666, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1957265923
 GameObject:
   m_ObjectHideFlags: 0
@@ -3030,3 +3075,4 @@ SceneRoots:
   - {fileID: 1363773803}
   - {fileID: 1399704411}
   - {fileID: 1633598470}
+  - {fileID: 1637901395}
