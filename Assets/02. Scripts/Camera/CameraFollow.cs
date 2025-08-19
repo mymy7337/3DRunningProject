@@ -1,23 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
     [Header("Target")]
-    [SerializeField] private Transform target; // CameraAnchor 에 연결
-    [SerializeField] private float distance = 8f;
-    [SerializeField] private float height = 8f;
-    [SerializeField] private float rotationLerp = 8f;
+    [SerializeField] private Transform target;   // Player의 CameraAnchor
+    [SerializeField, Min(0f)] private float distance = 8f;
+    [SerializeField, Min(0f)] private float height   = 8f;
 
-    [Header("Camera Tuning")]
-    [SerializeField, Min(0f)] private float lerp = 6f;
-    [SerializeField] private bool lookTarget = true;
-    [SerializeField] private Vector3 lookAhead = new Vector3(0f, 1f, 6f);
+    [Header("Smoothing")]
+    [SerializeField, Min(0f)] private float positionLerp = 6f;
+    [SerializeField, Min(0f)] private float rotationLerp = 8f;
 
-    [Header("Lock Axis")]
-    public bool lockZAxis = true;
-    public float fixedZAxis = 0f;
+    [Header("Orientation")]
+    [SerializeField] private bool lockTilt = true;   // 좌우 이동 중에도 회전하지 않게
+    [SerializeField] private float fixedTilt = 0f;   // 직선 러너면 0 권장
+    [SerializeField] private float pitchAngle = 25f; // 내려다보는 각도
 
     public void Bind(Transform x) => target = x;
 
@@ -25,26 +22,24 @@ public class CameraFollow : MonoBehaviour
     {
         if (!target) return;
 
-        Vector3 forward = target.forward;
-        Vector3 up = target.up;
-        Vector3 desiredPosition = target.position - forward * distance + up * height;
-        if (lockZAxis)
-            desiredPosition.z = fixedZAxis;
+        Vector3 desiredPos = target.position
+                           - Vector3.forward * distance
+                           + Vector3.up      * height;
 
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, lerp * Time.deltaTime);
+        transform.position = Vector3.Lerp(
+            transform.position,
+            desiredPos,
+            positionLerp * Time.deltaTime
+        );
 
-        if (lookTarget)
-        {
-            Quaternion desiredRotation = Quaternion.LookRotation(forward, Vector3.up);
-            Vector3 euler = desiredRotation.eulerAngles;
-            euler.x += 30f;
-            desiredRotation = Quaternion.Euler(euler);
+        float tilt = lockTilt ? fixedTilt : target.eulerAngles.y;
 
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                desiredRotation,
-                rotationLerp * Time.deltaTime
-            );
-        }
+        Quaternion desiredRot = Quaternion.Euler(pitchAngle, tilt, 0f);
+
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            desiredRot,
+            rotationLerp * Time.deltaTime
+        );
     }
 }
