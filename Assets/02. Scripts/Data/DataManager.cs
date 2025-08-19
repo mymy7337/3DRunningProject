@@ -19,7 +19,7 @@ public class DataManager : Singleton<DataManager>
 
     private string filePath;
 
-    protected override bool isDestroy => false;
+    protected override bool isDestroy => true;
 
     protected override void Awake()
     {
