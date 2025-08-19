@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class DataManager : Singleton<DataManager>
@@ -38,19 +39,9 @@ public class DataManager : Singleton<DataManager>
         }
     }
 
-    public void Save(GameData score)
+    public void Save(GameData data)
     {
-
-        foreach (var achievement in achievements)
-        {
-            score.achievements.Add(new AchievementStat
-            {
-                id = achievement.id,
-                isClear = achievement.isClear
-            });
-        }
-
-        var saveData = JsonUtility.ToJson(score);
+        var saveData = JsonUtility.ToJson(data);
 
         File.WriteAllText(filePath, saveData);
     }
@@ -62,7 +53,14 @@ public class DataManager : Singleton<DataManager>
         { 
             var loadData = File.ReadAllText(filePath);
 
-            return JsonUtility.FromJson<GameData>(loadData);
+            var loadedGameData = JsonUtility.FromJson<GameData>(loadData);
+
+            if (loadedGameData.achievements == null)
+            {
+                loadedGameData.achievements = new List<AchievementStat>();
+            }
+
+            return loadedGameData;
         }
         else
         {
@@ -77,7 +75,7 @@ public class DataManager : Singleton<DataManager>
                 gameData.achievements.Add(new AchievementStat
                 {
                     id = achievement.id,
-                    isClear = achievement.isClear
+                    isClear = false
                 });
             }
             string json = JsonUtility.ToJson(gameData);
@@ -90,23 +88,19 @@ public class DataManager : Singleton<DataManager>
     // === 업적 해금 ===
     public void ClearAchievement(int id)
     {
-        for(int i = 0; i < achievements.Count; i++)
+        if (id == gameData.achievements[id].id)
         {
-            if(id == achievements[i].id)
+            if (gameData.achievements[id].isClear == false)
             {
-                if(achievements[i].isClear == false && gameData.achievements[i].isClear == false)
-                {
-                    achievements[i].isClear = true;
+                gameData.achievements[id].isClear = true;
 
-                    gameData.achievements[i].isClear = achievements[i].isClear;
+                gameData.achievements[id].id = id;
 
-                    SetAchievementText(achievements[i]);
-
-                    Save(gameData);
-                }
-                return;
+                SetAchievementText(achievements[id]);
             }
         }
+
+        Save(gameData);
     }
 
     // === 업적 달성시 업적창 나타내기 ===

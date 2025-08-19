@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class AchievementItem : MonoBehaviour
 {
+    private GameData gameData;
+
     public Image icon;                                // === 업적 아이콘 ===
     public TextMeshProUGUI nameText;                   // === 업적 이름===
     public TextMeshProUGUI descriptionText;             // === 업적 내용 ===
@@ -20,7 +22,7 @@ public class AchievementItem : MonoBehaviour
         nameText.text = data.achievementName;
         descriptionText.text = data.description;
 
-        if(data.isClear == true)
+        if (gameData.achievements[index].isClear == true)
         {
             checkAchievement.gameObject.SetActive(false);
         }

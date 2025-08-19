@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
+    private GameData gameData;
+
     // === 점수를 위한 타이머 ===
     private float timer;
 
@@ -14,10 +16,11 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         // === GameData에서 저장된 highScore를 불러옴 ===
-        GameData loadedData = DataManager.Instance.Load();
-        if (loadedData != null)
+        gameData = DataManager.Instance.Load();
+
+        if (gameData != null)
         {
-            highScore = loadedData.highScore;
+            highScore = gameData.highScore;
         }
 
         if (TitleManager.Instance != null)
@@ -34,7 +37,7 @@ public class ScoreManager : MonoBehaviour
             timer += Time.fixedDeltaTime;
 
             // === 첫번째 업적 ===
-            if (timer >= 60.0f && DataManager.Instance.achievements[0].isClear == false)
+            if (timer >= 6.0f)
             {
                 DataManager.Instance.ClearAchievement(0);
             }
@@ -59,7 +62,7 @@ public class ScoreManager : MonoBehaviour
     public void FinalScore()
     {
         int finalScore = currentScore + (int)timer;
-        if(finalScore >= 99 && DataManager.Instance.achievements[1].isClear == false)
+        if(finalScore >= 99)
         {
             DataManager.Instance.ClearAchievement(1);
         }
