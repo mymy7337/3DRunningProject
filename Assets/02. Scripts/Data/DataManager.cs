@@ -58,8 +58,8 @@ public class DataManager : Singleton<DataManager>
     public GameData Load()
     {
         // === 파일 확인 후 로드 ===
-        if (File.Exists(filePath)) 
-        {
+        if (File.Exists(filePath))
+        { 
             var loadData = File.ReadAllText(filePath);
 
             return JsonUtility.FromJson<GameData>(loadData);
@@ -124,7 +124,7 @@ public class DataManager : Singleton<DataManager>
     // === 업적창 끄기 ===
     private IEnumerator HidePanel(float delay)
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSecondsRealtime(delay);
         achievementPanel.gameObject.SetActive(false);
     }
 }
