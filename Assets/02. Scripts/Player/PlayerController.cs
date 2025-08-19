@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour
             if(!canJump)
             {
                 StopCoroutine(crouch);
+                StartCoroutine(animationSpeedSet((transform.position.y)));
                 canJump = true;
                 isCrouching = false;
                 _capsuleCollider.center = new Vector3(0, 1, 0);
@@ -108,6 +109,13 @@ public class PlayerController : MonoBehaviour
             AudioManager.Instance.PlaySFX(0);
             AudioManager.Instance.SetSFXVolume(0.3f);
         }
+    }
+
+    private IEnumerator animationSpeedSet(float time)
+    {
+        _animationController.animator.speed = 2;
+        yield return new WaitForSeconds(time);
+        _animationController.animator.speed = 1;
     }
 
     private IEnumerator JumpCheck()
