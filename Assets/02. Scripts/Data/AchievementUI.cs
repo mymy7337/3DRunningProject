@@ -1,21 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AchievementUI : MonoBehaviour
+public class AchievementUI : Singleton<AchievementUI>
 {
     [Header("infomation")]
-    public Image achievementPanel;            // === 업적 창 ===
-    public Image icon;                         // === 업적 아이콘 ===
-    public TextMeshProUGUI nameText;            // === 업적 이름===
-    public TextMeshProUGUI descriptionText;      // === 업적 내용 ===
+    public Image achievementPanel;                    // === 업적 창 ===
+    public GameObject achievement;                    // === 업적 당 나타내줄 오브젝트 ===
+    public Transform parentTransform;                 // === 부모로 둘 오브젝트 ===
 
-    public List<AchievementData> achievements;
+    private Vector3 spawnPosition = new(62, -28, 0);  // === 초기 위치 ===
 
-    private void Awake()
+    public List<AchievementData> achievements;        // === 업적 확인 용 ===
+
+    protected override bool isDestroy => true;
+
+    protected override void Awake()
     {
+        base.Awake();
+
         if (SceneLoader.Instance != null)
         {
             achievementPanel.gameObject.SetActive(false);
@@ -26,9 +32,17 @@ public class AchievementUI : MonoBehaviour
     {
         for(int i = 0; i < achievements.Count; i++)
         {
-            icon.sprite = achievements[i].icon;
-            nameText.text = achievements[i].achievementName;
-            descriptionText.text = achievements[i].description;
+            GameObject newAchievement = Instantiate(achievement, spawnPosition, Quaternion.identity);
+            newAchievement.transform.SetParent(parentTransform, false);
+
+            spawnPosition.y -= 362;
+
+            AchievementItem itemScript = newAchievement.GetComponent<AchievementItem>();
+
+            if (itemScript != null)
+            {
+                itemScript.SetIndex(i);
+            }
         }
     }
 
