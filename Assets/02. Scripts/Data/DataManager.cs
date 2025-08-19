@@ -55,9 +55,12 @@ public class DataManager : Singleton<DataManager>
 
             var loadedGameData = JsonUtility.FromJson<GameData>(loadData);
 
-            if (loadedGameData.achievements == null)
+            if (loadedGameData.achievementsList == null)
             {
-                loadedGameData.achievements = new List<AchievementStat>();
+                loadedGameData.achievementsList = new AchievementList
+                    {
+                    achievements = new List<AchievementStat>()
+                };
             }
 
             return loadedGameData;
@@ -68,11 +71,11 @@ public class DataManager : Singleton<DataManager>
             gameData = new GameData 
             { 
                 highScore = 0,
-                achievements = new List<AchievementStat>()
+                achievementsList = new AchievementList()
             };
             foreach (var achievement in achievements)
             {
-                gameData.achievements.Add(new AchievementStat
+                gameData.achievementsList.achievements.Add(new AchievementStat
                 {
                     id = achievement.id,
                     isClear = false
@@ -88,18 +91,17 @@ public class DataManager : Singleton<DataManager>
     // === 업적 해금 ===
     public void ClearAchievement(int id)
     {
-        if (id == gameData.achievements[id].id)
+        if (id == gameData.achievementsList.achievements[id].id)
         {
-            if (gameData.achievements[id].isClear == false)
+            if (gameData.achievementsList.achievements[id].isClear == false)
             {
-                gameData.achievements[id].isClear = true;
+                gameData.achievementsList.achievements[id].isClear = true;
 
-                gameData.achievements[id].id = id;
+                gameData.achievementsList.achievements[id].id = id;
 
                 SetAchievementText(achievements[id]);
             }
         }
-
         Save(gameData);
     }
 

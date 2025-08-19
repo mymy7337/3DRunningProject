@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AchievementList : MonoBehaviour
+[Serializable]
+public class AchievementList
 {
-
+    public List<AchievementStat> achievements = new();
 }

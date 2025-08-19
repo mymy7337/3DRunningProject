@@ -22,7 +22,7 @@ public class AchievementItem : MonoBehaviour
         nameText.text = data.achievementName;
         descriptionText.text = data.description;
 
-        if (gameData.achievements[index].isClear == true)
+        if (gameData.achievementsList.achievements[index].isClear == true)
         {
             checkAchievement.gameObject.SetActive(false);
         }
