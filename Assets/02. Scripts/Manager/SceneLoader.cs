@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : Singleton<SceneLoader>
 {
-    protected override bool isDestroy => false;
+    protected override bool isDestroy => true;
 
     protected override void Awake()
     {
