@@ -2,13 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class PlayerCustomizer : MonoBehaviour
 {
     [SerializeField] private SkinnedMeshRenderer[] renderers;
     //1. Çì¾î 2. ÇÇºÎ 3. ¿Ê 4. Àå°© 5. ½Å¹ß
 
+    [SerializeField] private GameObject[] characters;
+
+    public int characterIndex;
+
     public ColorData colorData;
+
+    private void Awake()
+    {
+        Instantiate(characters[characterIndex], this.transform);
+    }
 
     private void Start()
     {
