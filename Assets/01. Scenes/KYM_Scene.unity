@@ -370,49 +370,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4430876291939108567, guid: 58e7bccc57cf64b3fbec205b38b80c2c, type: 3}
-      propertyPath: characterIndex
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430876291939108567, guid: 58e7bccc57cf64b3fbec205b38b80c2c, type: 3}
-      propertyPath: renderers.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430876291939108567, guid: 58e7bccc57cf64b3fbec205b38b80c2c, type: 3}
-      propertyPath: characters.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430876291939108567, guid: 58e7bccc57cf64b3fbec205b38b80c2c, type: 3}
-      propertyPath: characters.Array.data[0]
-      value: 
-      objectReference: {fileID: 5248935995464760801, guid: 03d3c5f553804a2418c9e696cd18df58, type: 3}
-    - target: {fileID: 4430876291939108567, guid: 58e7bccc57cf64b3fbec205b38b80c2c, type: 3}
-      propertyPath: characters.Array.data[1]
-      value: 
-      objectReference: {fileID: 1127070260591221339, guid: f91469e9b0232b74b8de83e8f3b8a0c5, type: 3}
-    - target: {fileID: 4430876291939108567, guid: 58e7bccc57cf64b3fbec205b38b80c2c, type: 3}
-      propertyPath: characters.Array.data[2]
-      value: 
-      objectReference: {fileID: 685536839758889894, guid: 7b9d72e518c55f04caa82e258d4cb3e4, type: 3}
-    - target: {fileID: 4430876291939108567, guid: 58e7bccc57cf64b3fbec205b38b80c2c, type: 3}
-      propertyPath: characters.Array.data[3]
-      value: 
-      objectReference: {fileID: 1449375665418616102, guid: faa0cbb79395d394db2968ca530e8a40, type: 3}
-    - target: {fileID: 4430876291939108567, guid: 58e7bccc57cf64b3fbec205b38b80c2c, type: 3}
-      propertyPath: characters.Array.data[4]
-      value: 
-      objectReference: {fileID: 2740444262131486972, guid: 8d9de659c7d59d74aa593b50acac7f83, type: 3}
-    - target: {fileID: 5251963037135383463, guid: 58e7bccc57cf64b3fbec205b38b80c2c, type: 3}
-      propertyPath: character
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7646994077360772334, guid: 58e7bccc57cf64b3fbec205b38b80c2c, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 7698046789086605477, guid: 58e7bccc57cf64b3fbec205b38b80c2c, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58e7bccc57cf64b3fbec205b38b80c2c, type: 3}

@@ -6,25 +6,24 @@ using UnityEngine.TextCore.Text;
 
 public class PlayerCustomizer : MonoBehaviour
 {
-    [SerializeField] private SkinnedMeshRenderer[] renderers;
-    //1. Çì¾î 2. ÇÇºÎ 3. ¿Ê 4. Àå°© 5. ½Å¹ß
-
     [SerializeField] private GameObject[] characters;
 
     public int characterIndex;
 
     public ColorData colorData;
+    public Materials materials;
 
     private void Awake()
     {
-        Instantiate(characters[characterIndex], this.transform);
+        var character = Instantiate(characters[characterIndex], this.transform);
+        materials = character.GetComponent<Materials>();
     }
 
     private void Start()
     {
         if (!File.Exists(Application.persistentDataPath + "/ColorData.json"))
         {
-            for(int i = 0; i < 5; i++)
+            for(int i = 0; i < materials.renderers.Length; i++)
             {
                 colorData.colors[i] = new Color(1, 1, 1);
             }
@@ -36,16 +35,16 @@ public class PlayerCustomizer : MonoBehaviour
 
     private void SetColor()
     {
-        for(int i = 0; i < renderers.Length; i++)
+        for(int i = 0; i < materials.renderers.Length; i++)
         {
             Load();
-            renderers[i].material.SetColor("_Color", colorData.colors[i]);
+            materials.renderers[i].material.SetColor("_Color", colorData.colors[i]);
         }
     }
 
     public void ChangeColor(int idx, Color albedo)
     {
-        Material material = renderers[idx].material;
+        Material material = materials.renderers[idx].material;
 
         material.SetColor("_Color", albedo);
 
