@@ -13,10 +13,10 @@ public class PlayerAnimationController : MonoBehaviour
 
     private bool isRun;
 
-
-    private void Awake()
+    private void Start()
     {
         animator = GetComponentInChildren<Animator>();
+
     }
 
     public void Run()

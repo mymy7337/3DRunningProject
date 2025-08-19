@@ -7,9 +7,10 @@ using UnityEngine.UI;
 
 public class AchievementItem : MonoBehaviour
 {
-    [SerializeField] public Image icon;                                // === 업적 아이콘 ===
-    [SerializeField] public TextMeshProUGUI nameText;                  // === 업적 이름===
-    [SerializeField] public TextMeshProUGUI descriptionText;           // === 업적 내용 ===
+    public Image icon;                                // === 업적 아이콘 ===
+    public TextMeshProUGUI nameText;                   // === 업적 이름===
+    public TextMeshProUGUI descriptionText;             // === 업적 내용 ===
+    public Image checkAchievement;                       // === 업적 클리어시 해금 ===
 
     public void SetIndex(int index)
     {
@@ -18,5 +19,10 @@ public class AchievementItem : MonoBehaviour
         icon.sprite = data.icon;
         nameText.text = data.achievementName;
         descriptionText.text = data.description;
+
+        if(data.isClear == true)
+        {
+            checkAchievement.gameObject.SetActive(false);
+        }
     }
 }

@@ -1533,10 +1533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   achievementPanel: {fileID: 1650680781}
-  icon: {fileID: 0}
-  nameText: {fileID: 0}
-  descriptionText: {fileID: 0}
-  achievement: {fileID: 6214801492842717342, guid: 6598e320bd764fb4ea32e9f0557ba209, type: 3}
+  achievementPrefabs: {fileID: 6214801492842717342, guid: 6598e320bd764fb4ea32e9f0557ba209, type: 3}
   parentTransform: {fileID: 1650680780}
   achievements:
   - {fileID: 11400000, guid: 40165304042bd5742a258424b0666a87, type: 2}
