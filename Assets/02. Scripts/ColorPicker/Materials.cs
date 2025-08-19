@@ -5,5 +5,5 @@ using UnityEngine;
 public class Materials : MonoBehaviour
 {
     public SkinnedMeshRenderer[] renderers;
-    //1. ÇÇºÎ 2. Çì¾î 3. ·»Áî 4~Àåºñ, etc
+    //1. í”¼ë¶€ 2. í—¤ì–´ 3. ë Œì¦ˆ 4~ìž¥ë¹„, etc
 }
