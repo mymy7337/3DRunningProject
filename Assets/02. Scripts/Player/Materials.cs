@@ -5,5 +5,5 @@ using UnityEngine;
 public class Materials : MonoBehaviour
 {
     public SkinnedMeshRenderer[] renderers;
-    //1. 헤어 2. 피부 3. 옷 4. 장갑 5. 신발 6. etc
+    //1. 피부 2. 헤어 3. 렌즈 4~장비, etc
 }
