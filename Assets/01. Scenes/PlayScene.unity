@@ -1603,9 +1603,7 @@ MonoBehaviour:
   rotationLerp: 8
   lockTilt: 1
   fixedTilt: 0
-  pitchAngle: 25
-  lockZAxis: 1
-  fixedZAxis: -0.75
+  pitchAngle: 30
 --- !u!1 &1119461727
 GameObject:
   m_ObjectHideFlags: 0

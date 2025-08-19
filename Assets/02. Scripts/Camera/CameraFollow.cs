@@ -16,10 +16,6 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float fixedTilt = 0f;   // 직선 러너면 0 권장
     [SerializeField] private float pitchAngle = 25f; // 내려다보는 각도
 
-    [Header("Optional: Lock Z Position")]
-    [SerializeField] private bool lockZAxis = false; // Z 값 고정
-    [SerializeField] private float fixedZAxis = 0f;
-
     public void Bind(Transform x) => target = x;
 
     private void LateUpdate()
@@ -30,17 +26,15 @@ public class CameraFollow : MonoBehaviour
                            - Vector3.forward * distance
                            + Vector3.up      * height;
 
-        if (lockZAxis) desiredPos.z = fixedZAxis;
-
         transform.position = Vector3.Lerp(
             transform.position,
             desiredPos,
             positionLerp * Time.deltaTime
         );
 
-        float yaw = lockTilt ? fixedTilt : target.eulerAngles.y;
+        float tilt = lockTilt ? fixedTilt : target.eulerAngles.y;
 
-        Quaternion desiredRot = Quaternion.Euler(pitchAngle, yaw, 0f);
+        Quaternion desiredRot = Quaternion.Euler(pitchAngle, tilt, 0f);
 
         transform.rotation = Quaternion.Slerp(
             transform.rotation,
