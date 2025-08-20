@@ -7,7 +7,7 @@ public class DayNightCycle : MonoBehaviour
     public float fullDayLength;
     public float startTime = 0.4f;
     private float timeRate;
-    public Vector3 noon;
+    public Vector3 noon = new Vector3(50f, 170f, 0f);
 
     [Header("Sun")]
     public Light sun;
@@ -20,6 +20,7 @@ public class DayNightCycle : MonoBehaviour
     public AnimationCurve moonIntensity;
 
     [Header("Other Lighting")]
+    public Gradient ambientColor;
     public AnimationCurve lightingIntensityMultiplier;
     public AnimationCurve reflectionIntensityMultiplier;
 
@@ -33,25 +34,20 @@ public class DayNightCycle : MonoBehaviour
     {
         time = (time + timeRate * Time.deltaTime) % 1.0f;
 
-        UpdateLighting(sun, sunColor, sunIntensity);
-        UpdateLighting(moon, moonColor, moonIntensity);
+        UpdateLighting(sun, sunColor, sunIntensity, 0.25f);
+        UpdateLighting(moon, moonColor, moonIntensity, 0.75f);
 
         RenderSettings.ambientIntensity = lightingIntensityMultiplier.Evaluate(time);
         RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
+
+        RenderSettings.ambientLight = ambientColor.Evaluate(time);
     }
 
-    void UpdateLighting(Light lightSource, Gradient colorGradiant, AnimationCurve intensityCurve)
+    void UpdateLighting(Light lightSource, Gradient colorGradient, AnimationCurve intensityCurve, float offset)
     {
         float intensity = intensityCurve.Evaluate(time);
-
-        lightSource.transform.eulerAngles = (time - (lightSource == sun ? 0.25f : 0.75f)) * noon * 4.0f;
-        lightSource.color = colorGradiant.Evaluate(time);
+        lightSource.transform.eulerAngles = (time - offset) * noon * 4f;
+        lightSource.color = colorGradient.Evaluate(time);
         lightSource.intensity = intensity;
-
-        GameObject go = lightSource.gameObject;
-        if (lightSource.intensity == 0 && go.activeInHierarchy)
-            go.SetActive(false);
-        else if (lightSource.intensity > 0 && !go.activeInHierarchy)
-            go.SetActive(true);
     }
 }
