@@ -19,6 +19,28 @@ public class MapManager : Singleton<MapManager>
 
     protected override bool isDestroy => true;
 
+    private readonly Dictionary<object, float> speedMultipliers = new();
+    public float CurrentScrollSpeed
+    {
+        get
+        {
+            float multiplier = 1f;
+            foreach (var keyValue in speedMultipliers) multiplier *= keyValue.Value;
+            return scrollSpeed * multiplier;
+        }
+    }
+
+    public void AddSpeedMultiplier(object key, float multiplier)
+    {
+        if (multiplier <= 0f) return;
+        speedMultipliers[key] = multiplier;
+    }
+
+    public void RemoveSpeedMultiplier(object key)
+    {
+        speedMultipliers.Remove(key);
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -51,9 +73,10 @@ public class MapManager : Singleton<MapManager>
 
     void MoveMaps()
     {
+        float velocity = CurrentScrollSpeed;
         foreach (GameObject map in activeMaps)
         {
-            map.transform.Translate(Vector3.back * scrollSpeed * Time.deltaTime);
+            map.transform.Translate(Vector3.back * velocity * Time.deltaTime, Space.World);
         }
     }
 
