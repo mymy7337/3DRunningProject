@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 4
   achievementName: "\uB9C8\uB77C\uD1A0\uB108"
   description: "\uCD1D 42.195km\uB97C \uB2EC\uB9AC\uC138\uC694."
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 11dd7b2f4f04a1a4fb427d11448a82bf, type: 3}
