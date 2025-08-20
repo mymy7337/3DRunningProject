@@ -21,6 +21,11 @@ public class AchievementUI : MonoBehaviour
 
     public void WindowsCreate()
     {
+        foreach (Transform child in parentTransform)
+        {
+            Destroy(child.gameObject);
+        }
+
         for (int i = 0; i < DataManager.Instance.achievements.Count; i++)
         {
             GameObject newAchievement = Instantiate(achievementPrefabs, spawnPosition, Quaternion.identity);
