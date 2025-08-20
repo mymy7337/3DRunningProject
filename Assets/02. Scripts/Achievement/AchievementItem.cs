@@ -20,12 +20,10 @@ public class AchievementItem : Singleton<AchievementItem>
     }
 
     public void SetIndex(int index)
-    {
-        AchievementData data = DataManager.Instance.achievements[index];
-
-        icon.sprite = data.icon;
-        nameText.text = data.achievementName;
-        descriptionText.text = data.description;
+    { 
+        //icon.sprite = DataManager.Instance.achievements.icon;
+        //nameText.text = DataManager.Instance.achievements.achievementName;
+        //descriptionText.text = DataManager.Instance.achievements.description;
 
         // === 클리어시 보여줌 ===
         if (DataManager.Instance.gameData.achievements[index].isClear == true)
