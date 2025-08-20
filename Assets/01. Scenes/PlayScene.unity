@@ -639,6 +639,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 27292a2c3e2e4a04fb13d202b084b3b3, type: 2}
   - {fileID: 11400000, guid: 7168912a7c31a0545bef1dded32a88eb, type: 2}
   - {fileID: 11400000, guid: 39581b4b67e4b714f87d21ac56620603, type: 2}
+  - {fileID: 11400000, guid: 60fbad4cabce6434da999c6127084795, type: 2}
   achievementPanel: {fileID: 66648696}
   icon: {fileID: 2110050904}
   nameText: {fileID: 2043317060}
