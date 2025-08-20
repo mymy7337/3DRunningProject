@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1951714447}
-  m_IndirectSpecularColor: {r: 0.4366756, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667546, g: 0.4842708, b: 0.56452245, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -952,6 +952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameData:
     highScore: 0
+    totalDistance: 0
     achievements: []
   achievements:
   - {fileID: 11400000, guid: 40165304042bd5742a258424b0666a87, type: 2}
@@ -2070,6 +2071,24 @@ MonoBehaviour:
   moveSpeed: 5
   spawnTriggerOffset: 20
   despawnZ: -110
+  invincibilityPrefab: {fileID: 1178025871860770956, guid: 07f46362cab7544edb29d2f449dbf068, type: 3}
+  minAmount: 0
+  maxAmount: 2
+  laneCount: 3
+  laneSpacing: 2
+  laneOriginX: 0
+  zMinLocal: 2
+  zMaxLocal: 18
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  blockMask:
+    serializedVersion: 2
+    m_Bits: 0
+  rayHeight: 30
+  yOffset: 0.1
+  overlapRadius: 0.6
+  spawnTriesPerItem: 6
 --- !u!4 &1363773803
 Transform:
   m_ObjectHideFlags: 0

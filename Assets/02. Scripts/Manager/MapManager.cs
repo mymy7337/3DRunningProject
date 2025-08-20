@@ -81,5 +81,4 @@ public class MapManager : Singleton<MapManager>
             Destroy(mapQueue.Dequeue());
         }
     }
-
 }
