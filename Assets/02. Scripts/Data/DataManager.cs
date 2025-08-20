@@ -59,10 +59,16 @@ public class DataManager : Singleton<DataManager>
     {
         // === 파일 확인 후 로드 ===
         if (File.Exists(filePath))
-        { 
+        {
             var loadData = File.ReadAllText(filePath);
 
-            JsonUtility.FromJson<GameData>(loadData);
+            gameData = JsonUtility.FromJson<GameData>(loadData);
+
+            if (gameData.achievements == null)
+            {
+                gameData.achievements = new List<AchievementStat>();
+            }
+
         }
         else
         {
@@ -82,6 +88,8 @@ public class DataManager : Singleton<DataManager>
             }
             string json = JsonUtility.ToJson(gameData);
             File.WriteAllText(filePath, json);
+
+            Save(gameData);
         }
     }
 
