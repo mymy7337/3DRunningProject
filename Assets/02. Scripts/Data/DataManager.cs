@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class DataManager : Singleton<DataManager>
 {
-    private GameData gameData;
+    public GameData gameData;
 
     public List<AchievementData> achievements;
 
@@ -19,6 +19,16 @@ public class DataManager : Singleton<DataManager>
 
     private string filePath;
 
+    private Coroutine _playCoroutine;             // === 업적창 중복 방지 ===
+
+    // === 업적 확인용 ===
+    [HideInInspector]
+    public int jumpCount;
+    [HideInInspector]
+    public int crouchCount;
+    [HideInInspector]
+    public float totalDistance;
+
     protected override bool isDestroy => true;
 
     protected override void Awake()
@@ -29,7 +39,7 @@ public class DataManager : Singleton<DataManager>
         filePath = Path.Combine(Application.persistentDataPath, "gameData.json");
 
         // === JSON 동기화 ===
-        gameData = Load();
+        Load();
 
         // === 판넬 끄기 + 방어 코드===
         if(TitleManager.Instance != null)
@@ -40,29 +50,25 @@ public class DataManager : Singleton<DataManager>
 
     public void Save(GameData score)
     {
-
-        foreach (var achievement in achievements)
-        {
-            score.achievements.Add(new AchievementStat
-            {
-                id = achievement.id,
-                isClear = achievement.isClear
-            });
-        }
-
         var saveData = JsonUtility.ToJson(score);
 
         File.WriteAllText(filePath, saveData);
     }
 
-    public GameData Load()
+    public void Load()
     {
         // === 파일 확인 후 로드 ===
         if (File.Exists(filePath))
-        { 
+        {
             var loadData = File.ReadAllText(filePath);
 
-            return JsonUtility.FromJson<GameData>(loadData);
+            gameData = JsonUtility.FromJson<GameData>(loadData);
+
+            if (gameData.achievements == null)
+            {
+                gameData.achievements = new List<AchievementStat>();
+            }
+
         }
         else
         {
@@ -77,13 +83,13 @@ public class DataManager : Singleton<DataManager>
                 gameData.achievements.Add(new AchievementStat
                 {
                     id = achievement.id,
-                    isClear = achievement.isClear
+                    isClear = false
                 });
             }
             string json = JsonUtility.ToJson(gameData);
             File.WriteAllText(filePath, json);
 
-            return gameData;
+            Save(gameData);
         }
     }
 
@@ -94,17 +100,14 @@ public class DataManager : Singleton<DataManager>
         {
             if(id == achievements[i].id)
             {
-                if(achievements[i].isClear == false && gameData.achievements[i].isClear == false)
+                if(gameData.achievements[i].isClear == false)
                 {
-                    achievements[i].isClear = true;
-
-                    gameData.achievements[i].isClear = achievements[i].isClear;
+                    gameData.achievements[i].isClear = true;
 
                     SetAchievementText(achievements[i]);
 
                     Save(gameData);
                 }
-                return;
             }
         }
     }
@@ -112,13 +115,18 @@ public class DataManager : Singleton<DataManager>
     // === 업적 달성시 업적창 나타내기 ===
     private void SetAchievementText(AchievementData data)
     {
+        if (_playCoroutine != null)
+        {
+            StopCoroutine(_playCoroutine);
+        }
+
         achievementPanel.gameObject.SetActive(true);
 
         icon.sprite = data.icon;
         nameText.text = data.achievementName;
         descriptionText.text = data.description;
 
-        StartCoroutine(HidePanel(3.0f));
+        _playCoroutine = StartCoroutine(HidePanel(3.0f));
     }
 
     // === 업적창 끄기 ===
@@ -126,5 +134,7 @@ public class DataManager : Singleton<DataManager>
     {
         yield return new WaitForSecondsRealtime(delay);
         achievementPanel.gameObject.SetActive(false);
+
+        _playCoroutine = null;
     }
 }

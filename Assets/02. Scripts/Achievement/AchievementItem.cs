@@ -5,24 +5,38 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AchievementItem : MonoBehaviour
+public class AchievementItem : Singleton<AchievementItem>
 {
-    public Image icon;                                // === æ˜¿˚ æ∆¿Ãƒ‹ ===
-    public TextMeshProUGUI nameText;                   // === æ˜¿˚ ¿Ã∏ß===
-    public TextMeshProUGUI descriptionText;             // === æ˜¿˚ ≥ªøÎ ===
-    public Image checkAchievement;                       // === æ˜¿˚ ≈¨∏ÆæÓΩ√ «ÿ±› ===
+    public Image icon;                                // === ÏóÖÏ†Å ÏïÑÏù¥ÏΩò ===
+    public TextMeshProUGUI nameText;                   // === ÏóÖÏ†Å Ïù¥Î¶Ñ===
+    public TextMeshProUGUI descriptionText;             // === ÏóÖÏ†Å ÎÇ¥Ïö© ===
+    public Image checkAchievement;                       // === ÏóÖÏ†Å ÌÅ¥Î¶¨Ïñ¥Ïãú Ìï¥Í∏à ===
+
+    protected override bool isDestroy => true;        // === Ïã±Í∏ÄÌÜ§ ÏÑ†Ïñ∏ ===
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     public void SetIndex(int index)
-    {
-        AchievementData data = AchievementUI.Instance.achievements[index];
+    { 
+        //icon.sprite = DataManager.Instance.achievements.icon;
+        //nameText.text = DataManager.Instance.achievements.achievementName;
+        //descriptionText.text = DataManager.Instance.achievements.description;
 
-        icon.sprite = data.icon;
-        nameText.text = data.achievementName;
-        descriptionText.text = data.description;
-
-        if(data.isClear == true)
+        // === ÌÅ¥Î¶¨Ïñ¥Ïãú Î≥¥Ïó¨Ï§å ===
+        if (DataManager.Instance.gameData.achievements[index].isClear == true)
         {
             checkAchievement.gameObject.SetActive(false);
         }
+
+    }
+
+    public void NextWindowsCreate(Vector2 pos)
+    {
+        gameObject.transform.position = pos + new Vector2(0, -1456);
+
+        SetIndex(3);
     }
 }

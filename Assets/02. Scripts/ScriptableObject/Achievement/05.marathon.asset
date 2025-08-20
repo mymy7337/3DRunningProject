@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9699705f7a21c6e4c87d5b963c42f537, type: 3}
-  m_Name: 60second
+  m_Name: 05.marathon
   m_EditorClassIdentifier: 
-  id: 0
-  achievementName: "60\uCD08"
-  description: "60\uCD08 \uB3D9\uC548 \uBC84\uD2F0\uAE30"
-  isClear: 0
+  id: 4
+  achievementName: "\uB9C8\uB77C\uD1A0\uB108"
+  description: "\uCD1D 42.195km\uB97C \uB2EC\uB9AC\uC138\uC694."
   icon: {fileID: 21300000, guid: 11dd7b2f4f04a1a4fb427d11448a82bf, type: 3}
