@@ -8,16 +8,10 @@ using UnityEngine.UI;
 public class AchievementUI : MonoBehaviour
 {
     [Header("infomation")]
-    public Image achievementPanel;                    // === 업적 창 ===
     public GameObject achievementPrefabs;             // === 업적 당 나타내줄 오브젝트 ===
     public Transform parentTransform;                 // === 부모로 둘 오브젝트 ===
 
-    private Vector3 spawnPosition = new(62, -28, 0);  // === 초기 위치 ===
-
-    public void Awake()
-    {
-        achievementPanel.gameObject.SetActive(false);
-    }
+    private Vector3 spawnPosition = new(0, 0, 0);  // === 초기 위치 ===
 
     public void WindowsCreate()
     {
@@ -31,8 +25,6 @@ public class AchievementUI : MonoBehaviour
             GameObject newAchievement = Instantiate(achievementPrefabs, spawnPosition, Quaternion.identity);
             newAchievement.transform.SetParent(parentTransform, false);
 
-            spawnPosition.y -= 362;
-
             AchievementItem itemScript = newAchievement.GetComponent<AchievementItem>();
 
             if (itemScript != null)
@@ -44,11 +36,12 @@ public class AchievementUI : MonoBehaviour
 
     public void OpenWindows()
     {
-        achievementPanel.gameObject.SetActive(true);
+        DataManager.Instance.achievementPanel.gameObject.SetActive(true);
+        WindowsCreate();
     }
 
     public void CloseWindows()
     {
-        achievementPanel.gameObject.SetActive(false);
+        DataManager.Instance.achievementPanel.gameObject.SetActive(false);
     }
 }

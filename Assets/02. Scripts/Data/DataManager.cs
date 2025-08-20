@@ -41,7 +41,7 @@ public class DataManager : Singleton<DataManager>
         Load();
 
         // === 판넬 끄기 + 방어 코드===
-        if(TitleManager.Instance != null)
+        if(TitleManager.Instance.gameObject != null)
         {
             achievementPanel.gameObject.SetActive(false);
         }
