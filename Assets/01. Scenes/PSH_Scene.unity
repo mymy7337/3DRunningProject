@@ -392,8 +392,8 @@ MonoBehaviour:
   - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
   - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
   poolSize: 10
-  startSpawnCount: 3
-  mapLength: 90
+  startSpawnCount: 4
+  mapLength: 60
   scrollSpeed: 20
   spawnTriggerOffset: 90
   despawnZ: -90
