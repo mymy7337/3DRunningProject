@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.5748165, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1616,12 +1616,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapPrefabs:
-  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
-  - {fileID: 7864422107392160020, guid: b99269b4f5c8a8545afad81b0e503c44, type: 3}
-  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
-  - {fileID: 7864422107392160020, guid: b99269b4f5c8a8545afad81b0e503c44, type: 3}
-  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
-  poolSize: 5
+  - {fileID: 7864422107392160020, guid: f80196526a8a28746a60e084a3792e4a, type: 3}
+  - {fileID: 7864422107392160020, guid: f80196526a8a28746a60e084a3792e4a, type: 3}
+  - {fileID: 7864422107392160020, guid: f80196526a8a28746a60e084a3792e4a, type: 3}
+  - {fileID: 7864422107392160020, guid: f80196526a8a28746a60e084a3792e4a, type: 3}
+  - {fileID: 7864422107392160020, guid: f80196526a8a28746a60e084a3792e4a, type: 3}
   startSpawnCount: 3
   mapLength: 65
   scrollSpeed: 5
