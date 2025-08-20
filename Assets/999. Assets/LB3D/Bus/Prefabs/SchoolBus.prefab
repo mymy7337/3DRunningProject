@@ -1026,7 +1026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5645073810869350691}
   - component: {fileID: 2724304891055477608}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CanTouch
   m_TagString: Untagged
   m_Icon: {fileID: 0}

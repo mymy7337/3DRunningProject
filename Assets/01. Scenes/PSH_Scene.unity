@@ -381,17 +381,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapPrefabs:
-  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
-  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
-  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
-  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
-  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
-  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
-  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
-  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
-  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
-  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
-  poolSize: 10
+  - {fileID: 7864422107392160020, guid: b99269b4f5c8a8545afad81b0e503c44, type: 3}
+  - {fileID: 7864422107392160020, guid: b99269b4f5c8a8545afad81b0e503c44, type: 3}
+  - {fileID: 7864422107392160020, guid: b99269b4f5c8a8545afad81b0e503c44, type: 3}
+  - {fileID: 7864422107392160020, guid: b99269b4f5c8a8545afad81b0e503c44, type: 3}
+  - {fileID: 7864422107392160020, guid: b99269b4f5c8a8545afad81b0e503c44, type: 3}
+  poolSize: 5
   startSpawnCount: 4
   mapLength: 60
   scrollSpeed: 20

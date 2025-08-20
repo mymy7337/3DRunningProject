@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.5748165, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1736,12 +1736,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b0325b90c8c7a49b2dc627a08d8b7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapPrefab: {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
-  preSpawnCount: 2
-  mapLength: 100
-  moveSpeed: 5
-  spawnTriggerOffset: 20
-  despawnZ: -110
+  mapPrefabs:
+  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
+  - {fileID: 7864422107392160020, guid: b99269b4f5c8a8545afad81b0e503c44, type: 3}
+  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
+  - {fileID: 7864422107392160020, guid: b99269b4f5c8a8545afad81b0e503c44, type: 3}
+  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
+  poolSize: 10
+  startSpawnCount: 3
+  mapLength: 65
+  scrollSpeed: 5
+  spawnTriggerOffset: 90
+  despawnZ: -90
 --- !u!4 &1363773803
 Transform:
   m_ObjectHideFlags: 0
