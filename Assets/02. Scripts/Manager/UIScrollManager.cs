@@ -7,6 +7,6 @@ public class UIScrollManager : MonoBehaviour
 {
     public void OnScroll(Vector2 normalizedPosition)
     {
-        AchievementItem.Instance.NextWindowsCreate(normalizedPosition);
+       
     }
 }

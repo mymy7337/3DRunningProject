@@ -5,25 +5,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AchievementItem : Singleton<AchievementItem>
+public class AchievementItem : MonoBehaviour
 {
     public Image icon;                                // === 업적 아이콘 ===
     public TextMeshProUGUI nameText;                   // === 업적 이름===
     public TextMeshProUGUI descriptionText;             // === 업적 내용 ===
     public Image checkAchievement;                       // === 업적 클리어시 해금 ===
 
-    protected override bool isDestroy => true;        // === 싱글톤 선언 ===
-
-    protected override void Awake()
+    public void SetIndex(AchievementData data, int index)
     {
-        base.Awake();
-    }
-
-    public void SetIndex(int index)
-    { 
-        //icon.sprite = DataManager.Instance.achievements.icon;
-        //nameText.text = DataManager.Instance.achievements.achievementName;
-        //descriptionText.text = DataManager.Instance.achievements.description;
+        icon.sprite = data.icon;
+        nameText.text = data.achievementName;
+        descriptionText.text = data.description;
 
         // === 클리어시 보여줌 ===
         if (DataManager.Instance.gameData.achievements[index].isClear == true)
@@ -37,6 +30,6 @@ public class AchievementItem : Singleton<AchievementItem>
     {
         gameObject.transform.position = pos + new Vector2(0, -1456);
 
-        SetIndex(3);
+        SetIndex(DataManager.Instance.achievements[3] ,3);
     }
 }
