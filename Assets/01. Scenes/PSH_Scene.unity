@@ -380,12 +380,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b0325b90c8c7a49b2dc627a08d8b7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapPrefab: {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
-  preSpawnCount: 2
-  mapLength: 100
-  moveSpeed: 5
-  spawnTriggerOffset: 20
-  despawnZ: -110
+  mapPrefabs:
+  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
+  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
+  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
+  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
+  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
+  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
+  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
+  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
+  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
+  - {fileID: 7864422107392160020, guid: b3d9ed27762d07b4a9a6db6f08678a5f, type: 3}
+  poolSize: 10
+  startSpawnCount: 3
+  mapLength: 90
+  scrollSpeed: 20
+  spawnTriggerOffset: 90
+  despawnZ: -90
 --- !u!4 &813312865
 Transform:
   m_ObjectHideFlags: 0
