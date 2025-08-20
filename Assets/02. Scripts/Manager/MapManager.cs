@@ -6,7 +6,6 @@ public class MapManager : Singleton<MapManager>
     public GameObject[] mapPrefabs;   // 랜덤으로 나올 맵
 
     [Header("맵 설정")]
-    public int poolSize;          // 미리 생성할 맵 수
     public int startSpawnCount;      // 시작 시 화면에 배치할 맵 수
     public float mapLength;      // 맵 하나의 길이
     public float scrollSpeed;    // 맵 이동 속도
@@ -27,7 +26,7 @@ public class MapManager : Singleton<MapManager>
     void Start()
     {
         // 1. 풀 생성
-        for (int i = 0; i < poolSize; i++)
+        for (int i = 0; i < mapPrefabs.Length; i++)
         {
             GameObject map = Instantiate(mapPrefabs[i], Vector3.zero, Quaternion.identity);
             map.SetActive(false);
