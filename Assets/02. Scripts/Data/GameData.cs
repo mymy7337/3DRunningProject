@@ -7,6 +7,7 @@ using UnityEngine;
 public class GameData 
 {
     public int highScore;
+    public float totalDistance;
 
     public List<AchievementStat> achievements = new();
 }

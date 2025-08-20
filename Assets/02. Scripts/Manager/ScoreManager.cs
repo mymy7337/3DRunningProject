@@ -7,15 +7,18 @@ public class ScoreManager : MonoBehaviour
     // === 점수를 위한 타이머 ===
     private float timer;
 
-    // === 게임내에서 현재점수, 최고점수 임의로 저장 ===
+    // === 게임내에서 현재점수, 최고점수, 이동한 거리 임의로 저장 ===
     private int highScore = 0;
     private int currentScore = 0;
+    private float totalDistance = 0;
 
     private void Start()
     {
+        // === 게임 시작시 들고옴 ===
         if (DataManager.Instance.gameData != null)
         {
             highScore = DataManager.Instance.gameData.highScore;
+            totalDistance += DataManager.Instance.gameData.totalDistance;
         }
 
         if (TitleManager.Instance != null)
@@ -31,6 +34,8 @@ public class ScoreManager : MonoBehaviour
         {
             timer += Time.fixedDeltaTime;
 
+            totalDistance += 0.5f * Time.fixedDeltaTime;
+
             // === 업적 확인 ===
             if (timer >= 60.0f)
             {
@@ -43,6 +48,10 @@ public class ScoreManager : MonoBehaviour
             if(DataManager.Instance.crouchCount >= 99)
             {
                 DataManager.Instance.ClearAchievement(3);
+            }
+            if(totalDistance >= 42195)
+            {
+                DataManager.Instance.ClearAchievement(4);
             }
         }
     }
@@ -69,6 +78,7 @@ public class ScoreManager : MonoBehaviour
         }
 
         DataManager.Instance.gameData.highScore = highScore;
+        DataManager.Instance.gameData.totalDistance = (int)totalDistance;
 
         DataManager.Instance.Save(DataManager.Instance.gameData);
 
