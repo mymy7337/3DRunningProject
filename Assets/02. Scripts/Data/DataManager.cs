@@ -22,6 +22,9 @@ public class DataManager : Singleton<DataManager>
 
     [HideInInspector]
     public int highScore;                         // === 제이슨 저장을 위해 숨김 ===
+    // === 업적 확인용 ===
+    public int jumpCount;
+    public int crouchCount;
 
     protected override bool isDestroy => true;
 

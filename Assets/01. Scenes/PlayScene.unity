@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.5748165, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -631,13 +631,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1949337226c69b43ba523d4c95f2ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameData:
+    highScore: 0
+    achievements: []
   achievements:
   - {fileID: 11400000, guid: 40165304042bd5742a258424b0666a87, type: 2}
   - {fileID: 11400000, guid: 27292a2c3e2e4a04fb13d202b084b3b3, type: 2}
+  - {fileID: 11400000, guid: 7168912a7c31a0545bef1dded32a88eb, type: 2}
+  - {fileID: 11400000, guid: 39581b4b67e4b714f87d21ac56620603, type: 2}
   achievementPanel: {fileID: 66648696}
   icon: {fileID: 2110050904}
   nameText: {fileID: 2043317060}
   descriptionText: {fileID: 583122270}
+  highScore: 0
+  jumpCount: 0
+  crouchCount: 0
 --- !u!4 &530003654
 Transform:
   m_ObjectHideFlags: 0

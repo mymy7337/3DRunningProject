@@ -32,9 +32,18 @@ public class ScoreManager : MonoBehaviour
             timer += Time.fixedDeltaTime;
 
             // === 첫번째 업적 ===
-            if (timer >= 6.0f)
+            if (timer >= 60.0f)
             {
                 DataManager.Instance.ClearAchievement(0);
+            }
+            // === 세번째 업적 ===
+            if (DataManager.Instance.jumpCount >= 99)
+            {
+                DataManager.Instance.ClearAchievement(2);
+            }
+            if(DataManager.Instance.crouchCount >= 99)
+            {
+                DataManager.Instance.ClearAchievement(3);
             }
         }
     }
@@ -43,14 +52,6 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int amount)
     {
         currentScore += amount;
-    }
-
-    public void UpDateUI(int highScore, int finalScore)
-    {
-        // === 최고점수 현재점수 생존시간 업데이트 ===
-        TitleManager.Instance.highScore.text = highScore.ToString("N0"); // === 소수점 없이 ===
-        TitleManager.Instance.score.text = finalScore.ToString("N0");
-        TitleManager.Instance.time.text = timer.ToString("N2");         // === 소수점 둘째 자리까지 표현 ===
     }
 
     // === 최종점수 반환 ===
@@ -74,4 +75,13 @@ public class ScoreManager : MonoBehaviour
 
         UpDateUI(highScore, finalScore);
     }
+
+    public void UpDateUI(int highScore, int finalScore)
+    {
+        // === 최고점수 현재점수 생존시간 업데이트 ===
+        TitleManager.Instance.highScore.text = highScore.ToString("N0"); // === 소수점 없이 ===
+        TitleManager.Instance.score.text = finalScore.ToString("N0");
+        TitleManager.Instance.time.text = timer.ToString("N2");         // === 소수점 둘째 자리까지 표현 ===
+    }
+
 }

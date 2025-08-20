@@ -108,6 +108,8 @@ public class PlayerController : MonoBehaviour
             _animationController.Jump();
             AudioManager.Instance.PlaySFX(0);
             AudioManager.Instance.SetSFXVolume(0.3f);
+
+            DataManager.Instance.jumpCount++; // === 조지현 추가 ===
         }
     }
 
@@ -155,6 +157,8 @@ public class PlayerController : MonoBehaviour
             _animationController.Crouch();
             AudioManager.Instance.PlaySFX(1);
             AudioManager.Instance.SetSFXVolume(0.1f);
+
+            DataManager.Instance.crouchCount++; // === 조지현 추가 ===
         }
     }
 
