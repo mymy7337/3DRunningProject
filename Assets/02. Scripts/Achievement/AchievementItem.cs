@@ -7,22 +7,29 @@ using UnityEngine.UI;
 
 public class AchievementItem : MonoBehaviour
 {
-    public Image icon;                                // === ¾÷Àû ¾ÆÀÌÄÜ ===
-    public TextMeshProUGUI nameText;                   // === ¾÷Àû ÀÌ¸§===
-    public TextMeshProUGUI descriptionText;             // === ¾÷Àû ³»¿ë ===
-    public Image checkAchievement;                       // === ¾÷Àû Å¬¸®¾î½Ã ÇØ±İ ===
+    public Image icon;                                // === ì—…ì  ì•„ì´ì½˜ ===
+    public TextMeshProUGUI nameText;                   // === ì—…ì  ì´ë¦„===
+    public TextMeshProUGUI descriptionText;             // === ì—…ì  ë‚´ìš© ===
+    public Image checkAchievement;                       // === ì—…ì  í´ë¦¬ì–´ì‹œ í•´ê¸ˆ ===
 
     public void SetIndex(int index)
     {
-        AchievementData data = AchievementUI.Instance.achievements[index];
+        AchievementData data = DataManager.Instance.achievements[index];
 
         icon.sprite = data.icon;
         nameText.text = data.achievementName;
         descriptionText.text = data.description;
 
-        if(data.isClear == true)
+        // === ì•„ì§ í”Œë ˆì´ì”¬ì„ ë“¤ì–´ê°€ì§€ ì•Šì•˜ë‹¤ë©´ ë°©ì–´ ì½”ë“œ ===
+        if(DataManager.Instance != null)
         {
-            checkAchievement.gameObject.SetActive(false);
+            if (DataManager.Instance.gameData != null && DataManager.Instance.gameData.achievements != null)
+            {
+                if (DataManager.Instance.gameData.achievements[index].isClear == true)
+                {
+                    checkAchievement.gameObject.SetActive(false);
+                }
+            }
         }
     }
 }

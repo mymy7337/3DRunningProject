@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
 
     private float time;
 
+    private Coroutine crouch;
+    private Coroutine jumpCheck;
+
     private Rigidbody _rigidbody;
     private CapsuleCollider _capsuleCollider;
     private PlayerAnimationController _animationController;
@@ -89,20 +92,38 @@ public class PlayerController : MonoBehaviour
 
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started && IsGrounded() && canJump && !isJumping)
+        if(context.phase == InputActionPhase.Started && IsGrounded() && !isJumping)
         {
-            StartCoroutine(JumpCheck());
+            if(!canJump)
+            {
+                StopCoroutine(crouch);
+                StartCoroutine(animationSpeedSet((transform.position.y)));
+                canJump = true;
+                isCrouching = false;
+                _capsuleCollider.center = new Vector3(0, 1, 0);
+                _capsuleCollider.height = 2.05f;
+            }
+            jumpCheck = StartCoroutine(JumpCheck());
             _rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             _animationController.Jump();
             AudioManager.Instance.PlaySFX(0);
             AudioManager.Instance.SetSFXVolume(0.3f);
+
+            DataManager.Instance.jumpCount++; // === 조지현 추가 ===
         }
+    }
+
+    private IEnumerator animationSpeedSet(float time)
+    {
+        _animationController.animator.speed = 2;
+        yield return new WaitForSeconds(time);
+        _animationController.animator.speed = 1;
     }
 
     private IEnumerator JumpCheck()
     {
         isJumping = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1f);
         isJumping = false;
     }
 
@@ -132,10 +153,12 @@ public class PlayerController : MonoBehaviour
         if(context.phase == InputActionPhase.Started && !isCrouching)
         {
             canJump = false;
-            StartCoroutine(Crouch());
+            crouch = StartCoroutine(Crouch());
             _animationController.Crouch();
             AudioManager.Instance.PlaySFX(1);
             AudioManager.Instance.SetSFXVolume(0.1f);
+
+            DataManager.Instance.crouchCount++; // === 조지현 추가 ===
         }
     }
 
@@ -146,6 +169,8 @@ public class PlayerController : MonoBehaviour
         {
             _rigidbody.AddForce(Vector3.down * jumpPower, ForceMode.Impulse);
             _animationController.Crouch();
+            StopCoroutine(jumpCheck);
+            isJumping = false;
             yield return new WaitForSeconds(0.05f);
         }
 

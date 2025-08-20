@@ -10,7 +10,7 @@ public class PlayerCustomizer : MonoBehaviour
 
     public int characterIndex;
 
-    public ColorData colorData;
+    public CharacterVisual characterVisual;
     public Materials materials;
 
     private void Awake()
@@ -21,11 +21,16 @@ public class PlayerCustomizer : MonoBehaviour
 
     private void Start()
     {
-        if (!File.Exists(Application.persistentDataPath + "/ColorData.json"))
+        if (!File.Exists(Application.persistentDataPath + "/CharacterVisual.json"))
         {
-            for(int i = 0; i < materials.renderers.Length; i++)
+            characterVisual = new CharacterVisual();
+            for (int i = 0; i < characters.Length; i++)
             {
-                colorData.colors[i] = new Color(1, 1, 1);
+                characterVisual.colorDatas[i] = new ColorData();
+                for (int j = 0; j < materials.renderers.Length; j++)
+                {
+                    characterVisual.colorDatas[i].colors.Add(Color.white);
+                }
             }
             Save();
         }
@@ -38,7 +43,7 @@ public class PlayerCustomizer : MonoBehaviour
         for(int i = 0; i < materials.renderers.Length; i++)
         {
             Load();
-            materials.renderers[i].material.SetColor("_Color", colorData.colors[i]);
+            materials.renderers[i].material.SetColor("_Color", characterVisual.colorDatas[characterIndex].colors[i]);
         }
     }
 
@@ -48,26 +53,34 @@ public class PlayerCustomizer : MonoBehaviour
 
         material.SetColor("_Color", albedo);
 
-        colorData.colors[idx] = albedo;
+        characterVisual.colorDatas[characterIndex].colors[idx] = albedo;
         Save();
     }
 
     private void Save()
     {
-        var saveColorData = JsonUtility.ToJson(colorData);
+        var saveCharacterVisual = JsonUtility.ToJson(characterVisual);
 
-        File.WriteAllText(Application.persistentDataPath + "/ColorData.json", saveColorData);
+        File.WriteAllText(Application.persistentDataPath + "/CharacterVisual.json", saveCharacterVisual);
     }
 
     private void Load()
     {
-        var loadColorData = File.ReadAllText(Application.persistentDataPath + "/ColorData.json");
-        colorData = JsonUtility.FromJson<ColorData>(loadColorData);
+        var loadCharacterVisual = File.ReadAllText(Application.persistentDataPath + "/CharacterVisual.json");
+        characterVisual = JsonUtility.FromJson<CharacterVisual>(loadCharacterVisual);
+    }
+
+    [System.Serializable]
+    public class CharacterVisual
+    {
+        public ColorData[] colorDatas = new ColorData[5];
     }
 
     [System.Serializable]
     public class ColorData
     {
-        public Color[] colors = new Color[5];
+        public List<Color> colors = new List<Color>();
     }
 }
+
+

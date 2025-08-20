@@ -11,6 +11,7 @@ public class BarColorPicker : BaseColorPicker
     {
         sizeOfPalette = new Vector2(palette.GetComponent<RectTransform>().rect.width, 0);
     }
+
     protected override void SelectColor()
     {
         Vector3 offest = Input.mousePosition - transform.position;
