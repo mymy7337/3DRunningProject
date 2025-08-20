@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9699705f7a21c6e4c87d5b963c42f537, type: 3}
-  m_Name: 04.jump
+  m_Name: 04.crouch
   m_EditorClassIdentifier: 
   id: 3
-  achievementName: 
-  description: 
-  icon: {fileID: 0}
+  achievementName: "\uAD6C\uB978\uB2E4!"
+  description: "\uD55C \uAC8C\uC784\uC5D0\uC11C 99\uBC88 \uAD6C\uB974\uC138\uC694."
+  icon: {fileID: 21300000, guid: f593657f6f44232478a0ef04b35ec14c, type: 3}
