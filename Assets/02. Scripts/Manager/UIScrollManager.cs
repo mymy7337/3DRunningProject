@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class UIScrollManager : MonoBehaviour
 {
-    public void OnScroll()
+    public void OnScroll(Vector2 normalizedPosition)
     {
-        AchievementUI.Instance.NextWindowsCreate();
+        AchievementItem.Instance.NextWindowsCreate(normalizedPosition);
     }
-
 }

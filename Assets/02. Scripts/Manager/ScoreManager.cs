@@ -67,7 +67,7 @@ public class ScoreManager : MonoBehaviour
     {
         int finalScore = currentScore + (int)timer;
 
-        if(finalScore >= 99)
+        if(finalScore >= 100)
         {
             DataManager.Instance.ClearAchievement(1);
         }

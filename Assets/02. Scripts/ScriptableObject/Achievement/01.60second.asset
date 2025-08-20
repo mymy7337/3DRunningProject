@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 01.60second
   m_EditorClassIdentifier: 
   id: 0
-  achievementName: "60\uCD08"
-  description: "60\uCD08 \uB3D9\uC548 \uB2EC\uB9AC\uC138\uC694."
-  icon: {fileID: 21300000, guid: 11dd7b2f4f04a1a4fb427d11448a82bf, type: 3}
+  achievementName: "\uBC24\uC0C8\uB2EC\uB9AC\uAE30"
+  description: "\uD558\uB8E8 \uB3D9\uC548 \uB2EC\uB9AC\uC138\uC694."
+  icon: {fileID: 21300000, guid: 48347c76531c245498b2936854e0b63f, type: 3}
