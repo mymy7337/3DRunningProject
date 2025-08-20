@@ -5,25 +5,37 @@ using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AchievementUI : MonoBehaviour
+public class AchievementUI : Singleton<AchievementUI>
 {
     [Header("infomation")]
-    public GameObject achievementPrefabs;             // === ì—…ì  ë‹¹ ë‚˜íƒ€ë‚´ì¤„ ì˜¤ë¸Œì íŠ¸ ===
-    public Transform parentTransform;                 // === ë¶€ëª¨ë¡œ ë‘˜ ì˜¤ë¸Œì íŠ¸ ===
+    public Image achievementPanel;                    // === ¾÷Àû Ã¢ ===
+    public GameObject achievementPrefabs;                    // === ¾÷Àû ´ç ³ªÅ¸³»ÁÙ ¿ÀºêÁ§Æ® ===
+    public Transform parentTransform;                 // === ºÎ¸ğ·Î µÑ ¿ÀºêÁ§Æ® ===
 
-    private Vector3 spawnPosition = new(0, 0, 0);  // === ì´ˆê¸° ìœ„ì¹˜ ===
+    private Vector3 spawnPosition = new(62, -28, 0);  // === ÃÊ±â À§Ä¡ ===
 
-    public void WindowsCreate()
+    public List<AchievementData> achievements;        // === ¾÷Àû È®ÀÎ ¿ë ===
+
+    protected override bool isDestroy => true;
+
+    protected override void Awake()
     {
-        foreach (Transform child in parentTransform)
-        {
-            Destroy(child.gameObject);
-        }
+        base.Awake();
 
-        for (int i = 0; i < DataManager.Instance.achievements.Count; i++)
+        if (SceneLoader.Instance != null)
+        {
+            achievementPanel.gameObject.SetActive(false);
+        }
+    }
+
+    private void Start()
+    {
+        for(int i = 0; i < achievements.Count; i++)
         {
             GameObject newAchievement = Instantiate(achievementPrefabs, spawnPosition, Quaternion.identity);
             newAchievement.transform.SetParent(parentTransform, false);
+
+            spawnPosition.y -= 362;
 
             AchievementItem itemScript = newAchievement.GetComponent<AchievementItem>();
 
@@ -36,12 +48,11 @@ public class AchievementUI : MonoBehaviour
 
     public void OpenWindows()
     {
-        DataManager.Instance.achievementPanel.gameObject.SetActive(true);
-        WindowsCreate();
+        achievementPanel.gameObject.SetActive(true);
     }
 
     public void CloseWindows()
     {
-        DataManager.Instance.achievementPanel.gameObject.SetActive(false);
+        achievementPanel.gameObject.SetActive(false);
     }
 }

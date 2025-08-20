@@ -11,6 +11,7 @@ public class AchievementData : ScriptableObject
     public int id;                        // === 업적 순서 ===
     public string achievementName;         // === 업적 이름 ===
     public string description;              // === 해금 조건 ===
+    public bool isClear = false;             // === 해금시 true ===
 
     [Header("etc.")]
     public Sprite icon;                       // === 업적별 아이콘 ===

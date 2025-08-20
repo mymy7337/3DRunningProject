@@ -1,16 +1,20 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-
 public class MapManager : Singleton<MapManager>
 {
-    public GameObject mapPrefab;            // 반복할 맵 프리팹
-    public int preSpawnCount;           // 시작 시 생성할 맵 수
-    public float mapLength;           // 하나의 맵 길이
-    public float moveSpeed;
-    public float spawnTriggerOffset;  // 마지막 맵이 이 거리 이상 이동하면 다음 맵 생성
-    public float despawnZ;           // 이 Z값보다 뒤에 있는 맵은 제거
+    [Header("맵 프리팹")]
+    public GameObject[] mapPrefabs;   // 랜덤으로 나올 맵
 
-    private Queue<GameObject> mapQueue = new Queue<GameObject>();
+    [Header("맵 설정")]
+    public int poolSize;          // 미리 생성할 맵 수
+    public int startSpawnCount;      // 시작 시 화면에 배치할 맵 수
+    public float mapLength;      // 맵 하나의 길이
+    public float scrollSpeed;    // 맵 이동 속도
+    public float spawnTriggerOffset; // 마지막 맵이 이 거리보다 앞으로 가면 새 맵 스폰
+    public float despawnZ;      // 이 Z보다 뒤로 가면 재활용
+
+    private Queue<GameObject> activeMaps = new Queue<GameObject>();
+    private List<GameObject> waitingMaps = new List<GameObject>();
     private GameObject lastMap;
 
     protected override bool isDestroy => true;
@@ -22,7 +26,17 @@ public class MapManager : Singleton<MapManager>
 
     void Start()
     {
-        for (int i = 0; i < preSpawnCount; i++)
+        // 1. 풀 생성
+        for (int i = 0; i < poolSize; i++)
+        {
+            int rand = Random.Range(0, mapPrefabs.Length);
+            GameObject map = Instantiate(mapPrefabs[rand], Vector3.zero, Quaternion.identity);
+            map.SetActive(false);
+            waitingMaps.Add(map);
+        }
+
+        // 2. 시작 화면 채우기
+        for (int i = 0; i < startSpawnCount; i++)
         {
             SpawnNextMap();
         }
@@ -32,16 +46,14 @@ public class MapManager : Singleton<MapManager>
     {
         MoveMaps();
         TrySpawnNext();
-        RemovePassedMaps();
+        RecyclePassedMaps();
     }
 
     void MoveMaps()
     {
-        Debug.Log("moveSpeed: " + moveSpeed);
-
-        foreach (GameObject map in mapQueue)
+        foreach (GameObject map in activeMaps)
         {
-            map.transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
+            map.transform.Translate(Vector3.back * scrollSpeed * Time.deltaTime);
         }
     }
 
@@ -49,9 +61,7 @@ public class MapManager : Singleton<MapManager>
     {
         if (lastMap == null) return;
 
-        float lastMapZ = lastMap.transform.position.z;
-
-        if (lastMapZ < spawnTriggerOffset)
+        if (lastMap.transform.position.z < spawnTriggerOffset)
         {
             SpawnNextMap();
         }
@@ -59,27 +69,34 @@ public class MapManager : Singleton<MapManager>
 
     void SpawnNextMap()
     {
+        if (waitingMaps.Count == 0) return;
+
+        int randIndex = Random.Range(0, waitingMaps.Count);
+        GameObject map = waitingMaps[randIndex];
+        waitingMaps.RemoveAt(randIndex);
+
+        // 마지막 맵 기준으로 Spawn
         Vector3 spawnPos = Vector3.zero;
-
         if (lastMap != null)
-        {
             spawnPos = lastMap.transform.position + new Vector3(0, 0, mapLength);
-        }
 
-        GameObject newMap = Instantiate(mapPrefab, spawnPos, Quaternion.identity);
-        mapQueue.Enqueue(newMap);
-        lastMap = newMap;
+        map.transform.position = spawnPos;
+        map.SetActive(true);
+
+        activeMaps.Enqueue(map);
+        lastMap = map;
     }
 
-    void RemovePassedMaps()
+    void RecyclePassedMaps()
     {
-        if (mapQueue.Count == 0) return;
+        if (activeMaps.Count == 0) return;
 
-        GameObject firstMap = mapQueue.Peek();
+        GameObject firstMap = activeMaps.Peek();
         if (firstMap.transform.position.z < despawnZ)
         {
-            Destroy(mapQueue.Dequeue());
+            activeMaps.Dequeue();
+            firstMap.SetActive(false);
+            waitingMaps.Add(firstMap);
         }
     }
-
 }
