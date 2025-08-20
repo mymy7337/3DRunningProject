@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable] // === ÀúÀåÇÒ ÀÌ¸§ Á¤ÀÇ ===
+[Serializable] // === ì €ì¥í•  ì´ë¦„ ì •ì˜ ===
 public class GameData 
 {
     public int highScore;
+    public float totalDistance;
 
     public List<AchievementStat> achievements = new();
 }

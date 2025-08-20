@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    // === Á¡¼ö¸¦ À§ÇÑ Å¸ÀÌ¸Ó ===
+    // === ì ìˆ˜ë¥¼ ìœ„í•œ íƒ€ì´ë¨¸ ===
     private float timer;
 
-    // === °ÔÀÓ³»¿¡¼­ ÇöÀçÁ¡¼ö, ÃÖ°íÁ¡¼ö ÀÓÀÇ·Î ÀúÀå ===
+    // === ê²Œì„ë‚´ì—ì„œ í˜„ì¬ì ìˆ˜, ìµœê³ ì ìˆ˜, ì´ë™í•œ ê±°ë¦¬ ì„ì˜ë¡œ ì €ì¥ ===
     private int highScore = 0;
     private int currentScore = 0;
+    private float totalDistance = 0;
 
     private void Start()
     {
-        // === GameData¿¡¼­ ÀúÀåµÈ highScore¸¦ ºÒ·¯¿È ===
-        GameData loadedData = DataManager.Instance.Load();
-        if (loadedData != null)
+        // === ê²Œì„ ì‹œì‘ì‹œ ë“¤ê³ ì˜´ ===
+        if (DataManager.Instance.gameData != null)
         {
-            highScore = loadedData.highScore;
+            highScore = DataManager.Instance.gameData.highScore;
+            totalDistance += DataManager.Instance.gameData.totalDistance;
         }
 
         if (TitleManager.Instance != null)
@@ -28,54 +29,68 @@ public class ScoreManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // === ¹æ¾î ÄÚµå ===
+        // === ë°©ì–´ ì½”ë“œ ===
         if (TitleManager.Instance != null)
         {
             timer += Time.fixedDeltaTime;
 
-            // === Ã¹¹øÂ° ¾÷Àû ===
-            if (timer >= 60.0f && DataManager.Instance.achievements[0].isClear == false)
+            totalDistance += 0.5f * Time.fixedDeltaTime;
+
+            // === ì—…ì  í™•ì¸ ===
+            if (timer >= 60.0f)
             {
                 DataManager.Instance.ClearAchievement(0);
+            }
+            if (DataManager.Instance.jumpCount >= 99)
+            {
+                DataManager.Instance.ClearAchievement(2);
+            }
+            if(DataManager.Instance.crouchCount >= 99)
+            {
+                DataManager.Instance.ClearAchievement(3);
+            }
+            if(totalDistance >= 42195)
+            {
+                DataManager.Instance.ClearAchievement(4);
             }
         }
     }
 
-    // === Á¡¼ö Ãß°¡ ¸Ş¼­µå ===
+    // === ì ìˆ˜ ì¶”ê°€ ë©”ì„œë“œ ===
     public void AddScore(int amount)
     {
         currentScore += amount;
     }
 
-    public void UpDateUI(int highScore, int finalScore)
-    {
-        // === ÃÖ°íÁ¡¼ö ÇöÀçÁ¡¼ö »ıÁ¸½Ã°£ ¾÷µ¥ÀÌÆ® ===
-        TitleManager.Instance.highScore.text = highScore.ToString("N0"); // === ¼Ò¼öÁ¡ ¾øÀÌ ===
-        TitleManager.Instance.score.text = finalScore.ToString("N0");
-        TitleManager.Instance.time.text = timer.ToString("N2");         // === ¼Ò¼öÁ¡ µÑÂ° ÀÚ¸®±îÁö Ç¥Çö ===
-    }
-
-    // === ÃÖÁ¾Á¡¼ö ¹İÈ¯ ===
+    // === ìµœì¢…ì ìˆ˜ ë°˜í™˜ ===
     public void FinalScore()
     {
         int finalScore = currentScore + (int)timer;
-        if(finalScore >= 99 && DataManager.Instance.achievements[1].isClear == false)
+
+        if(finalScore >= 99)
         {
             DataManager.Instance.ClearAchievement(1);
         }
+
         if (finalScore >= highScore)
         {
             highScore = finalScore;
         }
-        
-        // === Á¦ÀÌ½¼ ÆÄÀÏ¿¡ ÀúÀå ===
-        GameData dataToSave = new()
-        {
-            highScore = highScore,
-        };
 
-        DataManager.Instance.Save(dataToSave);
+        DataManager.Instance.gameData.highScore = highScore;
+        DataManager.Instance.gameData.totalDistance = (int)totalDistance;
+
+        DataManager.Instance.Save(DataManager.Instance.gameData);
 
         UpDateUI(highScore, finalScore);
     }
+
+    public void UpDateUI(int highScore, int finalScore)
+    {
+        // === ìµœê³ ì ìˆ˜ í˜„ì¬ì ìˆ˜ ìƒì¡´ì‹œê°„ ì—…ë°ì´íŠ¸ ===
+        TitleManager.Instance.highScore.text = highScore.ToString("N0"); // === ì†Œìˆ˜ì  ì—†ì´ ===
+        TitleManager.Instance.score.text = finalScore.ToString("N0");
+        TitleManager.Instance.time.text = timer.ToString("N2");         // === ì†Œìˆ˜ì  ë‘˜ì§¸ ìë¦¬ê¹Œì§€ í‘œí˜„ ===
+    }
+
 }

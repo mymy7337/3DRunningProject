@@ -3,21 +3,30 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class DataManager : Singleton<DataManager>
 {
-    private GameData gameData;
+    public GameData gameData;
 
     public List<AchievementData> achievements;
 
     [Header("infomation")]
-    public Image achievementPanel;            // === ¾÷Àû Ã¢ ===
-    public Image icon;                         // === ¾÷Àû ¾ÆÀÌÄÜ ===
-    public TextMeshProUGUI nameText;            // === ¾÷Àû ÀÌ¸§===
-    public TextMeshProUGUI descriptionText;      // === ¾÷Àû ³»¿ë ===
+    public Image achievementPanel;            // === ì—…ì  ì°½ ===
+    public Image icon;                         // === ì—…ì  ì•„ì´ì½˜ ===
+    public TextMeshProUGUI nameText;            // === ì—…ì  ì´ë¦„===
+    public TextMeshProUGUI descriptionText;      // === ì—…ì  ë‚´ìš© ===
 
     private string filePath;
+
+    private Coroutine _playCoroutine;             // === ì—…ì ì°½ ì¤‘ë³µ ë°©ì§€ ===
+
+    [HideInInspector]
+    public int highScore;                         // === ì œì´ìŠ¨ ì €ì¥ì„ ìœ„í•´ ìˆ¨ê¹€ ===
+    // === ì—…ì  í™•ì¸ìš© ===
+    public int jumpCount;
+    public int crouchCount;
 
     protected override bool isDestroy => true;
 
@@ -25,48 +34,44 @@ public class DataManager : Singleton<DataManager>
     {
         base.Awake();
 
-        // === ÆÄÀÏ °æ·Î¸¦ Ã£±â ===
+        // === íŒŒì¼ ê²½ë¡œë¥¼ ì°¾ê¸° ===
         filePath = Path.Combine(Application.persistentDataPath, "gameData.json");
 
-        // === JSON µ¿±âÈ­ ===
-        gameData = Load();
+        // === JSON ë™ê¸°í™” ===
+        Load();
 
-        // === ÆÇ³Ú ²ô±â + ¹æ¾î ÄÚµå===
+        // === íŒë„¬ ë„ê¸° + ë°©ì–´ ì½”ë“œ===
         if(TitleManager.Instance != null)
         {
             achievementPanel.gameObject.SetActive(false);
         }
     }
 
-    public void Save(GameData score)
+    public void Save(GameData data)
     {
-
-        foreach (var achievement in achievements)
-        {
-            score.achievements.Add(new AchievementStat
-            {
-                id = achievement.id,
-                isClear = achievement.isClear
-            });
-        }
-
-        var saveData = JsonUtility.ToJson(score);
+        var saveData = JsonUtility.ToJson(data);
 
         File.WriteAllText(filePath, saveData);
     }
 
-    public GameData Load()
+    public void Load()
     {
-        // === ÆÄÀÏ È®ÀÎ ÈÄ ·Îµå ===
+        // === íŒŒì¼ í™•ì¸ í›„ ë¡œë“œ ===
         if (File.Exists(filePath))
-        { 
+        {
             var loadData = File.ReadAllText(filePath);
 
-            return JsonUtility.FromJson<GameData>(loadData);
+            gameData = JsonUtility.FromJson<GameData>(loadData);
+
+            // === ë¦¬ìŠ¤íŠ¸ê°€ ì—†ëŠ” ê²½ìš° ===
+            if (gameData.achievements == null)
+            {
+                gameData.achievements = new List<AchievementStat>();
+            }
         }
         else
         {
-            // === ¾øÀ¸¸é ÇÏ³ª ¸¸µé¾îÁÜ ===
+            // === ì—†ìœ¼ë©´ í•˜ë‚˜ ë§Œë“¤ì–´ì¤Œ ===
             gameData = new GameData 
             { 
                 highScore = 0,
@@ -77,54 +82,55 @@ public class DataManager : Singleton<DataManager>
                 gameData.achievements.Add(new AchievementStat
                 {
                     id = achievement.id,
-                    isClear = achievement.isClear
+                    isClear = false
                 });
             }
             string json = JsonUtility.ToJson(gameData);
             File.WriteAllText(filePath, json);
 
-            return gameData;
+            Save(gameData);
         }
     }
 
-    // === ¾÷Àû ÇØ±İ ===
+    // === ì—…ì  í•´ê¸ˆ ===
     public void ClearAchievement(int id)
     {
-        for(int i = 0; i < achievements.Count; i++)
+        if (id == gameData.achievements[id].id)
         {
-            if(id == achievements[i].id)
+            if (gameData.achievements[id].isClear == false)
             {
-                if(achievements[i].isClear == false && gameData.achievements[i].isClear == false)
-                {
-                    achievements[i].isClear = true;
+                gameData.achievements[id].isClear = true;
 
-                    gameData.achievements[i].isClear = achievements[i].isClear;
+                gameData.achievements[id].id = id;
 
-                    SetAchievementText(achievements[i]);
-
-                    Save(gameData);
-                }
-                return;
+                SetAchievementText(achievements[id]);
             }
         }
     }
 
-    // === ¾÷Àû ´Ş¼º½Ã ¾÷ÀûÃ¢ ³ªÅ¸³»±â ===
+    // === ì—…ì  ë‹¬ì„±ì‹œ ì—…ì ì°½ ë‚˜íƒ€ë‚´ê¸° ===
     private void SetAchievementText(AchievementData data)
     {
+        if (_playCoroutine != null)
+        {
+            StopCoroutine(_playCoroutine);
+        }
+
         achievementPanel.gameObject.SetActive(true);
 
         icon.sprite = data.icon;
         nameText.text = data.achievementName;
         descriptionText.text = data.description;
 
-        StartCoroutine(HidePanel(3.0f));
+        _playCoroutine = StartCoroutine(HidePanel(3.0f));
     }
 
-    // === ¾÷ÀûÃ¢ ²ô±â ===
+    // === ì—…ì ì°½ ë„ê¸° ===
     private IEnumerator HidePanel(float delay)
     {
         yield return new WaitForSecondsRealtime(delay);
         achievementPanel.gameObject.SetActive(false);
+
+        _playCoroutine = null;
     }
 }

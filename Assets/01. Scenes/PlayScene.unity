@@ -160,7 +160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -15.000122, y: 0}
+  m_AnchoredPosition: {x: -15, y: 0}
   m_SizeDelta: {x: 330, y: 150}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &66648696
@@ -950,13 +950,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1949337226c69b43ba523d4c95f2ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameData:
+    highScore: 0
+    achievements: []
   achievements:
   - {fileID: 11400000, guid: 40165304042bd5742a258424b0666a87, type: 2}
   - {fileID: 11400000, guid: 27292a2c3e2e4a04fb13d202b084b3b3, type: 2}
+  - {fileID: 11400000, guid: 7168912a7c31a0545bef1dded32a88eb, type: 2}
+  - {fileID: 11400000, guid: 39581b4b67e4b714f87d21ac56620603, type: 2}
+  - {fileID: 11400000, guid: 60fbad4cabce6434da999c6127084795, type: 2}
   achievementPanel: {fileID: 66648696}
   icon: {fileID: 2110050904}
   nameText: {fileID: 2043317060}
   descriptionText: {fileID: 583122270}
+  highScore: 0
+  jumpCount: 0
+  crouchCount: 0
 --- !u!4 &530003654
 Transform:
   m_ObjectHideFlags: 0
@@ -1824,12 +1833,11 @@ MonoBehaviour:
   target: {fileID: 959039023}
   distance: 0
   height: 0.3
+  positionLerp: 6
   rotationLerp: 8
-  lerp: 3
-  lookTarget: 1
-  lookAhead: {x: 0, y: 1, z: 6}
-  lockZAxis: 1
-  fixedZAxis: -3
+  lockTilt: 1
+  fixedTilt: 0
+  pitchAngle: 30
 --- !u!1 &1119461727
 GameObject:
   m_ObjectHideFlags: 0
