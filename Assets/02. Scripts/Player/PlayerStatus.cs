@@ -12,6 +12,12 @@ public class PlayerStatus : MonoBehaviour
     {
         if (IsInvincible == isInvincible) return;
         IsInvincible = isInvincible;
+
+        int playerLayer = LayerMask.NameToLayer("Player");
+        int obstacleLayer = LayerMask.NameToLayer("Obstacle");
+        Physics.IgnoreLayerCollision(playerLayer, obstacleLayer, isInvincible);
+        Physics.SyncTransforms();
+
         if (isInvincible) OnInvincibleStart?.Invoke();
         else OnInvincibleEnd?.Invoke();
     }
