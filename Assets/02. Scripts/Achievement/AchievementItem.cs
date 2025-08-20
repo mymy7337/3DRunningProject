@@ -20,16 +20,11 @@ public class AchievementItem : MonoBehaviour
         nameText.text = data.achievementName;
         descriptionText.text = data.description;
 
-        // === 아직 플레이씬을 들어가지 않았다면 방어 코드 ===
-        if(DataManager.Instance != null)
+        // === 클리어시 보여줌 ===
+        if (DataManager.Instance.gameData.achievements[index].isClear == true)
         {
-            if (DataManager.Instance.gameData != null && DataManager.Instance.gameData.achievements != null)
-            {
-                if (DataManager.Instance.gameData.achievements[index].isClear == true)
-                {
-                    checkAchievement.gameObject.SetActive(false);
-                }
-            }
+            checkAchievement.gameObject.SetActive(false);
         }
+
     }
 }
