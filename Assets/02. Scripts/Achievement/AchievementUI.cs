@@ -5,32 +5,23 @@ using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AchievementUI : Singleton<AchievementUI>
+public class AchievementUI : MonoBehaviour
 {
     [Header("infomation")]
-    public Image achievementPanel;                    // === ¾÷Àû Ã¢ ===
-    public GameObject achievementPrefabs;                    // === ¾÷Àû ´ç ³ªÅ¸³»ÁÙ ¿ÀºêÁ§Æ® ===
-    public Transform parentTransform;                 // === ºÎ¸ğ·Î µÑ ¿ÀºêÁ§Æ® ===
+    public Image achievementPanel;                    // === ì—…ì  ì°½ ===
+    public GameObject achievementPrefabs;             // === ì—…ì  ë‹¹ ë‚˜íƒ€ë‚´ì¤„ ì˜¤ë¸Œì íŠ¸ ===
+    public Transform parentTransform;                 // === ë¶€ëª¨ë¡œ ë‘˜ ì˜¤ë¸Œì íŠ¸ ===
 
-    private Vector3 spawnPosition = new(62, -28, 0);  // === ÃÊ±â À§Ä¡ ===
+    private Vector3 spawnPosition = new(62, -28, 0);  // === ì´ˆê¸° ìœ„ì¹˜ ===
 
-    public List<AchievementData> achievements;        // === ¾÷Àû È®ÀÎ ¿ë ===
-
-    protected override bool isDestroy => true;
-
-    protected override void Awake()
+    public void Awake()
     {
-        base.Awake();
-
-        if (SceneLoader.Instance != null)
-        {
-            achievementPanel.gameObject.SetActive(false);
-        }
+        achievementPanel.gameObject.SetActive(false);
     }
 
-    private void Start()
+    public void WindowsCreate()
     {
-        for(int i = 0; i < achievements.Count; i++)
+        for (int i = 0; i < DataManager.Instance.achievements.Count; i++)
         {
             GameObject newAchievement = Instantiate(achievementPrefabs, spawnPosition, Quaternion.identity);
             newAchievement.transform.SetParent(parentTransform, false);

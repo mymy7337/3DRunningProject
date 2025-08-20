@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class AchievementItem : MonoBehaviour
 {
-    private GameData gameData;
-
     public Image icon;                                // === 업적 아이콘 ===
     public TextMeshProUGUI nameText;                   // === 업적 이름===
     public TextMeshProUGUI descriptionText;             // === 업적 내용 ===
@@ -16,15 +14,22 @@ public class AchievementItem : MonoBehaviour
 
     public void SetIndex(int index)
     {
-        AchievementData data = AchievementUI.Instance.achievements[index];
+        AchievementData data = DataManager.Instance.achievements[index];
 
         icon.sprite = data.icon;
         nameText.text = data.achievementName;
         descriptionText.text = data.description;
 
-        if (DataManager.Instance.gameData.achievements[index].isClear == true)
+        // === 아직 플레이씬을 들어가지 않았다면 방어 코드 ===
+        if(DataManager.Instance != null)
         {
-            checkAchievement.gameObject.SetActive(false);
+            if (DataManager.Instance.gameData != null && DataManager.Instance.gameData.achievements != null)
+            {
+                if (DataManager.Instance.gameData.achievements[index].isClear == true)
+                {
+                    checkAchievement.gameObject.SetActive(false);
+                }
+            }
         }
     }
 }
