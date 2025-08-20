@@ -29,8 +29,7 @@ public class MapManager : Singleton<MapManager>
         // 1. 풀 생성
         for (int i = 0; i < poolSize; i++)
         {
-            int rand = Random.Range(0, mapPrefabs.Length);
-            GameObject map = Instantiate(mapPrefabs[rand], Vector3.zero, Quaternion.identity);
+            GameObject map = Instantiate(mapPrefabs[i], Vector3.zero, Quaternion.identity);
             map.SetActive(false);
             waitingMaps.Add(map);
         }
