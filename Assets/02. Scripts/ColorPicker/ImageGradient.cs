@@ -6,9 +6,9 @@ using UnityEngine.UI;
 [AddComponentMenu("UI/Effects/Simple Gradient")]
 public class ImageGradient : BaseMeshEffect
 {
-    public Color colorA;   // ìœ„(ë˜ëŠ” ì™¼ìª½)
-    public Color colorB = Color.black;   // ì•„ë˜(ë˜ëŠ” ì˜¤ë¥¸ìª½)
-    public bool horizontal = false;      // false=ìˆ˜ì§, true=ìˆ˜í‰
+    public Color colorA;   // À§(¶Ç´Â ¿ŞÂÊ)
+    public Color colorB = Color.black;   // ¾Æ·¡(¶Ç´Â ¿À¸¥ÂÊ)
+    public bool horizontal = false;      // false=¼öÁ÷, true=¼öÆò
 
     public override void ModifyMesh(VertexHelper vh)
     {
@@ -30,7 +30,7 @@ public class ImageGradient : BaseMeshEffect
             var ui = verts[i];
             float v = horizontal ? ui.position.x : ui.position.y;
             float t = Mathf.InverseLerp(min, max, v);
-            ui.color = Color32.Lerp(colorB, colorA, t); // Bâ†’Aë¡œ ë³´ê°„
+            ui.color = Color32.Lerp(colorB, colorA, t); // B¡æA·Î º¸°£
             verts[i] = ui;
         }
 
