@@ -9,7 +9,6 @@ public class SpeedBoostSO : PowerUpSO
     {
         Debug.Log("SpeedBoost");
         if (MapManager.Instance == null) return;
-        // 이 SO 에셋 자신을 key로 사용 → 같은 종류 재먹기 시 갱신/리셋 동작에 유리
         MapManager.Instance.AddSpeedMultiplier(this, multiplier);
     }
 
