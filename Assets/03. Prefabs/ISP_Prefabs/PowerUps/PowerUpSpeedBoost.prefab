@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4354280255097728328}
   - component: {fileID: 8115568796590751075}
   m_Layer: 0
-  m_Name: PowerUpInvincibility
+  m_Name: PowerUpSpeedBoost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237ae46742fab4531870f2a2ac7e98b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpSO: {fileID: 11400000, guid: 79e096cad2be841ceb9b6cf8eca52f8d, type: 2}
+  powerUpSO: {fileID: 11400000, guid: f3fbf2537ba7a4e90b400a4e40b65251, type: 2}
 --- !u!1 &6314684681575338323
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +157,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8b1f7c9e230f99f46a4e2c246a99f84e, type: 2}
+  - {fileID: 2100000, guid: 49b91a815dee8974d9439e1311858a09, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

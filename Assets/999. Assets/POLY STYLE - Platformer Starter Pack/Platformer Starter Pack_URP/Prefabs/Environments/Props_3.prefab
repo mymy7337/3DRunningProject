@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5524611549203617520}
   - component: {fileID: 1780908368827023632}
   - component: {fileID: 7543392714178034390}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Props_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

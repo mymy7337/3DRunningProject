@@ -5,11 +5,11 @@ using UnityEngine.LowLevel;
 
 public class Obstacle : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            var playerStatus = other.gameObject.GetComponent<PlayerStatus>();
+            var playerStatus = other.GetComponent<PlayerStatus>();
 
             if (playerStatus != null && playerStatus.IsInvincible)
             {
