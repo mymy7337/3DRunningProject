@@ -9,10 +9,10 @@ public class AchievementItem : MonoBehaviour
 {
     private GameData gameData;
 
-    public Image icon;                                // === ¾÷Àû ¾ÆÀÌÄÜ ===
-    public TextMeshProUGUI nameText;                   // === ¾÷Àû ÀÌ¸§===
-    public TextMeshProUGUI descriptionText;             // === ¾÷Àû ³»¿ë ===
-    public Image checkAchievement;                       // === ¾÷Àû Å¬¸®¾î½Ã ÇØ±İ ===
+    public Image icon;                                // === ì—…ì  ì•„ì´ì½˜ ===
+    public TextMeshProUGUI nameText;                   // === ì—…ì  ì´ë¦„===
+    public TextMeshProUGUI descriptionText;             // === ì—…ì  ë‚´ìš© ===
+    public Image checkAchievement;                       // === ì—…ì  í´ë¦¬ì–´ì‹œ í•´ê¸ˆ ===
 
     public void SetIndex(int index)
     {
@@ -22,7 +22,7 @@ public class AchievementItem : MonoBehaviour
         nameText.text = data.achievementName;
         descriptionText.text = data.description;
 
-        if (gameData.achievementsList.achievements[index].isClear == true)
+        if (DataManager.Instance.gameData.achievements[index].isClear == true)
         {
             checkAchievement.gameObject.SetActive(false);
         }
