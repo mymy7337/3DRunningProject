@@ -1161,8 +1161,8 @@ MonoBehaviour:
   achievements:
   - {fileID: 11400000, guid: 40165304042bd5742a258424b0666a87, type: 2}
   - {fileID: 11400000, guid: 27292a2c3e2e4a04fb13d202b084b3b3, type: 2}
-  - {fileID: 11400000, guid: 7168912a7c31a0545bef1dded32a88eb, type: 2}
-  - {fileID: 11400000, guid: 39581b4b67e4b714f87d21ac56620603, type: 2}
+  - {fileID: 11400000, guid: b2b38e0f8bc4e8f42a0c63c8e27be1da, type: 2}
+  - {fileID: 11400000, guid: 50cdbfa2ca3d7044abd59ae6095d3209, type: 2}
   - {fileID: 11400000, guid: 60fbad4cabce6434da999c6127084795, type: 2}
   achievementPanel: {fileID: 1653723703}
   icon: {fileID: 0}
