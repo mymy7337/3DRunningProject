@@ -31,12 +31,11 @@ public class ScoreManager : MonoBehaviour
         {
             timer += Time.fixedDeltaTime;
 
-            // === 첫번째 업적 ===
+            // === 업적 확인 ===
             if (timer >= 60.0f)
             {
                 DataManager.Instance.ClearAchievement(0);
             }
-            // === 세번째 업적 ===
             if (DataManager.Instance.jumpCount >= 99)
             {
                 DataManager.Instance.ClearAchievement(2);

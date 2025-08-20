@@ -20,6 +20,8 @@ public class DataManager : Singleton<DataManager>
 
     private string filePath;
 
+    private Coroutine _playCoroutine;             // === 업적창 중복 방지 ===
+
     [HideInInspector]
     public int highScore;                         // === 제이슨 저장을 위해 숨김 ===
     // === 업적 확인용 ===
@@ -109,13 +111,18 @@ public class DataManager : Singleton<DataManager>
     // === 업적 달성시 업적창 나타내기 ===
     private void SetAchievementText(AchievementData data)
     {
+        if (_playCoroutine != null)
+        {
+            StopCoroutine(_playCoroutine);
+        }
+
         achievementPanel.gameObject.SetActive(true);
 
         icon.sprite = data.icon;
         nameText.text = data.achievementName;
         descriptionText.text = data.description;
 
-        StartCoroutine(HidePanel(3.0f));
+        _playCoroutine = StartCoroutine(HidePanel(3.0f));
     }
 
     // === 업적창 끄기 ===
@@ -123,5 +130,7 @@ public class DataManager : Singleton<DataManager>
     {
         yield return new WaitForSecondsRealtime(delay);
         achievementPanel.gameObject.SetActive(false);
+
+        _playCoroutine = null;
     }
 }
