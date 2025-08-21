@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CircleColorPicker : BaseColorPicker
 {
     public ImageGradient imageGradient;
+
+    [SerializeField] private BarColorPicker barColorPicker;
 
     private void Start()
     {
@@ -23,6 +26,8 @@ public class CircleColorPicker : BaseColorPicker
 
         imageGradient.colorA = GetColor();
         imageGradient.GetComponent<Graphic>().SetVerticesDirty();
+
+        barColorPicker.RefreshApply();
     }
 
     protected override Color GetColor()
