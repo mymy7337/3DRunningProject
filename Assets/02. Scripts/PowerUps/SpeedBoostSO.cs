@@ -7,14 +7,12 @@ public class SpeedBoostSO : PowerUpSO
 
     public override void Apply(PlayerStatus playerStatus)
     {
-        Debug.Log("SpeedBoost on.");
         if (MapManager.Instance == null) return;
         MapManager.Instance.AddSpeedMultiplier(this, multiplier);
     }
 
     public override void Revert(PlayerStatus playerStatus)
     {
-        Debug.Log("SpeedBoost off.");
         if (MapManager.Instance == null) return;
         MapManager.Instance.RemoveSpeedMultiplier(this);
     }
