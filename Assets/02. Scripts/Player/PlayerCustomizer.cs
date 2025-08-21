@@ -6,39 +6,49 @@ using UnityEngine.TextCore.Text;
 
 public class PlayerCustomizer : MonoBehaviour
 {
-    [SerializeField] private GameObject[] characters;
+    public GameObject[] characters;
 
-    public int characterIndex;
-
-    public ColorData colorData;
     public Materials materials;
+
+    private GameObject character;
+
+    public ClothesUIManager clothesUIManager;
 
     private void Awake()
     {
-        var character = Instantiate(characters[characterIndex], this.transform);
+        CustomizeDataManager.Instance.Load();
+
+        character = Instantiate(characters[CustomizeDataManager.Instance.characterVisual.characterIndex], this.transform);
         materials = character.GetComponent<Materials>();
+        SetColor();
     }
 
-    private void Start()
+    public void ChangerCharacter(int characterIndex)
     {
-        if (!File.Exists(Application.persistentDataPath + "/ColorData.json"))
+        if (CustomizeDataManager.Instance.characterVisual.characterData[characterIndex].isAqcuire)
         {
-            for(int i = 0; i < materials.renderers.Length; i++)
-            {
-                colorData.colors[i] = new Color(1, 1, 1);
-            }
-            Save();
+            clothesUIManager.archer.SetActive(false);
+            clothesUIManager.knight.SetActive(false);
+            clothesUIManager.merchant.SetActive(false);
+            clothesUIManager.ninja.SetActive(false);
+            clothesUIManager.student.SetActive(false);
+            clothesUIManager.isOpen = false;
+            Destroy(character);
+            character = Instantiate(characters[characterIndex], this.transform);
+            materials = character.GetComponent<Materials>();
+            PlayerManager.Instance.Player.animationController.ResetAnimator(character.GetComponentInChildren<Animator>());
+            CustomizeDataManager.Instance.characterVisual.characterIndex = characterIndex;
+            CustomizeDataManager.Instance.Save();
+            SetColor();
         }
-
-        SetColor();
     }
 
     private void SetColor()
     {
         for(int i = 0; i < materials.renderers.Length; i++)
         {
-            Load();
-            materials.renderers[i].material.SetColor("_Color", colorData.colors[i]);
+            CustomizeDataManager.Instance.Load();
+            materials.renderers[i].material.SetColor("_Color", CustomizeDataManager.Instance.characterVisual.characterData[CustomizeDataManager.Instance.characterVisual.characterIndex].colors[i]);
         }
     }
 
@@ -48,26 +58,7 @@ public class PlayerCustomizer : MonoBehaviour
 
         material.SetColor("_Color", albedo);
 
-        colorData.colors[idx] = albedo;
-        Save();
-    }
-
-    private void Save()
-    {
-        var saveColorData = JsonUtility.ToJson(colorData);
-
-        File.WriteAllText(Application.persistentDataPath + "/ColorData.json", saveColorData);
-    }
-
-    private void Load()
-    {
-        var loadColorData = File.ReadAllText(Application.persistentDataPath + "/ColorData.json");
-        colorData = JsonUtility.FromJson<ColorData>(loadColorData);
-    }
-
-    [System.Serializable]
-    public class ColorData
-    {
-        public Color[] colors = new Color[5];
+        CustomizeDataManager.Instance.characterVisual.characterData[CustomizeDataManager.Instance.characterVisual.characterIndex].colors[idx] = albedo;
+        CustomizeDataManager.Instance.Save();
     }
 }
