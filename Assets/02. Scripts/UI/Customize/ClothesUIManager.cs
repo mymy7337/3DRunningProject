@@ -12,11 +12,11 @@ public class ClothesUIManager : MonoBehaviour
     public GameObject student;
 
 
-    private bool isOpen;
+    public bool isOpen;
     public void ControllUI()
     {
         isOpen = !isOpen;
-        switch(PlayerManager.Instance.Player.customizer.characterVisual.characterIndex)
+        switch(CustomizeDataManager.Instance.characterVisual.characterIndex)
         {
             case 0:
                 archer.SetActive(isOpen);
@@ -34,7 +34,5 @@ public class ClothesUIManager : MonoBehaviour
                 student.SetActive(isOpen);
                 break;
         }
-
-        
     }
 }

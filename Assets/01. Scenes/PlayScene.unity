@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366756, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -638,6 +638,9 @@ MonoBehaviour:
   achievements:
   - {fileID: 11400000, guid: 40165304042bd5742a258424b0666a87, type: 2}
   - {fileID: 11400000, guid: 27292a2c3e2e4a04fb13d202b084b3b3, type: 2}
+  - {fileID: 11400000, guid: 50cdbfa2ca3d7044abd59ae6095d3209, type: 2}
+  - {fileID: 11400000, guid: b2b38e0f8bc4e8f42a0c63c8e27be1da, type: 2}
+  - {fileID: 11400000, guid: 60fbad4cabce6434da999c6127084795, type: 2}
   achievementPanel: {fileID: 66648696}
   icon: {fileID: 2110050904}
   nameText: {fileID: 2043317060}

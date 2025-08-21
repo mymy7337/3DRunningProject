@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 670d1100a02274884ba6069c6e4ee055, type: 3}
   m_Name: SpeedBoost_5s
   m_EditorClassIdentifier: 
-  duration: 5
+  duration: 3
   multiplier: 1.5
