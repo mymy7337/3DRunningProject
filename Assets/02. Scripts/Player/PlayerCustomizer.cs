@@ -61,7 +61,7 @@ public class PlayerCustomizer : MonoBehaviour
         for(int i = 0; i < materials.renderers.Length; i++)
         {
             Load();
-            materials.renderers[i].material.SetColor("_Color", characterVisual.colorDatas[characterIndex].colors[i]);
+            materials.renderers[i].material.SetColor("_Color", characterVisual.colorDatas[characterVisual.characterIndex].colors[i]);
         }
     }
 
