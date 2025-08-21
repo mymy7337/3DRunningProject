@@ -16,6 +16,15 @@ public class AchievementItem : MonoBehaviour
     public TextMeshProUGUI descriptionText;             // === 업적 내용 ===
     public Image checkAchievement;                       // === 업적 클리어시 해금 ===
 
+
+    // === 인피니티 스크롤 하는중 ===
+    [HideInInspector]
+    public bool iscontact;                                // === 접촉 여부 확인 ===
+    [HideInInspector]
+    public bool endContact;                                // === 마지막 생성 확인 ===
+    [HideInInspector]
+    public Vector2 teleport;                               // === 위치 값 ===
+
     private void Start()
     {
         SetInformation(DataManager.Instance.achievements[index], index);
@@ -23,11 +32,24 @@ public class AchievementItem : MonoBehaviour
 
     private void Update()
     {
-        if(UIScrollManager.Instance.iscontact == true)
-        {
-            UIScrollManager.Instance.iscontact = false;
+        teleport.y = transform.position.y;
 
-            NextWindowsCreate(UIScrollManager.Instance.teleport);
+        if (teleport.y > 550)
+        {
+            iscontact = true;
+        }
+        else if (- 3024 >= gameObject.transform.localPosition.y)
+        {
+            endContact = true;
+        }
+
+        if (iscontact == true)
+        {
+            NextWindowsCreate();
+        }
+        else if(endContact == true)
+        {
+            UpperWindowsCreate();
         }
     }
 
@@ -46,28 +68,64 @@ public class AchievementItem : MonoBehaviour
 
     }
 
+    // === 다음 정보를 비교 ===
     public void ClearInformation()
     {
         icon.sprite = null;
         nameText.text = null;
         descriptionText.text = null;
+        checkAchievement.gameObject.SetActive(true);
     }
 
-    public void NextWindowsCreate(Vector2 pos)
+    public void NextWindowsCreate()
     {
-        gameObject.transform.localPosition = - pos + new Vector2(0, - 378 * 4); 
+        gameObject.transform.localPosition = new Vector2(0, -378 * (4 + index)); 
 
-        int indexUP = index + 1;
+        int indexUP = index + 4;
 
-        if (DataManager.Instance.achievements.Count >= indexUP)                   // === index 번호를 넘기지 않도록 방어 ===
+        if (DataManager.Instance.achievements.Count - 1 >= indexUP)               // === index 번호를 넘기지 않도록 방어 ===
         {
             ClearInformation();
 
-            SetInformation(DataManager.Instance.achievements[indexUP], indexUP); // === 다음으로 보여줄 창의 정보 ===
+            SetInformation(DataManager.Instance.achievements[indexUP], indexUP);  // === 다음으로 보여줄 창의 정보 ===
+
+            iscontact = false;
         }
         else
         {
-            index = 0;
+            indexUP = Math.Abs(DataManager.Instance.achievements.Count - indexUP); // === 총 갯수 - 초과한 값 ===
+
+            ClearInformation();
+
+            SetInformation(DataManager.Instance.achievements[indexUP], indexUP);  // === 처음으로 ===
+
+            iscontact = false;
+        }
+    }
+
+    public void UpperWindowsCreate()
+    {
+        gameObject.transform.localPosition = new Vector2(0, -1422 + ( 378 * index )); 
+
+        int indexUP = Math.Abs(index - 4);
+
+        if (DataManager.Instance.achievements.Count - 1 >= indexUP)               // === index 번호를 넘기지 않도록 방어 ===
+        {
+            ClearInformation();
+
+            SetInformation(DataManager.Instance.achievements[indexUP], indexUP);  // === 다음으로 보여줄 창의 정보 ===
+
+            iscontact = false;
+        }
+        else
+        {
+            indexUP = Math.Abs(DataManager.Instance.achievements.Count - indexUP); // === 총 갯수 - 초과한 값 ===
+
+            ClearInformation();
+
+            SetInformation(DataManager.Instance.achievements[indexUP], indexUP);  // === 처음으로 ===
+
+            iscontact = false;
         }
     }
 }
