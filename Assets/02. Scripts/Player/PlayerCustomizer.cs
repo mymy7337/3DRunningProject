@@ -8,29 +8,57 @@ public class PlayerCustomizer : MonoBehaviour
 {
     [SerializeField] private GameObject[] characters;
 
-    public int characterIndex;
-
-    public ColorData colorData;
+    public CharacterVisual characterVisual;
     public Materials materials;
+
+    private GameObject character;
 
     private void Awake()
     {
-        var character = Instantiate(characters[characterIndex], this.transform);
-        materials = character.GetComponent<Materials>();
-    }
-
-    private void Start()
-    {
-        if (!File.Exists(Application.persistentDataPath + "/ColorData.json"))
+        if (!File.Exists(Application.persistentDataPath + "/CharacterVisual.json"))
         {
-            for(int i = 0; i < materials.renderers.Length; i++)
+            characterVisual = new CharacterVisual();
+            characterVisual.characterIndex = 4;
+            characterVisual.characterData = new CharacterData[characters.Length];
+            for (int i = 0; i < characters.Length; i++)
             {
-                colorData.colors[i] = new Color(1, 1, 1);
+                characterVisual.characterData[i] = new CharacterData();
+                if(i != 4)
+                    characterVisual.characterData[i].isAqcuire = false;
+                else
+                    characterVisual.characterData[i].isAqcuire |= true;
+                int slotCount = SlotCount(characters[i]);
+                for (int j = 0; j < slotCount; j++)
+                {
+                    characterVisual.characterData[i].colors.Add(Color.white);
+                }
             }
             Save();
         }
+        Load();
 
+        character = Instantiate(characters[characterVisual.characterIndex], this.transform);
+        materials = character.GetComponent<Materials>();
         SetColor();
+    }
+
+    private int SlotCount(GameObject character)
+    {
+        Materials material = character.GetComponent<Materials>();
+        return material.renderers.Length;
+    }
+
+    public void ChangerCharacter(int characterIndex)
+    {
+        if (characterVisual.characterData[characterIndex].isAqcuire)
+        {
+            Destroy(character);
+            character = Instantiate(characters[characterIndex], this.transform);
+            materials = character.GetComponent<Materials>();
+            characterVisual.characterIndex = characterIndex;
+            Save();
+            SetColor();
+        }
     }
 
     private void SetColor()
@@ -38,7 +66,7 @@ public class PlayerCustomizer : MonoBehaviour
         for(int i = 0; i < materials.renderers.Length; i++)
         {
             Load();
-            materials.renderers[i].material.SetColor("_Color", colorData.colors[i]);
+            materials.renderers[i].material.SetColor("_Color", characterVisual.characterData[characterVisual.characterIndex].colors[i]);
         }
     }
 
@@ -48,26 +76,35 @@ public class PlayerCustomizer : MonoBehaviour
 
         material.SetColor("_Color", albedo);
 
-        colorData.colors[idx] = albedo;
+        characterVisual.characterData[characterVisual.characterIndex].colors[idx] = albedo;
         Save();
     }
 
     private void Save()
     {
-        var saveColorData = JsonUtility.ToJson(colorData);
+        var saveCharacterVisual = JsonUtility.ToJson(characterVisual);
 
-        File.WriteAllText(Application.persistentDataPath + "/ColorData.json", saveColorData);
+        File.WriteAllText(Application.persistentDataPath + "/CharacterVisual.json", saveCharacterVisual);
+        Debug.Log(Application.persistentDataPath + "/CharacterVisual.json");
     }
 
     private void Load()
     {
-        var loadColorData = File.ReadAllText(Application.persistentDataPath + "/ColorData.json");
-        colorData = JsonUtility.FromJson<ColorData>(loadColorData);
+        var loadCharacterVisual = File.ReadAllText(Application.persistentDataPath + "/CharacterVisual.json");
+        characterVisual = JsonUtility.FromJson<CharacterVisual>(loadCharacterVisual);
     }
 
     [System.Serializable]
-    public class ColorData
+    public class CharacterVisual
     {
-        public Color[] colors = new Color[5];
+        public int characterIndex;
+        public CharacterData[] characterData;
+    }
+
+    [System.Serializable]
+    public class CharacterData
+    {
+        public bool isAqcuire;
+        public List<Color> colors = new List<Color>();
     }
 }
