@@ -12,7 +12,7 @@ public class ClothesUIManager : MonoBehaviour
     public GameObject student;
 
 
-    private bool isOpen;
+    public bool isOpen;
     public void ControllUI()
     {
         isOpen = !isOpen;

@@ -12,6 +12,8 @@ public class PlayerCustomizer : MonoBehaviour
 
     private GameObject character;
 
+    public ClothesUIManager clothesUIManager;
+
     private void Awake()
     {
         CustomizeDataManager.Instance.Load();
@@ -25,6 +27,12 @@ public class PlayerCustomizer : MonoBehaviour
     {
         if (CustomizeDataManager.Instance.characterVisual.characterData[characterIndex].isAqcuire)
         {
+            clothesUIManager.archer.SetActive(false);
+            clothesUIManager.knight.SetActive(false);
+            clothesUIManager.merchant.SetActive(false);
+            clothesUIManager.ninja.SetActive(false);
+            clothesUIManager.student.SetActive(false);
+            clothesUIManager.isOpen = false;
             Destroy(character);
             character = Instantiate(characters[characterIndex], this.transform);
             materials = character.GetComponent<Materials>();
