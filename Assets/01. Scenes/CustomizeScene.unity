@@ -5419,6 +5419,10 @@ PrefabInstance:
       propertyPath: characterIndex
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4430876291939108567, guid: 58e7bccc57cf64b3fbec205b38b80c2c, type: 3}
+      propertyPath: characterVisual.characterIndex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7646994077360772334, guid: 58e7bccc57cf64b3fbec205b38b80c2c, type: 3}
       propertyPath: m_Name
       value: Player

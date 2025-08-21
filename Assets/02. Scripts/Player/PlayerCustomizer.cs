@@ -17,15 +17,10 @@ public class PlayerCustomizer : MonoBehaviour
 
     private void Awake()
     {
-        character = Instantiate(characters[characterIndex], this.transform);
-        materials = character.GetComponent<Materials>();
-    }
-
-    private void Start()
-    {
         if (!File.Exists(Application.persistentDataPath + "/CharacterVisual.json"))
         {
             characterVisual = new CharacterVisual();
+            characterVisual.characterIndex = 4;
             characterVisual.colorDatas = new ColorData[characters.Length];
             for (int i = 0; i < characters.Length; i++)
             {
@@ -38,7 +33,10 @@ public class PlayerCustomizer : MonoBehaviour
             }
             Save();
         }
+        Load();
 
+        character = Instantiate(characters[characterVisual.characterIndex], this.transform);
+        materials = character.GetComponent<Materials>();
         SetColor();
     }
 
@@ -53,6 +51,8 @@ public class PlayerCustomizer : MonoBehaviour
         Destroy(character);
         character = Instantiate(characters[characterIndex], this.transform);
         materials = character.GetComponent<Materials>();
+        characterVisual.characterIndex = characterIndex;
+        Save();
         SetColor();
     }
 
@@ -92,6 +92,7 @@ public class PlayerCustomizer : MonoBehaviour
     [System.Serializable]
     public class CharacterVisual
     {
+        public int characterIndex;
         public ColorData[] colorDatas;
     }
 
