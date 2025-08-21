@@ -6,38 +6,33 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : Singleton<TitleManager>
 {
-    // === Á¡¼ö¸¦ ¶ç¾îÁÙ ÅØ½ºÆ® ===
+    // === ì ìˆ˜ë¥¼ ë„ì–´ì¤„ í…ìŠ¤íŠ¸ ===
     public TextMeshProUGUI highScore;
     public TextMeshProUGUI score;
     public TextMeshProUGUI time;
     public GameObject endPanel;
 
-    // === ´Ù¸¥ ¸Å´ÏÀú È£Ãâ ===
-    public ScoreManager ScoreManager { get; private set; }
+    [Header("Distance")]
+    public TextMeshProUGUI distance;
 
     protected override bool isDestroy => true;
 
     protected override void Awake()
     {
-        // === Á¦³Ê¸¯ ½Ì±ÛÅæÀÇ Awake¸¦ ºÒ·¯¿È ===
+        // === ì œë„ˆë¦­ ì‹±ê¸€í†¤ì˜ Awakeë¥¼ ë¶ˆëŸ¬ì˜´ ===
         base.Awake();
-
-        // === ScoreManager »ı¼º ===
-        GameObject ScoreManagerObject = new GameObject("ScoreManager");
-        ScoreManager = ScoreManagerObject.AddComponent<ScoreManager>();
-        ScoreManagerObject.transform.SetParent(transform);
 
         endPanel.SetActive(false);
 
         Time.timeScale = 1.0f;
     }
 
-    // === °ÔÀÓ ¿À¹ö½Ã È£Ãâ ===
+    // === ê²Œì„ ì˜¤ë²„ì‹œ í˜¸ì¶œ ===
     public void GameOver()
     {
         endPanel.SetActive(true);
 
-        ScoreManager.FinalScore();
+        ScoreManager.Instance.FinalScore();
 
         Time.timeScale = 0.0f;
     }

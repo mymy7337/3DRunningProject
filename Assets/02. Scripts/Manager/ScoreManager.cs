@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : Singleton<ScoreManager>
 {
     // === 점수를 위한 타이머 ===
     private float timer;
@@ -11,6 +12,8 @@ public class ScoreManager : MonoBehaviour
     private int highScore = 0;
     private int currentScore = 0;
     private float totalDistance = 0;
+
+    protected override bool isDestroy => true;
 
     private void Start()
     {
@@ -30,14 +33,16 @@ public class ScoreManager : MonoBehaviour
     private void FixedUpdate()
     {
         // === 방어 코드 ===
-        if (TitleManager.Instance != null)
+        if (this != null)
         {
             timer += Time.fixedDeltaTime;
 
             totalDistance += 0.5f * Time.fixedDeltaTime;
 
+            TitleManager.Instance.distance.text = totalDistance.ToString("N2");
+
             // === 업적 확인 ===
-            if (timer >= 6.0f)
+            if (timer >= 60.0f)
             {
                 DataManager.Instance.ClearAchievement(0);
             }
