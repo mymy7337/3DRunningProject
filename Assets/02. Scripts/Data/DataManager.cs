@@ -104,8 +104,6 @@ public class DataManager : Singleton<DataManager>
                 {
                     gameData.achievements[i].isClear = true;
 
-                    PlayerManager.Instance.Player.customizer.characterVisual.characterData[i].isAqcuire = true;
-
                     SetAchievementText(achievements[i]);
 
                     Save(gameData);
