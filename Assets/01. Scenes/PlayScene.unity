@@ -1616,11 +1616,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapPrefabs:
-  - {fileID: 7864422107392160020, guid: f80196526a8a28746a60e084a3792e4a, type: 3}
-  - {fileID: 7864422107392160020, guid: f80196526a8a28746a60e084a3792e4a, type: 3}
-  - {fileID: 7864422107392160020, guid: f80196526a8a28746a60e084a3792e4a, type: 3}
-  - {fileID: 7864422107392160020, guid: f80196526a8a28746a60e084a3792e4a, type: 3}
-  - {fileID: 7864422107392160020, guid: f80196526a8a28746a60e084a3792e4a, type: 3}
+  - {fileID: 7864422107392160020, guid: 4241316cf15be1145bd48b7a3d8543b5, type: 3}
+  - {fileID: 7864422107392160020, guid: 4241316cf15be1145bd48b7a3d8543b5, type: 3}
+  - {fileID: 7864422107392160020, guid: 4241316cf15be1145bd48b7a3d8543b5, type: 3}
+  - {fileID: 7864422107392160020, guid: 4241316cf15be1145bd48b7a3d8543b5, type: 3}
+  - {fileID: 7864422107392160020, guid: 4241316cf15be1145bd48b7a3d8543b5, type: 3}
   startSpawnCount: 3
   mapLength: 65
   scrollSpeed: 5
