@@ -48,7 +48,6 @@ public class CustomizeDataManager : Singleton<CustomizeDataManager>
         var saveCharacterVisual = JsonUtility.ToJson(characterVisual);
 
         File.WriteAllText(Application.persistentDataPath + "/CharacterVisual.json", saveCharacterVisual);
-        Debug.Log(Application.persistentDataPath + "/CharacterVisual.json");
     }
 
     public void Load()
