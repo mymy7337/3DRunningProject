@@ -19,14 +19,18 @@ public class PlayerCustomizer : MonoBehaviour
         {
             characterVisual = new CharacterVisual();
             characterVisual.characterIndex = 4;
-            characterVisual.colorDatas = new ColorData[characters.Length];
+            characterVisual.characterData = new CharacterData[characters.Length];
             for (int i = 0; i < characters.Length; i++)
             {
-                characterVisual.colorDatas[i] = new ColorData();
+                characterVisual.characterData[i] = new CharacterData();
+                if(i != 4)
+                    characterVisual.characterData[i].isAqcuire = false;
+                else
+                    characterVisual.characterData[i].isAqcuire |= true;
                 int slotCount = SlotCount(characters[i]);
                 for (int j = 0; j < slotCount; j++)
                 {
-                    characterVisual.colorDatas[i].colors.Add(Color.white);
+                    characterVisual.characterData[i].colors.Add(Color.white);
                 }
             }
             Save();
@@ -46,12 +50,15 @@ public class PlayerCustomizer : MonoBehaviour
 
     public void ChangerCharacter(int characterIndex)
     {
-        Destroy(character);
-        character = Instantiate(characters[characterIndex], this.transform);
-        materials = character.GetComponent<Materials>();
-        characterVisual.characterIndex = characterIndex;
-        Save();
-        SetColor();
+        if (characterVisual.characterData[characterIndex].isAqcuire)
+        {
+            Destroy(character);
+            character = Instantiate(characters[characterIndex], this.transform);
+            materials = character.GetComponent<Materials>();
+            characterVisual.characterIndex = characterIndex;
+            Save();
+            SetColor();
+        }
     }
 
     private void SetColor()
@@ -59,7 +66,7 @@ public class PlayerCustomizer : MonoBehaviour
         for(int i = 0; i < materials.renderers.Length; i++)
         {
             Load();
-            materials.renderers[i].material.SetColor("_Color", characterVisual.colorDatas[characterVisual.characterIndex].colors[i]);
+            materials.renderers[i].material.SetColor("_Color", characterVisual.characterData[characterVisual.characterIndex].colors[i]);
         }
     }
 
@@ -69,7 +76,7 @@ public class PlayerCustomizer : MonoBehaviour
 
         material.SetColor("_Color", albedo);
 
-        characterVisual.colorDatas[characterVisual.characterIndex].colors[idx] = albedo;
+        characterVisual.characterData[characterVisual.characterIndex].colors[idx] = albedo;
         Save();
     }
 
@@ -91,14 +98,13 @@ public class PlayerCustomizer : MonoBehaviour
     public class CharacterVisual
     {
         public int characterIndex;
-        public ColorData[] colorDatas;
+        public CharacterData[] characterData;
     }
 
     [System.Serializable]
-    public class ColorData
+    public class CharacterData
     {
+        public bool isAqcuire;
         public List<Color> colors = new List<Color>();
     }
 }
-
-

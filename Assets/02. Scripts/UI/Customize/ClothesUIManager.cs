@@ -34,7 +34,5 @@ public class ClothesUIManager : MonoBehaviour
                 student.SetActive(isOpen);
                 break;
         }
-
-        
     }
 }
