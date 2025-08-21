@@ -12,16 +12,16 @@ public class DataManager : Singleton<DataManager>
     public List<AchievementData> achievements;
 
     [Header("infomation")]
-    public Image achievementPanel;            // === ¾÷Àû Ã¢ ===
-    public Image icon;                         // === ¾÷Àû ¾ÆÀÌÄÜ ===
-    public TextMeshProUGUI nameText;            // === ¾÷Àû ÀÌ¸§===
-    public TextMeshProUGUI descriptionText;      // === ¾÷Àû ³»¿ë ===
+    public Image achievementPanel;            // === ì—…ì  ì°½ ===
+    public Image icon;                         // === ì—…ì  ì•„ì´ì½˜ ===
+    public TextMeshProUGUI nameText;            // === ì—…ì  ì´ë¦„===
+    public TextMeshProUGUI descriptionText;      // === ì—…ì  ë‚´ìš© ===
 
     private string filePath;
 
-    private Coroutine _playCoroutine;             // === ¾÷ÀûÃ¢ Áßº¹ ¹æÁö ===
+    private Coroutine _playCoroutine;             // === ì—…ì ì°½ ì¤‘ë³µ ë°©ì§€ ===
 
-    // === ¾÷Àû È®ÀÎ¿ë ===
+    // === ì—…ì  í™•ì¸ìš© ===
     [HideInInspector]
     public int jumpCount;
     [HideInInspector]
@@ -35,13 +35,13 @@ public class DataManager : Singleton<DataManager>
     {
         base.Awake();
 
-        // === ÆÄÀÏ °æ·Î¸¦ Ã£±â ===
+        // === íŒŒì¼ ê²½ë¡œë¥¼ ì°¾ê¸° ===
         filePath = Path.Combine(Application.persistentDataPath, "gameData.json");
 
-        // === JSON µ¿±âÈ­ ===
+        // === JSON ë™ê¸°í™” ===
         Load();
 
-        // === ÆÇ³Ú ²ô±â + ¹æ¾î ÄÚµå===
+        // === íŒë„¬ ë„ê¸° + ë°©ì–´ ì½”ë“œ===
         if(TitleManager.Instance != null)
         {
             achievementPanel.gameObject.SetActive(false);
@@ -57,7 +57,7 @@ public class DataManager : Singleton<DataManager>
 
     public void Load()
     {
-        // === ÆÄÀÏ È®ÀÎ ÈÄ ·Îµå ===
+        // === íŒŒì¼ í™•ì¸ í›„ ë¡œë“œ ===
         if (File.Exists(filePath))
         {
             var loadData = File.ReadAllText(filePath);
@@ -72,7 +72,7 @@ public class DataManager : Singleton<DataManager>
         }
         else
         {
-            // === ¾øÀ¸¸é ÇÏ³ª ¸¸µé¾îÁÜ ===
+            // === ì—†ìœ¼ë©´ í•˜ë‚˜ ë§Œë“¤ì–´ì¤Œ ===
             gameData = new GameData 
             { 
                 highScore = 0,
@@ -93,7 +93,7 @@ public class DataManager : Singleton<DataManager>
         }
     }
 
-    // === ¾÷Àû ÇØ±İ ===
+    // === ì—…ì  í•´ê¸ˆ ===
     public void ClearAchievement(int id)
     {
         for(int i = 0; i < achievements.Count; i++)
@@ -104,6 +104,8 @@ public class DataManager : Singleton<DataManager>
                 {
                     gameData.achievements[i].isClear = true;
 
+                    PlayerManager.Instance.Player.customizer.characterVisual.characterData[i].isAqcuire = true;
+
                     SetAchievementText(achievements[i]);
 
                     Save(gameData);
@@ -112,7 +114,7 @@ public class DataManager : Singleton<DataManager>
         }
     }
 
-    // === ¾÷Àû ´Ş¼º½Ã ¾÷ÀûÃ¢ ³ªÅ¸³»±â ===
+    // === ì—…ì  ë‹¬ì„±ì‹œ ì—…ì ì°½ ë‚˜íƒ€ë‚´ê¸° ===
     private void SetAchievementText(AchievementData data)
     {
         if (_playCoroutine != null)
@@ -129,7 +131,7 @@ public class DataManager : Singleton<DataManager>
         _playCoroutine = StartCoroutine(HidePanel(3.0f));
     }
 
-    // === ¾÷ÀûÃ¢ ²ô±â ===
+    // === ì—…ì ì°½ ë„ê¸° ===
     private IEnumerator HidePanel(float delay)
     {
         yield return new WaitForSecondsRealtime(delay);

@@ -37,7 +37,7 @@ public class ScoreManager : MonoBehaviour
             totalDistance += 0.5f * Time.fixedDeltaTime;
 
             // === 업적 확인 ===
-            if (timer >= 60.0f)
+            if (timer >= 6.0f)
             {
                 DataManager.Instance.ClearAchievement(0);
             }
