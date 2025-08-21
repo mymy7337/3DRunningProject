@@ -5,33 +5,34 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
 
-    public static readonly int isRunning = Animator.StringToHash("IsRun");
+    public static readonly int isIdling = Animator.StringToHash("IsIdle");
     public static readonly int isJumping = Animator.StringToHash("IsJump");
     public static readonly int isCrouch = Animator.StringToHash("IsCrouch");
 
-    private Animator animator;
+    public Animator animator;
 
-    private bool isRun;
+    public bool isIdle;
 
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
-
     }
 
-    public void Run()
+    public void Idle()
     {
-        isRun = !isRun;
-        animator.SetBool(isRunning, isRun);
+        isIdle = !isIdle;
+        animator.SetBool(isIdling, isIdle);
     }
 
     public void Jump()
     {
-        animator.SetTrigger(isJumping);
+        if(!isIdle)
+            animator.SetTrigger(isJumping);
     }
 
     public void Crouch()
     {
-        animator.SetTrigger(isCrouch);
+        if(!isIdle)
+            animator.SetTrigger(isCrouch);
     }
 }
