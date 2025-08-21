@@ -6,57 +6,39 @@ using UnityEngine.TextCore.Text;
 
 public class PlayerCustomizer : MonoBehaviour
 {
-    [SerializeField] private GameObject[] characters;
+    public GameObject[] characters;
 
-    public CharacterVisual characterVisual;
     public Materials materials;
 
     private GameObject character;
 
+    public ClothesUIManager clothesUIManager;
+
     private void Awake()
     {
-        if (!File.Exists(Application.persistentDataPath + "/CharacterVisual.json"))
-        {
-            characterVisual = new CharacterVisual();
-            characterVisual.characterIndex = 4;
-            characterVisual.characterData = new CharacterData[characters.Length];
-            for (int i = 0; i < characters.Length; i++)
-            {
-                characterVisual.characterData[i] = new CharacterData();
-                if(i != 4)
-                    characterVisual.characterData[i].isAqcuire = false;
-                else
-                    characterVisual.characterData[i].isAqcuire |= true;
-                int slotCount = SlotCount(characters[i]);
-                for (int j = 0; j < slotCount; j++)
-                {
-                    characterVisual.characterData[i].colors.Add(Color.white);
-                }
-            }
-            Save();
-        }
-        Load();
+        CustomizeDataManager.Instance.Load();
 
-        character = Instantiate(characters[characterVisual.characterIndex], this.transform);
+        character = Instantiate(characters[CustomizeDataManager.Instance.characterVisual.characterIndex], this.transform);
         materials = character.GetComponent<Materials>();
         SetColor();
     }
 
-    private int SlotCount(GameObject character)
-    {
-        Materials material = character.GetComponent<Materials>();
-        return material.renderers.Length;
-    }
-
     public void ChangerCharacter(int characterIndex)
     {
-        if (characterVisual.characterData[characterIndex].isAqcuire)
+        if (CustomizeDataManager.Instance.characterVisual.characterData[characterIndex].isAqcuire)
         {
+            clothesUIManager.archer.SetActive(false);
+            clothesUIManager.knight.SetActive(false);
+            clothesUIManager.merchant.SetActive(false);
+            clothesUIManager.ninja.SetActive(false);
+            clothesUIManager.student.SetActive(false);
+            clothesUIManager.isOpen = false;
             Destroy(character);
             character = Instantiate(characters[characterIndex], this.transform);
             materials = character.GetComponent<Materials>();
-            characterVisual.characterIndex = characterIndex;
-            Save();
+            PlayerManager.Instance.Player.animationController.ResetAnimator(character.GetComponentInChildren<Animator>());
+            CustomizeDataManager.Instance.characterVisual.characterIndex = characterIndex;
+            CustomizeDataManager.Instance.Save();
             SetColor();
         }
     }
@@ -65,8 +47,8 @@ public class PlayerCustomizer : MonoBehaviour
     {
         for(int i = 0; i < materials.renderers.Length; i++)
         {
-            Load();
-            materials.renderers[i].material.SetColor("_Color", characterVisual.characterData[characterVisual.characterIndex].colors[i]);
+            CustomizeDataManager.Instance.Load();
+            materials.renderers[i].material.SetColor("_Color", CustomizeDataManager.Instance.characterVisual.characterData[CustomizeDataManager.Instance.characterVisual.characterIndex].colors[i]);
         }
     }
 
@@ -76,35 +58,7 @@ public class PlayerCustomizer : MonoBehaviour
 
         material.SetColor("_Color", albedo);
 
-        characterVisual.characterData[characterVisual.characterIndex].colors[idx] = albedo;
-        Save();
-    }
-
-    private void Save()
-    {
-        var saveCharacterVisual = JsonUtility.ToJson(characterVisual);
-
-        File.WriteAllText(Application.persistentDataPath + "/CharacterVisual.json", saveCharacterVisual);
-        Debug.Log(Application.persistentDataPath + "/CharacterVisual.json");
-    }
-
-    private void Load()
-    {
-        var loadCharacterVisual = File.ReadAllText(Application.persistentDataPath + "/CharacterVisual.json");
-        characterVisual = JsonUtility.FromJson<CharacterVisual>(loadCharacterVisual);
-    }
-
-    [System.Serializable]
-    public class CharacterVisual
-    {
-        public int characterIndex;
-        public CharacterData[] characterData;
-    }
-
-    [System.Serializable]
-    public class CharacterData
-    {
-        public bool isAqcuire;
-        public List<Color> colors = new List<Color>();
+        CustomizeDataManager.Instance.characterVisual.characterData[CustomizeDataManager.Instance.characterVisual.characterIndex].colors[idx] = albedo;
+        CustomizeDataManager.Instance.Save();
     }
 }
