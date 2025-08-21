@@ -1350,7 +1350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0.4
-  fullDayLength: 60
+  fullDayLength: 10
   startTime: 0.4
   noon: {x: 90, y: 0, z: 0}
   sun: {fileID: 1467543624}
@@ -1438,9 +1438,9 @@ MonoBehaviour:
   moon: {fileID: 2078469070}
   moonColor:
     serializedVersion: 2
-    key0: {r: 0, g: 0.089155674, b: 1, a: 1}
-    key1: {r: 0, g: 0.14901961, b: 0.59607846, a: 1}
-    key2: {r: 0, g: 0.08627451, b: 0.9450981, a: 0}
+    key0: {r: 0.43529415, g: 0.4784314, b: 0.9176471, a: 1}
+    key1: {r: 0, g: 0.2216981, b: 0.8867924, a: 1}
+    key2: {r: 0.43426833, g: 0.47780716, b: 0.9169811, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
@@ -1471,7 +1471,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 2
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1480,7 +1480,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 0.25
-      value: 0.75
+      value: 1.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1489,7 +1489,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 0.5
-      value: 0.5
+      value: 1.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1498,7 +1498,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 0.75
-      value: 0.75
+      value: 1.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1507,7 +1507,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 1
+      value: 2
       inSlope: 0
       outSlope: 0
       tangentMode: 0
