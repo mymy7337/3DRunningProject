@@ -17,7 +17,7 @@ public class AchievementItem : MonoBehaviour
     public Image checkAchievement;                       // === 업적 클리어시 해금 ===
 
 
-    // === 인피니티 스크롤 하는중 ===
+    // === 인피니티 스크롤 포기 ===
     [HideInInspector]
     public bool iscontact;                                // === 접촉 여부 확인 ===
     [HideInInspector]
@@ -38,18 +38,10 @@ public class AchievementItem : MonoBehaviour
         {
             iscontact = true;
         }
-        else if (- 3024 >= gameObject.transform.localPosition.y)
-        {
-            endContact = true;
-        }
 
         if (iscontact == true)
         {
             NextWindowsCreate();
-        }
-        else if(endContact == true)
-        {
-            UpperWindowsCreate();
         }
     }
 
@@ -79,35 +71,9 @@ public class AchievementItem : MonoBehaviour
 
     public void NextWindowsCreate()
     {
-        gameObject.transform.localPosition = new Vector2(0, -378 * (4 + index)); 
+        gameObject.transform.localPosition = new Vector2(0, -378 * (5 + index)); 
 
-        int indexUP = index + 4;
-
-        if (DataManager.Instance.achievements.Count - 1 >= indexUP)               // === index 번호를 넘기지 않도록 방어 ===
-        {
-            ClearInformation();
-
-            SetInformation(DataManager.Instance.achievements[indexUP], indexUP);  // === 다음으로 보여줄 창의 정보 ===
-
-            iscontact = false;
-        }
-        else
-        {
-            indexUP = Math.Abs(DataManager.Instance.achievements.Count - indexUP); // === 총 갯수 - 초과한 값 ===
-
-            ClearInformation();
-
-            SetInformation(DataManager.Instance.achievements[indexUP], indexUP);  // === 처음으로 ===
-
-            iscontact = false;
-        }
-    }
-
-    public void UpperWindowsCreate()
-    {
-        gameObject.transform.localPosition = new Vector2(0, -1422 + ( 378 * index )); 
-
-        int indexUP = Math.Abs(index - 4);
+        int indexUP = index + 5;
 
         if (DataManager.Instance.achievements.Count - 1 >= indexUP)               // === index 번호를 넘기지 않도록 방어 ===
         {
