@@ -1,11 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 public class PowerUpItem : MonoBehaviour
 {
-    public PowerUpSO powerUpSO;
+    [SerializeField] private PowerUpSO powerUpSO;
+    [SerializeField] private float pickupCooldown = 0.5f; 
+
+    private Collider _col;
+
+    private void Awake()
+    {
+        _col = GetComponent<Collider>();
+    }
 
     private void Reset()
     {
@@ -15,13 +22,20 @@ public class PowerUpItem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!other.CompareTag("Player") || !_col.enabled) return;
 
         var runner = other.GetComponent<PowerUpPlayer>();
         if (runner != null && powerUpSO != null)
         {
             runner.Run(powerUpSO);
-            gameObject.SetActive(false);
+            StartCoroutine(Cooldown());
         }
+    }
+
+    private IEnumerator Cooldown()
+    {
+        _col.enabled = false;                           
+        yield return new WaitForSeconds(pickupCooldown);  
+        _col.enabled = true;                               
     }
 }
