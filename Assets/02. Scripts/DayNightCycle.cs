@@ -12,15 +12,15 @@ public class DayNightCycle : MonoBehaviour
     [Header("Sun")]
     public Light sun;
     public Gradient sunColor;
-    public AnimationCurve sunIntensity; // ³·¿¡¸¸ ÄÑÁü
+    public AnimationCurve sunIntensity; // ë‚®ì—ë§Œ ì¼œì§
 
     [Header("Moon")]
     public Light moon;
     public Gradient moonColor;
-    public AnimationCurve moonIntensity; // ¹ã¿¡¸¸ ÄÑÁü
+    public AnimationCurve moonIntensity; // ë°¤ì—ë§Œ ì¼œì§
 
     [Header("Other Lighting")]
-    public Gradient ambientColor; // ÀüÃ¼ ¾À Åæ
+    public Gradient ambientColor; // ì „ì²´ ì”¬ í†¤
     public AnimationCurve lightingIntensityMultiplier;
     public AnimationCurve reflectionIntensityMultiplier;
 
@@ -34,18 +34,18 @@ public class DayNightCycle : MonoBehaviour
     {
         time = (time + timeRate * Time.deltaTime) % 1f;
 
-        // Sun°ú Moon ¾÷µ¥ÀÌÆ® (offsetÀ¸·Î ±¸ºÐ)
+        // Sunê³¼ Moon ì—…ë°ì´íŠ¸ (offsetìœ¼ë¡œ êµ¬ë¶„)
         UpdateLighting(sun, sunColor, sunIntensity);
         UpdateLighting(moon, moonColor, moonIntensity);
 
 
-        // ³·/¹ã¿¡ ¸Â°Ô Sun Source ±³Ã¼
-        if (time >= 0.25f && time <= 0.75f) // ³·
+        // ë‚®/ë°¤ì— ë§žê²Œ Sun Source êµì²´
+        if (time >= 0.25f && time <= 0.75f) // ë‚®
             RenderSettings.sun = sun;
-        else // ¹ã
+        else // ë°¤
             RenderSettings.sun = moon;
 
-        // ÀüÃ¼ È¯°æ±¤°ú ¹Ý»ç±¤
+        // ì „ì²´ í™˜ê²½ê´‘ê³¼ ë°˜ì‚¬ê´‘
         RenderSettings.ambientLight = ambientColor.Evaluate(time);
         RenderSettings.ambientIntensity = lightingIntensityMultiplier.Evaluate(time);
         RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
@@ -53,13 +53,13 @@ public class DayNightCycle : MonoBehaviour
 
     void UpdateLighting(Light lightSource, Gradient colorGradient, AnimationCurve intensityCurve)
     {
-        // ¹à±â °è»ê
+        // ë°ê¸° ê³„ì‚°
         float intensity = intensityCurve.Evaluate(time);
 
-        // È¸Àü °è»ê
+        // íšŒì „ ê³„ì‚°
         lightSource.transform.eulerAngles = (time - (lightSource == sun ? 0.25f : 0.75f)) * noon * 4f;
 
-        // »ö»ó ¹× ¹à±â Àû¿ë
+        // ìƒ‰ìƒ ë° ë°ê¸° ì ìš©
         lightSource.color = colorGradient.Evaluate(time);
         lightSource.intensity = intensity;
 
