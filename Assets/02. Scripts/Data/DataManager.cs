@@ -104,6 +104,7 @@ public class DataManager : Singleton<DataManager>
                 {
                     gameData.achievements[i].isClear = true;
 
+                    // === 업적 클리어시 캐릭터 해금 ===
                     CustomizeDataManager.Instance.characterVisual.characterData[i].isAqcuire = true;
 
                     CustomizeDataManager.Instance.Save();

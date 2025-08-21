@@ -14,7 +14,7 @@ public class PlayerStatus : MonoBehaviour
         IsInvincible = isInvincible;
 
         int playerLayer = LayerMask.NameToLayer("Player");
-        int obstacleLayer = LayerMask.NameToLayer("Obstacle");
+        int obstacleLayer = LayerMask.NameToLayer("Obstacles");
         Physics.IgnoreLayerCollision(playerLayer, obstacleLayer, isInvincible);
         Physics.SyncTransforms();
 

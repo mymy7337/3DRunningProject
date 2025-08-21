@@ -5,7 +5,6 @@ using UnityEngine;
 public class PowerUpItem : MonoBehaviour
 {
     [SerializeField] private PowerUpSO powerUpSO;
-    [SerializeField] private float pickupCooldown = 0.5f; 
 
     private Collider _col;
 
@@ -28,14 +27,6 @@ public class PowerUpItem : MonoBehaviour
         if (runner != null && powerUpSO != null)
         {
             runner.Run(powerUpSO);
-            StartCoroutine(Cooldown());
         }
-    }
-
-    private IEnumerator Cooldown()
-    {
-        _col.enabled = false;                           
-        yield return new WaitForSeconds(pickupCooldown);  
-        _col.enabled = true;                               
     }
 }
