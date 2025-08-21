@@ -3412,7 +3412,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBC14\uC9C0"
+  m_text: "\uC2E0\uBC1C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: efe35d104fc190c4dbf0109723651010, type: 2}
   m_sharedMaterial: {fileID: 5039076036764523313, guid: efe35d104fc190c4dbf0109723651010, type: 2}
@@ -3828,7 +3828,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC288\uBBF8\uC988"
+  m_text: "\uCE58\uB9C8"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: efe35d104fc190c4dbf0109723651010, type: 2}
   m_sharedMaterial: {fileID: 5039076036764523313, guid: efe35d104fc190c4dbf0109723651010, type: 2}
@@ -6013,7 +6013,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBAA8\uC790"
+  m_text: "\uC154\uCE20"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: efe35d104fc190c4dbf0109723651010, type: 2}
   m_sharedMaterial: {fileID: 5039076036764523313, guid: efe35d104fc190c4dbf0109723651010, type: 2}
@@ -10925,6 +10925,10 @@ PrefabInstance:
       propertyPath: characterIndex
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4430876291939108567, guid: 58e7bccc57cf64b3fbec205b38b80c2c, type: 3}
+      propertyPath: clothesUIManager
+      value: 
+      objectReference: {fileID: 79752340}
     - target: {fileID: 4430876291939108567, guid: 58e7bccc57cf64b3fbec205b38b80c2c, type: 3}
       propertyPath: characterVisual.characterIndex
       value: 0

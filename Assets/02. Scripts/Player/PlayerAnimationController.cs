@@ -18,6 +18,12 @@ public class PlayerAnimationController : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
+    public void ResetAnimator(Animator _animator)
+    {
+        animator = _animator;
+
+    }
+
     public void Idle()
     {
         isIdle = !isIdle;
