@@ -22,9 +22,11 @@ public class CustomizeDataManager : Singleton<CustomizeDataManager>
             characterVisual = new CharacterVisual();
             characterVisual.characterIndex = 4;
             characterVisual.characterData = new CharacterData[characters.Length];
+            characterVisual.pickerData = new PickerData[characters.Length];
             for (int i = 0; i < characters.Length; i++)
             {
                 characterVisual.characterData[i] = new CharacterData();
+                characterVisual.pickerData[i] = new PickerData();
                 if (i != 4)
                     characterVisual.characterData[i].isAqcuire = false;
                 else
@@ -33,6 +35,9 @@ public class CustomizeDataManager : Singleton<CustomizeDataManager>
                 for (int j = 0; j < slotCount; j++)
                 {
                     characterVisual.characterData[i].colors.Add(Color.white);
+                    characterVisual.pickerData[i].barPos.Add(Vector3.zero);
+                    characterVisual.pickerData[i].circlePos.Add(Vector3.zero);
+                    characterVisual.pickerData[i].index = 0;
                 }
             }
             Save();
@@ -61,6 +66,7 @@ public class CustomizeDataManager : Singleton<CustomizeDataManager>
     {
         public int characterIndex;
         public CharacterData[] characterData;
+        public PickerData[] pickerData;
     }
 
     [System.Serializable]
@@ -68,5 +74,13 @@ public class CustomizeDataManager : Singleton<CustomizeDataManager>
     {
         public bool isAqcuire;
         public List<Color> colors = new List<Color>();
+    }
+
+    [System.Serializable]
+    public class PickerData
+    {
+        public int index;
+        public List<Vector3> barPos = new List<Vector3>();
+        public List<Vector3> circlePos = new List<Vector3>();
     }
 }

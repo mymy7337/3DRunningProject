@@ -19,6 +19,9 @@ public class BarColorPicker : BaseColorPicker
 
         picker.transform.position = transform.position + diff;
 
+        CustomizeDataManager.Instance.characterVisual.pickerData[CustomizeDataManager.Instance.characterVisual.characterIndex].barPos[CustomizeDataManager.Instance.characterVisual.pickerData[CustomizeDataManager.Instance.characterVisual.characterIndex].index] = picker.transform.localPosition;
+        CustomizeDataManager.Instance.Save();
+
         RefreshApply();
     }
 
@@ -43,5 +46,11 @@ public class BarColorPicker : BaseColorPicker
             return Color.Lerp(grad.colorB, grad.colorA, normalized.x);
 
         return Color.white;
+    }
+
+    public override void SetPickerPosition()
+    {
+        CustomizeDataManager.Instance.Load();
+        picker.transform.localPosition = CustomizeDataManager.Instance.characterVisual.pickerData[CustomizeDataManager.Instance.characterVisual.characterIndex].barPos[CustomizeDataManager.Instance.characterVisual.pickerData[CustomizeDataManager.Instance.characterVisual.characterIndex].index];
     }
 }

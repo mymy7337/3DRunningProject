@@ -627,6 +627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 0
 --- !u!1 &37059936
 GameObject:
@@ -1083,6 +1084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 3
 --- !u!114 &52687795
 MonoBehaviour:
@@ -1896,6 +1898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 3
 --- !u!114 &109210792
 MonoBehaviour:
@@ -2181,6 +2184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 2
 --- !u!114 &156060999
 MonoBehaviour:
@@ -2462,6 +2466,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 501d7281a3beb0f4680c277751a41425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barColor: {fileID: 1367692309}
+  circleColor: {fileID: 1287164321}
 --- !u!114 &182227857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2743,6 +2749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 4
 --- !u!114 &193960456
 MonoBehaviour:
@@ -3277,6 +3284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 5
 --- !u!114 &321719987
 MonoBehaviour:
@@ -3559,6 +3567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 4
 --- !u!114 &347757936
 MonoBehaviour:
@@ -4432,6 +4441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 7
 --- !u!114 &500896592
 MonoBehaviour:
@@ -4733,6 +4743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 4
 --- !u!114 &546649114
 MonoBehaviour:
@@ -5135,6 +5146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 4
 --- !u!114 &615899523
 MonoBehaviour:
@@ -5683,6 +5695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 5
 --- !u!114 &761803454
 MonoBehaviour:
@@ -6040,6 +6053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 5
 --- !u!114 &936091542
 MonoBehaviour:
@@ -6805,6 +6819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 9
 --- !u!114 &1253465495
 MonoBehaviour:
@@ -7142,6 +7157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 4
 --- !u!114 &1289018646
 MonoBehaviour:
@@ -7424,6 +7440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 3
 --- !u!114 &1342938406
 MonoBehaviour:
@@ -8485,6 +8502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 6
 --- !u!114 &1515875807
 MonoBehaviour:
@@ -8737,6 +8755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 6
 --- !u!114 &1646169003
 MonoBehaviour:
@@ -9018,6 +9037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 6
 --- !u!114 &1667939898
 MonoBehaviour:
@@ -9407,6 +9427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 8
 --- !u!114 &1747775656
 MonoBehaviour:
@@ -10185,6 +10206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 1
 --- !u!1 &1875701829
 GameObject:
@@ -10239,6 +10261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 3
 --- !u!114 &1875701832
 MonoBehaviour:
@@ -11604,6 +11627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barColorPicker: {fileID: 1367692309}
+  circleColorPicker: {fileID: 1287164321}
   index: 3
 --- !u!114 &2090584094
 MonoBehaviour:

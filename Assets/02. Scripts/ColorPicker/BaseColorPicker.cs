@@ -27,5 +27,10 @@ public abstract class BaseColorPicker : MonoBehaviour
         SelectColor();
     }
 
+    public virtual void SetPickerPosition()
+    { 
+
+    }
+
     protected abstract Color GetColor();
 }

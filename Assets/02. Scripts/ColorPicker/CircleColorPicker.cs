@@ -27,6 +27,9 @@ public class CircleColorPicker : BaseColorPicker
         imageGradient.colorA = GetColor();
         imageGradient.GetComponent<Graphic>().SetVerticesDirty();
 
+        CustomizeDataManager.Instance.characterVisual.pickerData[CustomizeDataManager.Instance.characterVisual.characterIndex].circlePos[CustomizeDataManager.Instance.characterVisual.pickerData[CustomizeDataManager.Instance.characterVisual.characterIndex].index] = picker.transform.localPosition;
+        CustomizeDataManager.Instance.Save();
+
         barColorPicker.RefreshApply();
     }
 
@@ -45,5 +48,11 @@ public class CircleColorPicker : BaseColorPicker
         Color circularSelectedColor = texture.GetPixelBilinear(normalized.x, normalized.y);
 
         return circularSelectedColor;
+    }
+
+    public override void SetPickerPosition()
+    {
+        CustomizeDataManager.Instance.Load();
+        picker.transform.localPosition = CustomizeDataManager.Instance.characterVisual.pickerData[CustomizeDataManager.Instance.characterVisual.characterIndex].circlePos[CustomizeDataManager.Instance.characterVisual.pickerData[CustomizeDataManager.Instance.characterVisual.characterIndex].index];
     }
 }
