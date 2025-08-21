@@ -230,7 +230,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b2b38e0f8bc4e8f42a0c63c8e27be1da, type: 2}
   - {fileID: 11400000, guid: 50cdbfa2ca3d7044abd59ae6095d3209, type: 2}
   - {fileID: 11400000, guid: 60fbad4cabce6434da999c6127084795, type: 2}
-  achievementPanel: {fileID: 0}
+  achievementPanel: {fileID: 802268435}
   icon: {fileID: 0}
   nameText: {fileID: 0}
   descriptionText: {fileID: 0}
@@ -966,7 +966,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 802268434}
         m_TargetAssemblyTypeName: AchievementUI, Assembly-CSharp
         m_MethodName: OpenWindows
         m_Mode: 1
@@ -2301,7 +2301,7 @@ MonoBehaviour:
   highScore: {fileID: 0}
   score: {fileID: 0}
   time: {fileID: 0}
-  endPanel: {fileID: 0}
+  endPanel: {fileID: 802268432}
 --- !u!4 &783784641
 Transform:
   m_ObjectHideFlags: 0
