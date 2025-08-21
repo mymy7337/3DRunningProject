@@ -16,7 +16,7 @@ public class ClothesUIManager : MonoBehaviour
     public void ControllUI()
     {
         isOpen = !isOpen;
-        switch(PlayerManager.Instance.Player.customizer.characterVisual.characterIndex)
+        switch(CustomizeDataManager.Instance.characterVisual.characterIndex)
         {
             case 0:
                 archer.SetActive(isOpen);
