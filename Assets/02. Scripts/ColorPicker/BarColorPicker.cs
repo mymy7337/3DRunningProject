@@ -19,7 +19,14 @@ public class BarColorPicker : BaseColorPicker
 
         picker.transform.position = transform.position + diff;
 
+        RefreshApply();
+    }
+
+    public void RefreshApply()
+    {
+        var color = GetColor();
         PlayerManager.Instance.Player.customizer.ChangeColor(rendererIndex, GetColor());
+        selectedColor = color;
     }
 
     protected override Color GetColor()
