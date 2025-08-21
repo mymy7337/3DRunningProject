@@ -8,7 +8,7 @@ public class CharSelectButton : MonoBehaviour
 
     public void selectCharacter()
     {
-        PlayerManager.Instance.Player.customizer.characterIndex = characterIndex;
+        PlayerManager.Instance.Player.customizer.characterVisual.characterIndex = characterIndex;
         PlayerManager.Instance.Player.customizer.ChangerCharacter(characterIndex);
     }
 }

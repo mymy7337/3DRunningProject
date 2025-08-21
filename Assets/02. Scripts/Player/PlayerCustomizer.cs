@@ -8,8 +8,6 @@ public class PlayerCustomizer : MonoBehaviour
 {
     [SerializeField] private GameObject[] characters;
 
-    public int characterIndex;
-
     public CharacterVisual characterVisual;
     public Materials materials;
 
@@ -71,7 +69,7 @@ public class PlayerCustomizer : MonoBehaviour
 
         material.SetColor("_Color", albedo);
 
-        characterVisual.colorDatas[characterIndex].colors[idx] = albedo;
+        characterVisual.colorDatas[characterVisual.characterIndex].colors[idx] = albedo;
         Save();
     }
 
