@@ -13,9 +13,11 @@ public class PlayerCustomizer : MonoBehaviour
     public CharacterVisual characterVisual;
     public Materials materials;
 
+    private GameObject character;
+
     private void Awake()
     {
-        var character = Instantiate(characters[characterIndex], this.transform);
+        character = Instantiate(characters[characterIndex], this.transform);
         materials = character.GetComponent<Materials>();
     }
 
@@ -24,10 +26,12 @@ public class PlayerCustomizer : MonoBehaviour
         if (!File.Exists(Application.persistentDataPath + "/CharacterVisual.json"))
         {
             characterVisual = new CharacterVisual();
+            characterVisual.colorDatas = new ColorData[characters.Length];
             for (int i = 0; i < characters.Length; i++)
             {
                 characterVisual.colorDatas[i] = new ColorData();
-                for (int j = 0; j < materials.renderers.Length; j++)
+                int slotCount = SlotCount(characters[i]);
+                for (int j = 0; j < slotCount; j++)
                 {
                     characterVisual.colorDatas[i].colors.Add(Color.white);
                 }
@@ -35,6 +39,20 @@ public class PlayerCustomizer : MonoBehaviour
             Save();
         }
 
+        SetColor();
+    }
+
+    private int SlotCount(GameObject character)
+    {
+        Materials material = character.GetComponent<Materials>();
+        return material.renderers.Length;
+    }
+
+    public void ChangerCharacter(int characterIndex)
+    {
+        Destroy(character);
+        character = Instantiate(characters[characterIndex], this.transform);
+        materials = character.GetComponent<Materials>();
         SetColor();
     }
 
@@ -62,6 +80,7 @@ public class PlayerCustomizer : MonoBehaviour
         var saveCharacterVisual = JsonUtility.ToJson(characterVisual);
 
         File.WriteAllText(Application.persistentDataPath + "/CharacterVisual.json", saveCharacterVisual);
+        Debug.Log(Application.persistentDataPath + "/CharacterVisual.json");
     }
 
     private void Load()
@@ -73,7 +92,7 @@ public class PlayerCustomizer : MonoBehaviour
     [System.Serializable]
     public class CharacterVisual
     {
-        public ColorData[] colorDatas = new ColorData[5];
+        public ColorData[] colorDatas;
     }
 
     [System.Serializable]
