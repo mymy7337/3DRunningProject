@@ -35,8 +35,8 @@ public class DayNightCycle : MonoBehaviour
         time = (time + timeRate * Time.deltaTime) % 1f;
 
         // Sun과 Moon 업데이트 (offset으로 구분)
-        UpdateLighting(sun, sunColor, sunIntensity, 0.25f);
-        UpdateLighting(moon, moonColor, moonIntensity, 0.75f);
+        UpdateLighting(sun, sunColor, sunIntensity);
+        UpdateLighting(moon, moonColor, moonIntensity);
 
 
         // 낮/밤에 맞게 Sun Source 교체
@@ -51,13 +51,13 @@ public class DayNightCycle : MonoBehaviour
         RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
     }
 
-    void UpdateLighting(Light lightSource, Gradient colorGradient, AnimationCurve intensityCurve, float offset)
+    void UpdateLighting(Light lightSource, Gradient colorGradient, AnimationCurve intensityCurve)
     {
         // 밝기 계산
         float intensity = intensityCurve.Evaluate(time);
 
         // 회전 계산
-        lightSource.transform.eulerAngles = (time - offset) * noon * 4f;
+        lightSource.transform.eulerAngles = (time - (lightSource == sun ? 0.25f : 0.75f)) * noon * 4f;
 
         // 색상 및 밝기 적용
         lightSource.color = colorGradient.Evaluate(time);
