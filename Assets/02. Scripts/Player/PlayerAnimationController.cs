@@ -9,7 +9,7 @@ public class PlayerAnimationController : MonoBehaviour
     public static readonly int isJumping = Animator.StringToHash("IsJump");
     public static readonly int isCrouch = Animator.StringToHash("IsCrouch");
 
-    private Animator animator;
+    public Animator animator;
 
     private bool isRun;
 
