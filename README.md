@@ -1,6 +1,7 @@
 # Road to School
 https://my7337.itch.io/road-to-school
 간단한 조작으로 할 수 있는 달리기형 게임입니다.
+![Road to School](https://github.com/user-attachments/assets/54006f81-716a-4882-a94a-b5a4bd4e9a23)
 
 ## 특징
 
